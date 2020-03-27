@@ -16,10 +16,28 @@ html {
 }
 
 body {
-	font-size: 1.6rem;
+	font-size: $font-size;
+	line-height: $baseline;
 	color: $black;
+	font-family: $font-family;
 }
 
 ul {
 	list-style: none;
+}
+
+input {
+	font-size: $font-size;
+	height: $baseline * 1.5;
+	margin-bottom: $baseline * .5;
+	padding: .8rem;
+}
+
+button {
+	font-size: $font-size;
+}
+
+input::placeholder {
+	font-family: $font-family;
+	color: $gray200;
 }

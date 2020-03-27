@@ -1,0 +1,17 @@
+@import '../../sass/abstracts/variables';
+
+.form-footer-nav {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: $baseline * 4;
+
+	& button {
+		height: $baseline * 2;
+		background-color: $gray400;
+		color: $white;
+		border: none;
+		padding: .8rem 2.4rem;
+		cursor: pointer;
+	}
+}

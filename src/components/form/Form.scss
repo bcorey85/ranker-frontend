@@ -1,0 +1,56 @@
+@import '../../sass/abstracts/variables';
+
+.form {
+	& h1 {
+		margin-bottom: $baseline;
+	}
+
+	max-width: 70.4rem;
+	margin: 0 auto;
+
+	& label {
+		display: block;
+		color: $gray400;
+	}
+
+	&__setup {
+		height: $baseline;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-bottom: $baseline;
+
+		& input {
+			margin-left: .8rem;
+			margin-right: 2.4rem;
+		}
+	}
+
+	&__category {
+		margin-bottom: $baseline * 2;
+
+		& input {
+			width: 100%;
+		}
+	}
+
+	&__section {
+		margin-bottom: $baseline * 2;
+
+		& input {
+			width: 100%;
+		}
+
+		& input:last-of-type {
+			margin-bottom: $baseline;
+		}
+	}
+
+	&__add-btn {
+		display: flex;
+		justify-content: flex-end;
+		border-top: .1rem solid $black;
+		padding-top: $baseline * .5;
+		margin-bottom: ($baseline) + ($baseline * .5);
+	}
+}

@@ -1,0 +1,11 @@
+.setup-input {
+	&__group {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		& input {
+			margin-right: 1.6rem;
+		}
+	}
+}

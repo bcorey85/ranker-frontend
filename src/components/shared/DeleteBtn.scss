@@ -1,0 +1,14 @@
+@import '../../sass/abstracts/variables';
+
+.delete-btn {
+	height: $baseline * 2;
+	width: $baseline * 2;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: .1rem solid $gray400;
+	border-radius: 50%;
+	background-color: $gray400;
+	color: $white;
+	cursor: pointer;
+}

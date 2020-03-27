@@ -1,9 +1,10 @@
+@import '../../sass/abstracts/variables';
+
 .header {
 	grid-column: 1/end;
 	grid-row: 1/2;
 	background-color: red;
-	height: 6.4rem;
-	padding: 1.6rem;
+	padding: $baseline;
 	display: flex;
 	align-items: center;
 }

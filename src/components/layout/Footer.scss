@@ -1,8 +1,10 @@
+@import '../../sass/abstracts/variables';
+
 .footer {
 	grid-column: 1/end;
 	grid-row: 3/end;
 	background-color: red;
-	padding: 1.6rem;
+	padding: $baseline;
 	display: flex;
 	align-items: center;
 }

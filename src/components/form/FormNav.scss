@@ -9,7 +9,13 @@
 		width: 33.33%;
 		border: none;
 		height: 4.8rem;
-		background-color: $gray200;
+		background-color: $gray300;
+		color: $white;
 		cursor: pointer;
+	}
+
+	&__btn--active {
+		background-color: $black;
+		color: $white;
 	}
 }

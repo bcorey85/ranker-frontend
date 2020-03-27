@@ -1,12 +1,41 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import './FormFooterNav.scss';
 
-const FormFooterNav = () => {
+const FormFooterNav = ({ handlePageChange, currentPage }) => {
+	const [ previous, setPrevious ] = useState(null);
+	const [ next, setNext ] = useState(null);
+
+	useEffect(
+		() => {
+			if (currentPage === 'Setup') {
+				setPrevious(null);
+				setNext('Input');
+			} else if (currentPage === 'Input') {
+				setPrevious('Setup');
+				setNext('Results');
+			} else {
+				setPrevious('Input');
+				setNext(null);
+			}
+		},
+		[ currentPage ]
+	);
+
 	return (
 		<nav className='form-footer-nav'>
-			<button>Previous</button>
-			<button>Next</button>
+			<div>
+				{previous && (
+					<button onClick={() => handlePageChange(previous)}>
+						Back
+					</button>
+				)}
+			</div>
+			<div>
+				{next && (
+					<button onClick={() => handlePageChange(next)}>Next</button>
+				)}
+			</div>
 		</nav>
 	);
 };

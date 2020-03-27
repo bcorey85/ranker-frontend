@@ -1,54 +1,56 @@
-import React from 'react';
+import React, { useState, useReducer } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import FormNav from './FormNav';
 import FormFooterNav from './FormFooterNav';
+import FormSetup from './FormSetup';
+import FormInput from './FormInput';
+import FormResults from './FormResults';
 
+import formReducer from '../../reducers/formReducer';
 import './Form.scss';
 
+const score1 = {
+	id: uuidv4(),
+	label: ''
+};
+
+const item1 = {
+	id: uuidv4(),
+	label: '',
+	scores: [],
+	average: null,
+	rank: null
+};
+
+const initialState = {
+	category: '',
+	items: [ item1 ],
+	scores: [ score1 ]
+};
+
 const Form = () => {
+	const [ currentPage, setCurrentPage ] = useState('Setup');
+	const [ formState, dispatch ] = useReducer(formReducer, initialState);
+
 	return (
 		<div className='form'>
-			<FormNav />
-			<h1>Setup</h1>
-			<h2>Setup Style</h2>
-			<div className='form__setup'>
-				<label htmlFor='quick'>Quick</label>
-				<input type='radio' id='quick' name='setup' value='quick' />
-				<label htmlFor='Flexible'>Flexible</label>
-				<input
-					type='radio'
-					id='flexible'
-					name='setup'
-					value='flexible'
-				/>
-			</div>
-			<h2>What are you ranking?</h2>
-			<div className='form__category'>
-				<label htmlFor='category'>Category</label>
-				<input type='text' id='category' placeholder='Category' />
-			</div>
-			<h2>What items are you ranking?</h2>
-			<div className='form__section'>
-				<label htmlFor='item1'>Item 1</label>
-				<input type='text' id='item1' placeholder='Item1' />
-				<label htmlFor='item2'>Item 2</label>
-				<input type='text' id='item2' placeholder='Item1' />
-				<div className='form__add-btn'>
-					<button>Add New</button>
-				</div>
-			</div>
+			<FormNav handlePageChange={setCurrentPage} />
 
-			<h2>What are you scoring by?</h2>
-			<div className='form__section'>
-				<label htmlFor='score1'>Score 1</label>
-				<input type='text' id='score1' placeholder='Score 1' />
-				<label htmlFor='score2'>Score 2</label>
-				<input type='text' id='score2' placeholder='Score 2' />
-				<div className='form__add-btn'>
-					<button>Add New</button>
-				</div>
-			</div>
-			<FormFooterNav />
+			{currentPage === 'Setup' && (
+				<FormSetup formState={formState} dispatch={dispatch} />
+			)}
+			{currentPage === 'Input' && (
+				<FormInput formState={formState} dispatch={dispatch} />
+			)}
+			{currentPage === 'Results' && (
+				<FormResults formState={formState} dispatch={dispatch} />
+			)}
+
+			<FormFooterNav
+				handlePageChange={setCurrentPage}
+				currentPage={currentPage}
+			/>
 		</div>
 	);
 };

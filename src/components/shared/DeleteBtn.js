@@ -8,7 +8,7 @@ const DeleteBtn = ({ handleDelete }) => {
 			className='delete-btn'
 			tabIndex='0'
 			onClick={handleDelete}>
-			Delete
+			del
 		</div>
 	);
 };

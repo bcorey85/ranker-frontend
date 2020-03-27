@@ -6,7 +6,7 @@ import './SetupInput.scss';
 
 const SetupInput = ({ handleChange, handleDelete, index, item, label }) => {
 	return (
-		<div key={item.id} className='setup-input'>
+		<div className='setup-input'>
 			<label htmlFor={item.id}>
 				{label} {index + 1}
 			</label>

@@ -49,18 +49,6 @@ const FormSetup = ({ formState, dispatch }) => {
 	return (
 		<div className='form-setup'>
 			<h1>Setup</h1>
-			{/* <h2>Setup Style</h2>
-			<div className='form__setup'>
-				<label htmlFor='quick'>Quick</label>
-				<input type='radio' id='quick' name='setup' value='quick' />
-				<label htmlFor='Flexible'>Flexible</label>
-				<input
-					type='radio'
-					id='flexible'
-					name='setup'
-					value='flexible'
-				/>
-			</div> */}
 			<h2>What are you ranking?</h2>
 			<div className='form__category'>
 				<label htmlFor='category'>Category</label>
@@ -77,6 +65,7 @@ const FormSetup = ({ formState, dispatch }) => {
 				{formState.items.map((item, index) => {
 					return (
 						<SetupInput
+							key={item.id}
 							handleChange={handleUpdateItem}
 							handleDelete={handleDeleteItem}
 							item={item}
@@ -95,6 +84,7 @@ const FormSetup = ({ formState, dispatch }) => {
 				{formState.scores.map((score, index) => {
 					return (
 						<SetupInput
+							key={score.id}
 							handleChange={handleUpdateScore}
 							handleDelete={handleDeleteScore}
 							item={score}

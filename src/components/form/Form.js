@@ -12,7 +12,8 @@ import './Form.scss';
 
 const score1 = {
 	id: uuidv4(),
-	label: ''
+	label: '',
+	score: ''
 };
 
 const item1 = {

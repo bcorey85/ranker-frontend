@@ -47,8 +47,11 @@ const formReducer = (state, action) => {
 			const filteredScores = state.scores.filter(
 				item => item.id !== action.id
 			);
-
 			return { ...state, scores: filteredScores };
+		case 'MAP_SCORES':
+			const mappedItems = state.items.map(item => {
+				return (item.scores = [ ...state.scores ]);
+			});
 		default: {
 			return state;
 		}

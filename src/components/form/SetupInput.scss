@@ -1,8 +1,10 @@
+@import '../../sass/abstracts/variables';
+
 .setup-input {
 	&__group {
 		display: flex;
 		justify-content: center;
-		align-items: center;
+		align-items: flex-start;
 
 		& input {
 			margin-right: 1.6rem;

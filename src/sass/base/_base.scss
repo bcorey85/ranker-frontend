@@ -1,0 +1,25 @@
+@import '../abstracts/variables';
+
+*,
+*::before,
+*::after {
+	margin: 0;
+	padding: 0;
+	box-sizing: inherit;
+}
+
+html {
+	font-size: 62.5%;
+	box-sizing: border-box;
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+
+body {
+	font-size: 1.6rem;
+	color: $black;
+}
+
+ul {
+	list-style: none;
+}

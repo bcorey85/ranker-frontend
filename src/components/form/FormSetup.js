@@ -17,17 +17,17 @@ const FormSetup = ({ formState, dispatch }) => {
 		dispatch({ type: 'ADD_SCORE' });
 	};
 
-	const handleUpdateItem = e => {
+	const handleUpdateItemLabel = e => {
 		dispatch({
-			type: 'UPDATE_ITEM',
+			type: 'UPDATE_ITEM_LABEL',
 			value: e.target.value,
 			id: e.target.id
 		});
 	};
 
-	const handleUpdateScore = e => {
+	const handleUpdateScoreLabel = e => {
 		dispatch({
-			type: 'UPDATE_SCORE',
+			type: 'UPDATE_SCORE_LABEL',
 			value: e.target.value,
 			id: e.target.id
 		});
@@ -66,7 +66,7 @@ const FormSetup = ({ formState, dispatch }) => {
 					return (
 						<SetupInput
 							key={item.id}
-							handleChange={handleUpdateItem}
+							handleChange={handleUpdateItemLabel}
 							handleDelete={handleDeleteItem}
 							item={item}
 							label='Item'
@@ -81,11 +81,11 @@ const FormSetup = ({ formState, dispatch }) => {
 
 			<h2>What are you scoring by?</h2>
 			<div className='form__section'>
-				{formState.scores.map((score, index) => {
+				{formState.scoreLabels.map((score, index) => {
 					return (
 						<SetupInput
 							key={score.id}
-							handleChange={handleUpdateScore}
+							handleChange={handleUpdateScoreLabel}
 							handleDelete={handleDeleteScore}
 							item={score}
 							label='Score'

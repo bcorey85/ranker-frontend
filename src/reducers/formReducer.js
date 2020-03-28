@@ -10,48 +10,98 @@ const formReducer = (state, action) => {
 		case 'ADD_ITEM':
 			return {
 				...state,
-				items: [ ...state.items, { id: uuidv4(), label: '' } ]
+				items: [
+					...state.items,
+					{
+						id: uuidv4(),
+						label: '',
+						scores: [],
+						average: null,
+						rank: null
+					}
+				]
 			};
 		case 'ADD_SCORE':
 			return {
 				...state,
-				scores: [
-					...state.scores,
-					{ id: uuidv4(), label: '', value: '' }
+				scoreLabels: [
+					...state.scoreLabels,
+					{ id: uuidv4(), label: '', average: null }
 				]
 			};
-		case 'UPDATE_ITEM':
-			const updatedItems = state.items.map(item => {
+		case 'UPDATE_ITEM_LABEL':
+			const updatedItemLabels = state.items.map(item => {
 				if (item.id === action.id) {
 					return { ...item, label: action.value };
+				}
+				return item;
+			});
+			return { ...state, items: updatedItemLabels };
+		case 'UPDATE_SCORE_LABEL':
+			const updatedScoreLables = state.scoreLabels.map(item => {
+				if (item.id === action.id) {
+					return { ...item, label: action.value };
+				}
+				return item;
+			});
+
+			return { ...state, scoreLabels: updatedScoreLables };
+		case 'UPDATE_ITEM_SCORE':
+			const updatedItems = state.items.map(item => {
+				if (item.id === action.itemId) {
+					const newScores = item.scores.map(score => {
+						if (score.id === action.scoreId) {
+							const newScore = {
+								...score,
+								score: action.value
+							};
+							return newScore;
+						}
+						return score;
+					});
+
+					const scoreSum = newScores
+						.filter(score => {
+							if (score.score !== '' && !isNaN(score.score)) {
+								return score;
+							}
+							return false;
+						})
+						.reduce((acc, cur) => {
+							return acc + parseFloat(cur.score);
+						}, 0);
+
+					return {
+						...item,
+						scores: newScores,
+						average: scoreSum / newScores.length
+					};
 				}
 				return item;
 			});
 
 			return { ...state, items: updatedItems };
-		case 'UPDATE_SCORE':
-			const updatedScores = state.scores.map(item => {
-				if (item.id === action.id) {
-					return { ...item, label: action.value };
-				}
-				return item;
-			});
-
-			return { ...state, scores: updatedScores };
 		case 'DELETE_ITEM':
 			const filteredItems = state.items.filter(
 				item => item.id !== action.id
 			);
 			return { ...state, items: filteredItems };
 		case 'DELETE_SCORE':
-			const filteredScores = state.scores.filter(
+			const filteredScores = state.scoreLables.filter(
 				item => item.id !== action.id
 			);
-			return { ...state, scores: filteredScores };
-		case 'MAP_SCORES':
+			return { ...state, scoreLabels: filteredScores };
+		case 'MAP_SCORES': // solve overwriting state
 			const mappedItems = state.items.map(item => {
-				return (item.scores = [ ...state.scores ]);
+				const scoreObjects = state.scoreLabels.map(label => {
+					return {
+						...label,
+						score: ''
+					};
+				});
+				return { ...item, scores: [ ...scoreObjects ] };
 			});
+			return { ...state, items: mappedItems };
 		default: {
 			return state;
 		}

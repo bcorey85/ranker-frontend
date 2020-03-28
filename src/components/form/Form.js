@@ -13,7 +13,7 @@ import './Form.scss';
 const score1 = {
 	id: uuidv4(),
 	label: '',
-	score: ''
+	average: null
 };
 
 const item1 = {
@@ -27,7 +27,7 @@ const item1 = {
 const initialState = {
 	category: '',
 	items: [ item1 ],
-	scores: [ score1 ]
+	scoreLabels: [ score1 ]
 };
 
 const Form = () => {

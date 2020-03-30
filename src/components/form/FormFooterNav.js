@@ -10,12 +10,12 @@ const FormFooterNav = ({ handlePageChange, currentPage }) => {
 		() => {
 			if (currentPage === 'Setup') {
 				setPrevious(null);
-				setNext('Input');
-			} else if (currentPage === 'Input') {
+				setNext('Score');
+			} else if (currentPage === 'Score') {
 				setPrevious('Setup');
 				setNext('Results');
 			} else {
-				setPrevious('Input');
+				setPrevious('Score');
 				setNext(null);
 			}
 		},

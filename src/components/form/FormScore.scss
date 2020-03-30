@@ -1,0 +1,38 @@
+@import '../../sass/abstracts/variables';
+
+.form-score {
+	&__group {
+		display: flex;
+		justify-content: space-between;
+
+		& label {
+			display: block;
+		}
+
+		& div:nth-of-type(1) {
+			flex: 1 1 auto;
+
+			& input {
+				width: 100%;
+			}
+		}
+
+		& div:nth-of-type(2) {
+			flex: 0 0 9.6rem;
+			margin-left: 3.2rem;
+			& input {
+				width: 100%;
+				text-align: right;
+			}
+		}
+	}
+
+	&__average {
+		display: flex;
+		justify-content: flex-end;
+		border-top: .1rem solid $gray300;
+		padding-top: $baseline * .5;
+		margin-bottom: ($baseline) + ($baseline * .5);
+		margin-top: $baseline;
+	}
+}

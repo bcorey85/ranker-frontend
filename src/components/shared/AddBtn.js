@@ -1,4 +1,6 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
 import './AddBtn.scss';
 
@@ -7,9 +9,9 @@ const AddBtn = ({ handleClick }) => {
 		<div
 			role='button'
 			onClick={handleClick}
-			className='add-btn'
-			tabIndex='0'>
-			add
+			tabIndex='0'
+			className='add-btn'>
+			<FontAwesomeIcon icon={faPlusCircle} />
 		</div>
 	);
 };

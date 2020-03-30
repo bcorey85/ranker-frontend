@@ -1,12 +1,18 @@
+@import '../abstracts/functions';
+
+$primary: hsl(230, 50%, 55%);
+$red: hsl(0, 60%, 45%);
+$green: hsl(100, 60%, 40%);
 $black: hsl(0, 0%, 20%);
 $white: hsl(0, 0%, 100%);
-$gray100: hsl(0, 0%, 70%);
+$gray50: hsl(0, 0%, 95%);
+$gray100: hsl(0, 0%, 80%);
 $gray200: hsl(0, 0%, 60%);
 $gray300: hsl(0, 0%, 46%);
 $gray400: hsl(0, 0%, 40%);
 $gray500: hsl(0, 0%, 30%);
 
 $font-size: 1.6rem;
-$baseline: $font-size * 1.5;
+$baseline: calc-lh($font-size, 1.5);
 
 $font-family: 'Public Sans', sans-serif;

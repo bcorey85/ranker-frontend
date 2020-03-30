@@ -1,7 +1,5 @@
-@import '../../sass/abstracts/variables';
-
 .content {
 	grid-column: 2/3;
 	grid-row: 2/3;
-	margin: ($baseline * 6) 0;
+	margin: 12rem 0;
 }

@@ -1,14 +1,15 @@
 @import '../../sass/abstracts/variables';
 
 .delete-btn {
-	height: $baseline * 1.5;
-	width: $baseline * 1.5;
+	height: 4.8rem;
+	width: 4.8rem;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	border: .1rem solid $gray400;
-	border-radius: 50%;
-	background-color: $gray400;
-	color: $white;
+	color: $gray100;
 	cursor: pointer;
+
+	&:hover {
+		color: $red;
+	}
 }

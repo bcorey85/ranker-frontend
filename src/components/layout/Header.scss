@@ -3,8 +3,8 @@
 .header {
 	grid-column: 1/end;
 	grid-row: 1/2;
-	background-color: red;
-	padding: $baseline;
+	background-color: $primary;
+	padding: 1.6rem;
 	display: flex;
 	align-items: center;
 }

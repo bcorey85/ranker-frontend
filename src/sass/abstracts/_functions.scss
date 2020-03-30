@@ -1,0 +1,14 @@
+@use 'sass:math';
+
+@function calc-lh($font-size, $ratio) {
+	$initial: ($font-size * 10) * $ratio;
+	$rounded: round($initial/4) * 4;
+	@return $rounded * .1;
+}
+
+// Calculate font-size for headers to nearest 4px for 8pt grid
+@function calc-fs($base-size, $ratio, $scale-degree) {
+	$initial: ($base-size * 10) * math.pow($ratio, $scale-degree);
+	$rounded: round($initial/4) * 4;
+	@return $rounded * .1;
+}

@@ -1,14 +1,16 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 import './DeleteBtn.scss';
 const DeleteBtn = ({ handleDelete }) => {
 	return (
 		<div
 			role='button'
-			className='delete-btn'
 			tabIndex='0'
-			onClick={handleDelete}>
-			del
+			onClick={handleDelete}
+			className='delete-btn'>
+			<FontAwesomeIcon icon={faTrashAlt} />
 		</div>
 	);
 };

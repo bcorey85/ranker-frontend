@@ -1,0 +1,27 @@
+@import '../../sass/abstracts/variables';
+
+.form-setup {
+	&__category {
+		margin-bottom: 3.6rem;
+
+		& input {
+			width: 100%;
+		}
+	}
+
+	&__section {
+		margin-bottom: 1.6rem;
+
+		& input {
+			flex: 1 1 auto;
+		}
+	}
+
+	&__add-btn {
+		display: flex;
+		justify-content: flex-end;
+		border-top: .1rem solid $gray300;
+
+		margin-top: 1.6rem;
+	}
+}

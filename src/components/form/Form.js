@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import FormNav from './FormNav';
 import FormFooterNav from './FormFooterNav';
 import FormSetup from './FormSetup';
-import FormInput from './FormInput';
+import FormScore from './FormScore';
 import FormResults from './FormResults';
 
 import formReducer from '../../reducers/formReducer';
@@ -36,13 +36,16 @@ const Form = () => {
 
 	return (
 		<div className='form'>
-			<FormNav handlePageChange={setCurrentPage} />
+			<FormNav
+				handlePageChange={setCurrentPage}
+				currentPage={currentPage}
+			/>
 
 			{currentPage === 'Setup' && (
 				<FormSetup formState={formState} dispatch={dispatch} />
 			)}
-			{currentPage === 'Input' && (
-				<FormInput formState={formState} dispatch={dispatch} />
+			{currentPage === 'Score' && (
+				<FormScore formState={formState} dispatch={dispatch} />
 			)}
 			{currentPage === 'Results' && (
 				<FormResults formState={formState} dispatch={dispatch} />

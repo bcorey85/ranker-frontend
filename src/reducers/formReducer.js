@@ -87,7 +87,7 @@ const formReducer = (state, action) => {
 			);
 			return { ...state, items: filteredItems };
 		case 'DELETE_SCORE':
-			const filteredScores = state.scoreLables.filter(
+			const filteredScores = state.scoreLabels.filter(
 				item => item.id !== action.id
 			);
 			return { ...state, scoreLabels: filteredScores };

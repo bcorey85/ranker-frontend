@@ -4,5 +4,5 @@
 	display: grid;
 	min-height: 100vh;
 	grid-template-columns: 1fr 102.4rem 1fr;
-	grid-template-rows: ($baseline * 3) 1fr ($baseline * 3);
+	grid-template-rows: 8rem 1fr 8rem;
 }

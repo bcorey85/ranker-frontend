@@ -4,14 +4,18 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	height: $baseline * 4;
+	height: 4.8rem;
 
 	& button {
-		height: $baseline * 2;
+		height: 4rem;
 		background-color: $gray300;
 		color: $white;
 		border: none;
 		padding: .8rem 2.4rem;
 		cursor: pointer;
+
+		&:hover {
+			background-color: $primary;
+		}
 	}
 }

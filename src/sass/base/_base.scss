@@ -1,20 +1,5 @@
 @import '../abstracts/variables';
 
-*,
-*::before,
-*::after {
-	margin: 0;
-	padding: 0;
-	box-sizing: inherit;
-}
-
-html {
-	font-size: 62.5%;
-	box-sizing: border-box;
-	overflow-y: scroll;
-	overflow-x: hidden;
-}
-
 body {
 	font-size: $font-size;
 	line-height: $baseline;
@@ -22,22 +7,30 @@ body {
 	font-family: $font-family;
 }
 
-ul {
-	list-style: none;
-}
-
 input {
+	font-family: $font-family;
 	font-size: $font-size;
-	height: $baseline * 1.5;
-	margin-bottom: $baseline * .5;
+	margin-bottom: .8rem;
 	padding: .8rem;
+	border: .1rem solid $gray100;
+	height: 4rem;
 }
 
 button {
 	font-size: $font-size;
+	font-family: $font-family;
+}
+
+label {
+	color: $gray400;
 }
 
 input::placeholder {
 	font-family: $font-family;
 	color: $gray200;
+}
+
+input:disabled {
+	background-color: $gray50;
+	border: .1rem solid $gray100;
 }

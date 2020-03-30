@@ -4,6 +4,8 @@ import AddBtn from '../shared/AddBtn';
 
 import SetupInput from './SetupInput';
 
+import './FormSetup.scss';
+
 const FormSetup = ({ formState, dispatch }) => {
 	const handleCategory = e => {
 		dispatch({ type: 'UPDATE_CATEGORY', value: e.target.value });
@@ -50,7 +52,7 @@ const FormSetup = ({ formState, dispatch }) => {
 		<div className='form-setup'>
 			<h1>Setup</h1>
 			<h2>What are you ranking?</h2>
-			<div className='form__category'>
+			<div className='form-setup__category'>
 				<label htmlFor='category'>Category</label>
 				<input
 					type='text'
@@ -61,7 +63,7 @@ const FormSetup = ({ formState, dispatch }) => {
 				/>
 			</div>
 			<h2>What items are you ranking?</h2>
-			<div className='form__section'>
+			<div className='form-setup__section'>
 				{formState.items.map((item, index) => {
 					return (
 						<SetupInput
@@ -74,13 +76,13 @@ const FormSetup = ({ formState, dispatch }) => {
 						/>
 					);
 				})}
-				<div className='form__add-btn'>
+				<div className='form-setup__add-btn'>
 					<AddBtn handleClick={handleNewItem} />
 				</div>
 			</div>
 
 			<h2>What are you scoring by?</h2>
-			<div className='form__section'>
+			<div className='form-setup__section'>
 				{formState.scoreLabels.map((score, index) => {
 					return (
 						<SetupInput
@@ -93,7 +95,7 @@ const FormSetup = ({ formState, dispatch }) => {
 						/>
 					);
 				})}
-				<div className='form__add-btn'>
+				<div className='form-setup__add-btn'>
 					<AddBtn handleClick={handleNewScore} />
 				</div>
 			</div>

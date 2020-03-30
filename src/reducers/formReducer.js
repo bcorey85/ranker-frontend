@@ -109,11 +109,9 @@ const formReducer = (state, action) => {
 						};
 					}
 				});
-				console.log(scoreObjects);
 
 				return { ...item, scores: [ ...scoreObjects ] };
 			});
-			console.log(mappedItems);
 
 			return { ...state, items: mappedItems };
 		case 'CALC_LABEL_AVERAGES':
@@ -134,7 +132,13 @@ const formReducer = (state, action) => {
 				label.average = sum / labelScores.length;
 				return label;
 			});
-			return { ...state, scoreLabels: updatedLabels };
+
+			const overallAverage =
+				state.items.reduce((acc, cur) => {
+					return acc + cur.average;
+				}, 0) / state.items.length;
+
+			return { ...state, scoreLabels: updatedLabels, overallAverage };
 		default: {
 			return state;
 		}

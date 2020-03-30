@@ -27,7 +27,8 @@ const item1 = {
 const initialState = {
 	category: '',
 	items: [ item1 ],
-	scoreLabels: [ score1 ]
+	scoreLabels: [ score1 ],
+	overallAverage: null
 };
 
 const Form = () => {

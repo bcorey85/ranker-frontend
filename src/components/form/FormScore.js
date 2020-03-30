@@ -55,11 +55,11 @@ const FormInput = ({ formState, dispatch }) => {
 
 	return (
 		<div className='form-score'>
-			<h1>{formState.category}</h1>
+			<h1>{formState.category} Scores</h1>
 			{formState.items.map((item, itemIndex) => {
 				return (
 					<div key={item.id}>
-						<h3>{item.label} Scores</h3>
+						<h3>{item.label}</h3>
 						<FormSection>
 							{item.scores.map((score, scoreIndex) => {
 								return (

@@ -40,7 +40,9 @@ const FormResults = ({ formState, dispatch }) => {
 								<tr key={item.id}>
 									<td>#</td>
 									<td>{item.label}</td>
-									<td>{item.average}</td>
+									<td>
+										{Math.round(item.average * 100) / 100}
+									</td>
 								</tr>
 							);
 						})}
@@ -82,7 +84,7 @@ const FormResults = ({ formState, dispatch }) => {
 						<div className='form-results__average'>
 							<h2>
 								<span>Average: </span>
-								{formState.overallAverage}
+								{Math.round(label.average * 100) / 100}
 							</h2>
 						</div>
 					</React.Fragment>

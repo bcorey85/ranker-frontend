@@ -14,15 +14,38 @@ const FormResults = ({ formState, dispatch }) => {
 		[ dispatch ]
 	);
 
-	{
-		console.log(formState);
-	}
 	if (isLoading) {
 		return <div>Loading</div>;
 	}
+	if (formState.category === '') {
+		return (
+			<div className='form-results'>
+				Please enter a Category in Setup.
+			</div>
+		);
+	}
+
+	if (formState.items.length === 1 && formState.items[0].label === '') {
+		return (
+			<div className='form-results'>
+				Please enter at least one Item to rank in Setup.
+			</div>
+		);
+	}
+
+	if (
+		formState.scoreLabels.length === 0 ||
+		formState.scoreLabels[0].label === ''
+	) {
+		return (
+			<div className='form-results'>
+				Please enter at least one Score Label in Setup.
+			</div>
+		);
+	}
 
 	return (
-		<div>
+		<div className='form-results'>
 			<h1>{formState.category} Results</h1>
 			<h3>Overview</h3>
 			<FormSection>
@@ -35,10 +58,10 @@ const FormResults = ({ formState, dispatch }) => {
 						</tr>
 					</thead>
 					<tbody>
-						{formState.items.map(item => {
+						{formState.items.map((item, index) => {
 							return (
 								<tr key={item.id}>
-									<td>#</td>
+									<td>{index + 1}</td>
 									<td>{item.label}</td>
 									<td>
 										{Math.round(item.average * 100) / 100}
@@ -52,7 +75,7 @@ const FormResults = ({ formState, dispatch }) => {
 			<div className='form-results__average'>
 				<h2>
 					<span>Average: </span>
-					{formState.overallAverage}
+					{Math.round(formState.overallAverage * 100) / 100}
 				</h2>
 			</div>
 			{formState.scoreLabels.map(label => {
@@ -69,12 +92,16 @@ const FormResults = ({ formState, dispatch }) => {
 									</tr>
 								</thead>
 								<tbody>
-									{label.scores.map(score => {
+									{label.scores.map((score, index) => {
 										return (
 											<tr key={score.id}>
-												<td>#</td>
+												<td>{index + 1}</td>
 												<td>{score.label}</td>
-												<td>{score.score}</td>
+												<td>
+													{Math.round(
+														score.score * 100
+													) / 100}
+												</td>
 											</tr>
 										);
 									})}

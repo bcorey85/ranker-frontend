@@ -53,6 +53,7 @@ const FormSetup = ({ formState, dispatch }) => {
 		<div className='form-setup'>
 			<h1>Setup</h1>
 			<h3>What are you ranking?</h3>
+			<h4>(Ex: Shoes)</h4>
 			<div className='form-setup__category'>
 				<FormSection>
 					<label htmlFor='category'>Category</label>
@@ -65,7 +66,8 @@ const FormSetup = ({ formState, dispatch }) => {
 					/>
 				</FormSection>
 			</div>
-			<h3>What items are you ranking?</h3>
+			<h3>What are your items?</h3>
+			<h4>(Ex: Nike, Adidas, Reebok)</h4>
 			<div className='form-setup__section'>
 				<FormSection>
 					{formState.items.map((item, index) => {
@@ -86,7 +88,8 @@ const FormSetup = ({ formState, dispatch }) => {
 				</div>
 			</div>
 
-			<h3>What are you score labels?</h3>
+			<h3>What are your score labels?</h3>
+			<h4>(Ex: Cost, Durability, Color)</h4>
 			<div className='form-setup__section'>
 				<FormSection>
 					{formState.scoreLabels.map((score, index) => {

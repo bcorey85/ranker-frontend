@@ -100,8 +100,6 @@ const formReducer = (state, action) => {
 					if (existingScore >= 0) {
 						return item.scores[existingScore];
 					} else {
-						console.log(label);
-
 						return {
 							id: label.id,
 							label: label.label,
@@ -127,15 +125,21 @@ const formReducer = (state, action) => {
 									score: score.score
 								};
 							});
-						console.log(itemScores);
 
 						return itemScores;
 					})
 					.flat();
+				console.log(labelScores);
 
 				const sum = labelScores.reduce((acc, cur) => {
-					return acc + parseFloat(cur.score);
+					if (cur.score !== '') {
+						return acc + parseFloat(cur.score);
+					} else {
+						return acc + 0;
+					}
 				}, 0);
+				console.log(sum);
+
 				label.scores = [ ...labelScores ];
 				label.average = sum / labelScores.length;
 				return label;

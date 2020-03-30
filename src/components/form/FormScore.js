@@ -43,8 +43,8 @@ const FormInput = ({ formState, dispatch }) => {
 	}
 
 	if (
-		formState.scoreLabels.length === 1 &&
-		formState.scoreLabels.label === ''
+		formState.scoreLabels.length === 0 ||
+		formState.scoreLabels[0].label === ''
 	) {
 		return (
 			<div className='form-score'>

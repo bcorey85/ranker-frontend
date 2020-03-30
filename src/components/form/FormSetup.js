@@ -3,6 +3,7 @@ import React from 'react';
 import AddBtn from '../shared/AddBtn';
 
 import SetupInput from './SetupInput';
+import FormSection from './FormSection';
 
 import './FormSetup.scss';
 
@@ -51,50 +52,56 @@ const FormSetup = ({ formState, dispatch }) => {
 	return (
 		<div className='form-setup'>
 			<h1>Setup</h1>
-			<h2>What are you ranking?</h2>
+			<h3>What are you ranking?</h3>
 			<div className='form-setup__category'>
-				<label htmlFor='category'>Category</label>
-				<input
-					type='text'
-					id='category'
-					placeholder='Category'
-					onChange={handleCategory}
-					value={formState.category}
-				/>
+				<FormSection>
+					<label htmlFor='category'>Category</label>
+					<input
+						type='text'
+						id='category'
+						placeholder='Category'
+						onChange={handleCategory}
+						value={formState.category}
+					/>
+				</FormSection>
 			</div>
-			<h2>What items are you ranking?</h2>
+			<h3>What items are you ranking?</h3>
 			<div className='form-setup__section'>
-				{formState.items.map((item, index) => {
-					return (
-						<SetupInput
-							key={item.id}
-							handleChange={handleUpdateItemLabel}
-							handleDelete={handleDeleteItem}
-							item={item}
-							label='Item'
-							index={index}
-						/>
-					);
-				})}
+				<FormSection>
+					{formState.items.map((item, index) => {
+						return (
+							<SetupInput
+								key={item.id}
+								handleChange={handleUpdateItemLabel}
+								handleDelete={handleDeleteItem}
+								item={item}
+								label='Item'
+								index={index}
+							/>
+						);
+					})}
+				</FormSection>
 				<div className='form-setup__add-btn'>
 					<AddBtn handleClick={handleNewItem} />
 				</div>
 			</div>
 
-			<h2>What are you score labels?</h2>
+			<h3>What are you score labels?</h3>
 			<div className='form-setup__section'>
-				{formState.scoreLabels.map((score, index) => {
-					return (
-						<SetupInput
-							key={score.id}
-							handleChange={handleUpdateScoreLabel}
-							handleDelete={handleDeleteScore}
-							item={score}
-							label='Score Label'
-							index={index}
-						/>
-					);
-				})}
+				<FormSection>
+					{formState.scoreLabels.map((score, index) => {
+						return (
+							<SetupInput
+								key={score.id}
+								handleChange={handleUpdateScoreLabel}
+								handleDelete={handleDeleteScore}
+								item={score}
+								label='Label'
+								index={index}
+							/>
+						);
+					})}
+				</FormSection>
 				<div className='form-setup__add-btn'>
 					<AddBtn handleClick={handleNewScore} />
 				</div>

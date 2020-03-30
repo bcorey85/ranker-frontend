@@ -11,9 +11,21 @@
 	&__average {
 		display: flex;
 		justify-content: flex-end;
-		border-top: .1rem solid $gray300;
-		padding-top: $baseline * .5;
-		margin-bottom: ($baseline) + ($baseline * .5);
-		margin-top: $baseline;
+		align-items: flex-end;
+		margin-top: .8rem;
+		padding-top: 1.6rem;
+		padding-right: .8rem;
+		margin-bottom: .8rem;
+
+		& h2 {
+			margin-bottom: 0;
+		}
+
+		& span {
+			font-size: 1.6rem;
+			font-weight: 400;
+			color: $gray300;
+			margin-right: .8rem;
+		}
 	}
 }

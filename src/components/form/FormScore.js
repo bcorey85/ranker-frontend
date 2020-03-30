@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
+import FormSection from './FormSection';
+
 import './FormScore.scss';
 
 const FormInput = ({ formState, dispatch }) => {
@@ -57,30 +59,36 @@ const FormInput = ({ formState, dispatch }) => {
 			{formState.items.map((item, itemIndex) => {
 				return (
 					<div key={item.id}>
-						<h2>{item.label}</h2>
-						{item.scores.map((score, scoreIndex) => {
-							return (
-								<div key={`item${itemIndex + 1}-${score.id}`}>
-									<label
-										htmlFor={`item${itemIndex +
+						<h3>{item.label}</h3>
+						<FormSection>
+							{item.scores.map((score, scoreIndex) => {
+								return (
+									<React.Fragment
+										key={`item${itemIndex +
 											1}-${score.id}`}>
-										{score.label}
-									</label>
-									<input
-										type='number'
-										id={`item${itemIndex + 1}-${score.id}`}
-										value={score.score}
-										onChange={handleUpdateScore}
-										data-itemindex={item.id}
-										data-scoreindex={score.id}
-									/>
-								</div>
-							);
-						})}
+										<label
+											htmlFor={`item${itemIndex +
+												1}-${score.id}`}>
+											{score.label}
+										</label>
+										<input
+											type='number'
+											id={`item${itemIndex +
+												1}-${score.id}`}
+											value={score.score}
+											onChange={handleUpdateScore}
+											data-itemindex={item.id}
+											data-scoreindex={score.id}
+										/>
+									</React.Fragment>
+								);
+							})}
+						</FormSection>
 						<div className='form-score__average'>
-							<h3>
-								Average: {Math.round(item.average * 100) / 100}
-							</h3>
+							<h2>
+								<span>Average: </span>
+								{Math.round(item.average * 100) / 100}
+							</h2>
 						</div>
 					</div>
 				);

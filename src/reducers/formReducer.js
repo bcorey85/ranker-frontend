@@ -103,7 +103,8 @@ const formReducer = (state, action) => {
 						console.log(label);
 
 						return {
-							...label,
+							id: label.id,
+							label: label.label,
 							score: ''
 						};
 					}
@@ -115,6 +116,25 @@ const formReducer = (state, action) => {
 			console.log(mappedItems);
 
 			return { ...state, items: mappedItems };
+		case 'CALC_LABEL_AVERAGES':
+			const updatedLabels = state.scoreLabels.map(label => {
+				const labelScores = state.items
+					.map(item => {
+						const itemScores = item.scores.filter(
+							score => score.label === label.label
+						);
+						return itemScores;
+					})
+					.flat();
+
+				const sum = labelScores.reduce((acc, cur) => {
+					return acc + parseFloat(cur.score);
+				}, 0);
+
+				label.average = sum / labelScores.length;
+				return label;
+			});
+			return { ...state, scoreLabels: updatedLabels };
 		default: {
 			return state;
 		}

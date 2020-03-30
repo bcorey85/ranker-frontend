@@ -91,16 +91,29 @@ const formReducer = (state, action) => {
 				item => item.id !== action.id
 			);
 			return { ...state, scoreLabels: filteredScores };
-		case 'MAP_SCORES': // solve overwriting state
+		case 'MAP_SCORES':
 			const mappedItems = state.items.map(item => {
 				const scoreObjects = state.scoreLabels.map(label => {
-					return {
-						...label,
-						score: ''
-					};
+					const existingScore = item.scores.findIndex(
+						score => score.label === label.label
+					);
+					if (existingScore >= 0) {
+						return item.scores[existingScore];
+					} else {
+						console.log(label);
+
+						return {
+							...label,
+							score: ''
+						};
+					}
 				});
+				console.log(scoreObjects);
+
 				return { ...item, scores: [ ...scoreObjects ] };
 			});
+			console.log(mappedItems);
+
 			return { ...state, items: mappedItems };
 		default: {
 			return state;

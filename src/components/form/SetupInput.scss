@@ -5,9 +5,13 @@
 		display: flex;
 		justify-content: center;
 		align-items: flex-start;
+		border: .1rem solid $gray200;
+		margin-bottom: .8rem;
 
 		& input {
 			margin-right: .8rem;
+			border: none;
+			margin-bottom: 0;
 		}
 	}
 }

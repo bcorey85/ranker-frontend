@@ -26,6 +26,31 @@ const FormInput = ({ formState, dispatch }) => {
 		return <div>Loading</div>;
 	}
 
+	if (formState.category === '') {
+		return (
+			<div className='form-score'>Please enter a Category in Setup.</div>
+		);
+	}
+
+	if (formState.items.length === 1 && formState.items[0].label === '') {
+		return (
+			<div className='form-score'>
+				Please enter at least one Item to rank in Setup.
+			</div>
+		);
+	}
+
+	if (
+		formState.scoreLabels.length === 1 &&
+		formState.scoreLabels.label === ''
+	) {
+		return (
+			<div className='form-score'>
+				Please enter at least one Score Label in Setup.
+			</div>
+		);
+	}
+
 	return (
 		<div className='form-score'>
 			<h1>{formState.category}</h1>
@@ -35,40 +60,20 @@ const FormInput = ({ formState, dispatch }) => {
 						<h2>{item.label}</h2>
 						{item.scores.map((score, scoreIndex) => {
 							return (
-								<div
-									key={`item${itemIndex + 1}-${score.id}`}
-									className='form-score__group'>
-									<div>
-										<label
-											htmlFor={`item${itemIndex +
-												1}-${score.id}`}>
-											Score {scoreIndex + 1}
-										</label>
-										<input
-											type='text'
-											id={`item${itemIndex +
-												1}-${score.label}`}
-											value={score.label}
-											disabled
-										/>{' '}
-									</div>
-
-									<div>
-										<label
-											htmlFor={`item${itemIndex +
-												1}-${score.id}`}>
-											Score
-										</label>
-										<input
-											type='number'
-											id={`item${itemIndex +
-												1}-${score.id}`}
-											value={score.value}
-											onChange={handleUpdateScore}
-											data-itemindex={item.id}
-											data-scoreindex={score.id}
-										/>
-									</div>
+								<div key={`item${itemIndex + 1}-${score.id}`}>
+									<label
+										htmlFor={`item${itemIndex +
+											1}-${score.id}`}>
+										{score.label}
+									</label>
+									<input
+										type='number'
+										id={`item${itemIndex + 1}-${score.id}`}
+										value={score.score}
+										onChange={handleUpdateScore}
+										data-itemindex={item.id}
+										data-scoreindex={score.id}
+									/>
 								</div>
 							);
 						})}

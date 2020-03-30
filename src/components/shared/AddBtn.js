@@ -10,7 +10,8 @@ const AddBtn = ({ handleClick }) => {
 			role='button'
 			onClick={handleClick}
 			tabIndex='0'
-			className='add-btn'>
+			className='add-btn'
+			aria-label='add'>
 			<FontAwesomeIcon icon={faPlusCircle} />
 		</div>
 	);

@@ -81,7 +81,7 @@ const FormSetup = ({ formState, dispatch }) => {
 				</div>
 			</div>
 
-			<h2>What are you scoring by?</h2>
+			<h2>What are you score labels?</h2>
 			<div className='form-setup__section'>
 				{formState.scoreLabels.map((score, index) => {
 					return (
@@ -90,7 +90,7 @@ const FormSetup = ({ formState, dispatch }) => {
 							handleChange={handleUpdateScoreLabel}
 							handleDelete={handleDeleteScore}
 							item={score}
-							label='Score'
+							label='Score Label'
 							index={index}
 						/>
 					);

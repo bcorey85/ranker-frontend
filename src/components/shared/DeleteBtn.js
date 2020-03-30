@@ -9,7 +9,8 @@ const DeleteBtn = ({ handleDelete }) => {
 			role='button'
 			tabIndex='0'
 			onClick={handleDelete}
-			className='delete-btn'>
+			className='delete-btn'
+			aria-label='delete'>
 			<FontAwesomeIcon icon={faTrashAlt} />
 		</div>
 	);

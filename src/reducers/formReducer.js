@@ -118,9 +118,17 @@ const formReducer = (state, action) => {
 			const updatedLabels = state.scoreLabels.map(label => {
 				const labelScores = state.items
 					.map(item => {
-						const itemScores = item.scores.filter(
-							score => score.label === label.label
-						);
+						const itemScores = item.scores
+							.filter(score => score.label === label.label)
+							.map(score => {
+								return {
+									id: uuidv4(),
+									label: item.label,
+									score: score.score
+								};
+							});
+						console.log(itemScores);
+
 						return itemScores;
 					})
 					.flat();
@@ -128,7 +136,7 @@ const formReducer = (state, action) => {
 				const sum = labelScores.reduce((acc, cur) => {
 					return acc + parseFloat(cur.score);
 				}, 0);
-
+				label.scores = [ ...labelScores ];
 				label.average = sum / labelScores.length;
 				return label;
 			});

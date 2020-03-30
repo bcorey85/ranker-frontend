@@ -13,6 +13,7 @@ import './Form.scss';
 const score1 = {
 	id: uuidv4(),
 	label: '',
+	scores: [],
 	average: null
 };
 

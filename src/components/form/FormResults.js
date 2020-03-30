@@ -53,6 +53,41 @@ const FormResults = ({ formState, dispatch }) => {
 					{formState.overallAverage}
 				</h2>
 			</div>
+			{formState.scoreLabels.map(label => {
+				return (
+					<React.Fragment key={label.id}>
+						<h3>{label.label}</h3>
+						<FormSection>
+							<table className='form-results__table'>
+								<thead>
+									<tr>
+										<th>Rank</th>
+										<th>Item</th>
+										<th>Score</th>
+									</tr>
+								</thead>
+								<tbody>
+									{label.scores.map(score => {
+										return (
+											<tr key={score.id}>
+												<td>#</td>
+												<td>{score.label}</td>
+												<td>{score.score}</td>
+											</tr>
+										);
+									})}
+								</tbody>
+							</table>
+						</FormSection>
+						<div className='form-results__average'>
+							<h2>
+								<span>Average: </span>
+								{formState.overallAverage}
+							</h2>
+						</div>
+					</React.Fragment>
+				);
+			})}
 		</div>
 	);
 };

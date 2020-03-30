@@ -38,14 +38,14 @@ const formReducer = (state, action) => {
 			});
 			return { ...state, items: updatedItemLabels };
 		case 'UPDATE_SCORE_LABEL':
-			const updatedScoreLables = state.scoreLabels.map(item => {
+			const updatedScoreLabels = state.scoreLabels.map(item => {
 				if (item.id === action.id) {
 					return { ...item, label: action.value };
 				}
 				return item;
 			});
 
-			return { ...state, scoreLabels: updatedScoreLables };
+			return { ...state, scoreLabels: updatedScoreLabels };
 		case 'UPDATE_ITEM_SCORE':
 			const updatedItems = state.items.map(item => {
 				if (item.id === action.itemId) {
@@ -129,7 +129,6 @@ const formReducer = (state, action) => {
 						return itemScores;
 					})
 					.flat();
-				console.log(labelScores);
 
 				const sum = labelScores.reduce((acc, cur) => {
 					if (cur.score !== '') {
@@ -138,7 +137,6 @@ const formReducer = (state, action) => {
 						return acc + 0;
 					}
 				}, 0);
-				console.log(sum);
 
 				label.scores = [ ...labelScores ];
 				label.average = sum / labelScores.length;

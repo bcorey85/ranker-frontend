@@ -59,7 +59,7 @@ const FormInput = ({ formState, dispatch }) => {
 			{formState.items.map((item, itemIndex) => {
 				return (
 					<div key={item.id}>
-						<h3>{item.label}</h3>
+						<h3>{item.label} Scores</h3>
 						<FormSection>
 							{item.scores.map((score, scoreIndex) => {
 								return (

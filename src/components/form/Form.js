@@ -1,5 +1,5 @@
 import React, { useState, useReducer } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import { RankForm } from '../../classes/FormClasses';
 
 import FormNav from './FormNav';
 import FormBody from './FormBody';
@@ -11,31 +11,13 @@ import FormResults from './FormResults';
 import formReducer from '../../reducers/formReducer';
 import './Form.scss';
 
-const score1 = {
-	id: uuidv4(),
-	label: '',
-	scores: [],
-	average: null
-};
-
-const item1 = {
-	id: uuidv4(),
-	label: '',
-	scores: [],
-	average: null,
-	rank: null
-};
-
-const initialState = {
-	items: [ item1 ],
-	scoreLabels: [ score1 ],
-	overallAverage: null,
-	sort: 'desc'
-};
+const initialState = new RankForm();
 
 const Form = () => {
 	const [ currentPage, setCurrentPage ] = useState('Setup');
-	const [ formState, dispatch ] = useReducer(formReducer, initialState);
+	const [ formState, dispatch ] = useReducer(formReducer, {
+		...initialState
+	});
 
 	return (
 		<div className='form'>

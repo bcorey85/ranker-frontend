@@ -4,8 +4,6 @@ import FormSection from './FormSection';
 import './FormResults.scss';
 
 const FormResults = ({ formState, dispatch }) => {
-	console.log(formState);
-
 	const [ isLoading, setIsLoading ] = useState(true);
 
 	useEffect(

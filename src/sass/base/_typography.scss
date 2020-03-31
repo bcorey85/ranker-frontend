@@ -1,11 +1,18 @@
 @import '../abstracts/variables';
 @import '../abstracts/functions';
+@import '../abstracts/mixins';
 
 h1 {
 	font-size: 4rem;
 	line-height: calc-lh(4rem, 1.1);
 	font-weight: 600;
-	margin-bottom: 3.6rem;
+	margin-bottom: 2.4rem;
+
+	@include respond(675) {
+		font-size: 3.2rem;
+		line-height: calc-lh(3.2rem, 1.1);
+		margin-bottom: 1.6rem;
+	}
 }
 
 h2 {
@@ -16,10 +23,18 @@ h2 {
 }
 
 h3 {
-	font-size: 2rem;
-	line-height: calc-lh(2rem, 1.1);
+	font-size: 1.8rem;
+	line-height: calc-lh(1.8rem, 1.1);
 	font-weight: 600;
 	margin-bottom: 1.6rem;
+	color: $gray300;
+
+	@include respond(675) {
+		font-size: 1.6rem;
+		line-height: calc-lh(1.6rem, 1.1);
+		font-weight: 600;
+		margin-bottom: .8rem;
+	}
 }
 
 h4 {

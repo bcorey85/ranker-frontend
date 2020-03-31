@@ -10,6 +10,7 @@ body {
 input {
 	font-family: $font-family;
 	font-size: $font-size;
+	color: $black;
 	padding: .8rem;
 	border: .1rem solid $gray100;
 	height: 4rem;
@@ -25,7 +26,8 @@ button {
 }
 
 label {
-	color: $gray400;
+	color: $gray200;
+	font-weight: 600;
 }
 
 input::placeholder {

@@ -12,13 +12,14 @@
 		display: flex;
 		justify-content: flex-end;
 		align-items: flex-end;
-		margin-top: .8rem;
-		padding-top: 1.6rem;
 		padding-right: .8rem;
+		margin-top: .8rem;
+		padding-top: .8rem;
 		margin-bottom: .8rem;
 
 		& h2 {
 			margin-bottom: 0;
+			font-size: 3.2rem;
 		}
 
 		& span {

@@ -2,6 +2,7 @@ import React, { useState, useReducer } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import FormNav from './FormNav';
+import FormBody from './FormBody';
 import FormFooterNav from './FormFooterNav';
 import FormSetup from './FormSetup';
 import FormScore from './FormScore';
@@ -42,21 +43,22 @@ const Form = () => {
 				handlePageChange={setCurrentPage}
 				currentPage={currentPage}
 			/>
+			<FormBody>
+				{currentPage === 'Setup' && (
+					<FormSetup formState={formState} dispatch={dispatch} />
+				)}
+				{currentPage === 'Score' && (
+					<FormScore formState={formState} dispatch={dispatch} />
+				)}
+				{currentPage === 'Results' && (
+					<FormResults formState={formState} dispatch={dispatch} />
+				)}
 
-			{currentPage === 'Setup' && (
-				<FormSetup formState={formState} dispatch={dispatch} />
-			)}
-			{currentPage === 'Score' && (
-				<FormScore formState={formState} dispatch={dispatch} />
-			)}
-			{currentPage === 'Results' && (
-				<FormResults formState={formState} dispatch={dispatch} />
-			)}
-
-			<FormFooterNav
-				handlePageChange={setCurrentPage}
-				currentPage={currentPage}
-			/>
+				<FormFooterNav
+					handlePageChange={setCurrentPage}
+					currentPage={currentPage}
+				/>
+			</FormBody>
 		</div>
 	);
 };

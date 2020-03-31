@@ -8,6 +8,12 @@
 
 		& th {
 			text-align: left;
+			color: $gray200;
+			font-weight: 600;
+		}
+
+		& th:nth-of-type(3) {
+			text-align: right;
 		}
 
 		& th:nth-of-type(2) {
@@ -23,12 +29,14 @@
 		display: flex;
 		justify-content: flex-end;
 		align-items: flex-end;
-		margin-top: .8rem;
-		padding-top: 1.6rem;
+		margin-top: 1.6rem;
+		padding-top: .8rem;
 		margin-bottom: .8rem;
+		border-top: .1rem solid $gray100;
 
 		& h2 {
 			margin-bottom: 0;
+			font-size: 3.2rem;
 		}
 
 		& span {

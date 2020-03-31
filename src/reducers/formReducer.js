@@ -75,7 +75,6 @@ const formReducer = (state, action) => {
 				return item;
 			});
 
-			// causing ui bug, order of score inputs being reordered due to sort
 			let sorted;
 			if (state.sort === 'desc') {
 				sorted = [ ...updatedItems ].sort(

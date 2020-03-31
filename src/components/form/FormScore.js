@@ -28,12 +28,6 @@ const FormInput = ({ formState, dispatch }) => {
 		return <div>Loading</div>;
 	}
 
-	if (formState.category === '') {
-		return (
-			<div className='form-score'>Please enter a Category in Setup.</div>
-		);
-	}
-
 	if (formState.items.length === 1 && formState.items[0].label === '') {
 		return (
 			<div className='form-score'>
@@ -55,7 +49,7 @@ const FormInput = ({ formState, dispatch }) => {
 
 	return (
 		<div className='form-score'>
-			<h1>{formState.category} Scores</h1>
+			<h1>Scores</h1>
 			{formState.items.map((item, itemIndex) => {
 				return (
 					<div key={item.id}>

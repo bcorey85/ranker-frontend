@@ -4,6 +4,8 @@ import FormSection from './FormSection';
 import './FormResults.scss';
 
 const FormResults = ({ formState, dispatch }) => {
+	console.log(formState);
+
 	const [ isLoading, setIsLoading ] = useState(true);
 
 	useEffect(
@@ -16,13 +18,6 @@ const FormResults = ({ formState, dispatch }) => {
 
 	if (isLoading) {
 		return <div>Loading</div>;
-	}
-	if (formState.category === '') {
-		return (
-			<div className='form-results'>
-				Please enter a Category in Setup.
-			</div>
-		);
 	}
 
 	if (formState.items.length === 1 && formState.items[0].label === '') {
@@ -46,7 +41,7 @@ const FormResults = ({ formState, dispatch }) => {
 
 	return (
 		<div className='form-results'>
-			<h1>{formState.category} Results</h1>
+			<h1>Results</h1>
 			<h3>Overview</h3>
 			<FormSection>
 				<table className='form-results__table'>
@@ -58,17 +53,20 @@ const FormResults = ({ formState, dispatch }) => {
 						</tr>
 					</thead>
 					<tbody>
-						{formState.items.map((item, index) => {
-							return (
-								<tr key={item.id}>
-									<td>{index + 1}</td>
-									<td>{item.label}</td>
-									<td>
-										{Math.round(item.average * 100) / 100}
-									</td>
-								</tr>
-							);
-						})}
+						{formState.items
+							.sort((a, b) => b.average - a.average)
+							.map((item, index) => {
+								return (
+									<tr key={item.id}>
+										<td>{index + 1}</td>
+										<td>{item.label}</td>
+										<td>
+											{Math.round(item.average * 100) /
+												100}
+										</td>
+									</tr>
+								);
+							})}
 					</tbody>
 				</table>
 			</FormSection>
@@ -92,19 +90,21 @@ const FormResults = ({ formState, dispatch }) => {
 									</tr>
 								</thead>
 								<tbody>
-									{label.scores.map((score, index) => {
-										return (
-											<tr key={score.id}>
-												<td>{index + 1}</td>
-												<td>{score.label}</td>
-												<td>
-													{Math.round(
-														score.score * 100
-													) / 100}
-												</td>
-											</tr>
-										);
-									})}
+									{label.scores
+										.sort((a, b) => b.score - a.score)
+										.map((score, index) => {
+											return (
+												<tr key={score.id}>
+													<td>{index + 1}</td>
+													<td>{score.label}</td>
+													<td>
+														{Math.round(
+															score.score * 100
+														) / 100}
+													</td>
+												</tr>
+											);
+										})}
 								</tbody>
 							</table>
 						</FormSection>

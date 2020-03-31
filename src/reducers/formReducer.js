@@ -2,11 +2,6 @@ import { v4 as uuidv4 } from 'uuid';
 
 const formReducer = (state, action) => {
 	switch (action.type) {
-		case 'UPDATE_CATEGORY':
-			return {
-				...state,
-				category: action.value
-			};
 		case 'ADD_ITEM':
 			return {
 				...state,
@@ -80,6 +75,29 @@ const formReducer = (state, action) => {
 				return item;
 			});
 
+			// causing ui bug, order of score inputs being reordered due to sort
+			let sorted;
+			if (state.sort === 'desc') {
+				sorted = [ ...updatedItems ].sort(
+					(a, b) => b.average - a.average
+				);
+			} else {
+				sorted = [ ...updatedItems ].sort(
+					(a, b) => a.average - b.average
+				);
+			}
+			const ranked = sorted.map((item, index) => {
+				item.rank = index + 1;
+				return item;
+			});
+
+			updatedItems.forEach(item => {
+				const index = ranked.findIndex(
+					rankedItem => rankedItem.id === item.id
+				);
+				return { ...item, rank: ranked[index].rank };
+			});
+
 			return { ...state, items: updatedItems };
 		case 'DELETE_ITEM':
 			const filteredItems = state.items.filter(
@@ -101,7 +119,7 @@ const formReducer = (state, action) => {
 						return item.scores[existingScore];
 					} else {
 						return {
-							id: label.id,
+							id: uuidv4(),
 							label: label.label,
 							score: ''
 						};

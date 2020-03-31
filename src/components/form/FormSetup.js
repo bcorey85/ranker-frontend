@@ -8,10 +8,6 @@ import FormSection from './FormSection';
 import './FormSetup.scss';
 
 const FormSetup = ({ formState, dispatch }) => {
-	const handleCategory = e => {
-		dispatch({ type: 'UPDATE_CATEGORY', value: e.target.value });
-	};
-
 	const handleNewItem = e => {
 		dispatch({ type: 'ADD_ITEM' });
 	};
@@ -53,21 +49,6 @@ const FormSetup = ({ formState, dispatch }) => {
 		<div className='form-setup'>
 			<h1>Setup</h1>
 			<h3>What are you ranking?</h3>
-			<h4>(Ex: Shoes)</h4>
-			<div className='form-setup__category'>
-				<FormSection>
-					<label htmlFor='category'>Category</label>
-					<input
-						type='text'
-						id='category'
-						placeholder='Category'
-						onChange={handleCategory}
-						value={formState.category}
-					/>
-				</FormSection>
-			</div>
-			<h3>What are your items?</h3>
-			<h4>(Ex: Nike, Adidas, Reebok)</h4>
 			<div className='form-setup__section'>
 				<FormSection>
 					{formState.items.map((item, index) => {
@@ -89,7 +70,6 @@ const FormSetup = ({ formState, dispatch }) => {
 			</div>
 
 			<h3>What are your score labels?</h3>
-			<h4>(Ex: Cost, Durability, Color)</h4>
 			<div className='form-setup__section'>
 				<FormSection>
 					{formState.scoreLabels.map((score, index) => {

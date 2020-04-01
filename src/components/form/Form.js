@@ -11,13 +11,13 @@ import FormResults from './FormResults';
 import formReducer from '../../reducers/formReducer';
 import './Form.scss';
 
-const initialState = new RankForm();
+const initialState = {
+	form: new RankForm()
+};
 
 const Form = () => {
 	const [ currentPage, setCurrentPage ] = useState('Setup');
-	const [ formState, dispatch ] = useReducer(formReducer, {
-		...initialState
-	});
+	const [ formState, dispatch ] = useReducer(formReducer, initialState);
 
 	return (
 		<div className='form'>

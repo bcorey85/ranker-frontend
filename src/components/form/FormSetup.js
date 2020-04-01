@@ -38,9 +38,9 @@ const FormSetup = ({ formState, dispatch }) => {
 			id
 		});
 	};
-	const handleDeleteScore = id => {
+	const handleDeleteScoreLabel = id => {
 		dispatch({
-			type: 'DELETE_SCORE',
+			type: 'DELETE_SCORE_LABEL',
 			id
 		});
 	};
@@ -51,7 +51,7 @@ const FormSetup = ({ formState, dispatch }) => {
 			<h3>What are you ranking?</h3>
 			<div className='form-setup__section'>
 				<FormSection>
-					{formState.items.map((item, index) => {
+					{formState.form.items.map((item, index) => {
 						return (
 							<SetupInput
 								key={item.id}
@@ -72,12 +72,12 @@ const FormSetup = ({ formState, dispatch }) => {
 			<h3>What are your score labels?</h3>
 			<div className='form-setup__section'>
 				<FormSection>
-					{formState.scoreLabels.map((score, index) => {
+					{formState.form.scoreLabels.map((score, index) => {
 						return (
 							<SetupInput
 								key={score.id}
 								handleChange={handleUpdateScoreLabel}
-								handleDelete={handleDeleteScore}
+								handleDelete={handleDeleteScoreLabel}
 								item={score}
 								label='Label'
 								index={index}

@@ -18,7 +18,10 @@ const FormResults = ({ formState, dispatch }) => {
 		return <div>Loading</div>;
 	}
 
-	if (formState.items.length === 1 && formState.items[0].label === '') {
+	if (
+		formState.form.items.length === 1 &&
+		formState.form.items[0].label === ''
+	) {
 		return (
 			<div className='form-results'>
 				Please enter at least one Item to rank in Setup.
@@ -27,8 +30,8 @@ const FormResults = ({ formState, dispatch }) => {
 	}
 
 	if (
-		formState.scoreLabels.length === 0 ||
-		formState.scoreLabels[0].label === ''
+		formState.form.scoreLabels.length === 0 ||
+		formState.form.scoreLabels[0].label === ''
 	) {
 		return (
 			<div className='form-results'>
@@ -51,7 +54,7 @@ const FormResults = ({ formState, dispatch }) => {
 						</tr>
 					</thead>
 					<tbody>
-						{formState.items
+						{formState.form.items
 							.sort((a, b) => b.average - a.average)
 							.map((item, index) => {
 								return (
@@ -71,10 +74,10 @@ const FormResults = ({ formState, dispatch }) => {
 			<div className='form-results__average'>
 				<h2>
 					<span>Average: </span>
-					{Math.round(formState.overallAverage * 100) / 100}
+					{Math.round(formState.form.overallAverage * 100) / 100}
 				</h2>
 			</div>
-			{formState.scoreLabels.map(label => {
+			{formState.form.scoreLabels.map(label => {
 				return (
 					<React.Fragment key={label.id}>
 						<h3>{label.label}</h3>

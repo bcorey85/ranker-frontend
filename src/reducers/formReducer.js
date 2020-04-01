@@ -1,77 +1,37 @@
-import { Item, ScoreLabel } from '../classes/FormClasses';
-import updateRanks from '../utils/updateRanks';
-
 const formReducer = (state, action) => {
 	switch (action.type) {
 		case 'ADD_ITEM':
-			return {
-				...state,
-				items: [ ...state.items, new Item('') ]
-			};
+			state.form.items = state.form.addItem();
+			return { ...state };
 		case 'ADD_SCORE':
-			return {
-				...state,
-				scoreLabels: [ ...state.scoreLabels, new ScoreLabel('') ]
-			};
+			state.form.scoreLabels = state.form.addScoreLabel();
+			return { ...state };
 		case 'UPDATE_ITEM_LABEL':
-			const updatedItemLabels = state.items.map(item => {
-				if (item.id === action.id) {
-					item.label = action.value;
-					return item;
-				}
-				return item;
-			});
-			return { ...state, items: updatedItemLabels };
+			state.form.items = state.form.updateItemLabel(action);
+			return {
+				...state
+			};
 		case 'UPDATE_SCORE_LABEL':
-			const updatedScoreLabels = state.scoreLabels.map(label => {
-				if (label.id === action.id) {
-					label.label = action.value;
-					return label;
-				}
-				return label;
-			});
-
-			return { ...state, scoreLabels: updatedScoreLabels };
+			state.form.scoreLabels = state.form.updateScoreLabel(action);
+			return { ...state };
 		case 'UPDATE_ITEM_SCORE':
-			const updatedItems = state.items.map(item => {
-				if (item.id === action.itemId) {
-					item.updateScore(action);
-				}
-				return item;
-			});
-
-			const updatedAndRanked = updateRanks(updatedItems, state);
-
-			return { ...state, items: updatedAndRanked };
+			state.form.items = state.form.updateRanks(
+				state.form.updateItemScore(action)
+			);
+			return { ...state };
 		case 'DELETE_ITEM':
-			const filteredItems = state.items.filter(
-				item => item.id !== action.id
-			);
-			return { ...state, items: filteredItems };
-		case 'DELETE_SCORE':
-			const filteredScores = state.scoreLabels.filter(
-				item => item.id !== action.id
-			);
-			return { ...state, scoreLabels: filteredScores };
+			state.form.items = state.form.deleteItem(action);
+			return { ...state };
+		case 'DELETE_SCORE_LABEL':
+			state.form.scoreLabels = state.form.deleteScoreLabel(action);
+			return { ...state };
 		case 'MAP_SCORES':
-			const mappedItems = state.items.map(item => {
-				return item.mapScores(state);
-			});
-
-			return { ...state, items: mappedItems };
+			state.form.items = state.form.mapScores();
+			return { ...state };
 		case 'CALC_LABEL_AVERAGES':
-			const updatedLabels = state.scoreLabels.map(label => {
-				label.scores = label.updateLabelScores(state);
-				label.average = label.calcAverage();
-				return label;
-			});
-
-			const overallAverage =
-				state.items.reduce((acc, cur) => {
-					return acc + cur.average;
-				}, 0) / state.items.length;
-
-			return { ...state, scoreLabels: updatedLabels, overallAverage };
+			state.form.labels = state.form.updateScoreLabels();
+			state.form.overallAverage = state.form.calcOverallAverage();
+			return { ...state };
 		default: {
 			return state;
 		}

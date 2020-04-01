@@ -5,9 +5,10 @@
 	width: 100%;
 	max-width: 70.4rem;
 	margin: 0 auto;
+	border-top: .8rem solid $primary;
 	border-bottom: .8rem solid $primary;
-	border-bottom-right-radius: .2rem;
-	border-bottom-left-radius: .2rem;
+	border-radius: .2rem;
+	box-shadow: 0 .4rem .6rem 0 rgba(0, 0, 0, .5);
 
 	@include respond(500) {
 		border-bottom-right-radius: 0;

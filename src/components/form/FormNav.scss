@@ -12,10 +12,7 @@
 		background-color: $gray50;
 		color: $gray200;
 		cursor: pointer;
-		border-top-left-radius: .2rem;
-		border-top-right-radius: .2rem;
-		border: .1rem solid $gray100;
-		border-bottom: none;
+		border: none;
 		font-weight: 600;
 
 		@include respond(500) {

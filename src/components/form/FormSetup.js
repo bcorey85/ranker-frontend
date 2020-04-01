@@ -69,7 +69,7 @@ const FormSetup = ({ formState, dispatch }) => {
 				</div>
 			</div>
 
-			<h3>What are your score labels?</h3>
+			<h3>How are you scoring?</h3>
 			<div className='form-setup__section'>
 				<FormSection>
 					{formState.form.scoreLabels.map((score, index) => {

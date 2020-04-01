@@ -1,4 +1,5 @@
 @import '../../sass/abstracts/variables';
+@import '../../sass/abstracts/mixins';
 
 .header {
 	display: flex;
@@ -12,5 +13,9 @@
 
 	& img {
 		width: 14.4rem;
+
+		@include respond(500) {
+			width: 9.6rem;
+		}
 	}
 }

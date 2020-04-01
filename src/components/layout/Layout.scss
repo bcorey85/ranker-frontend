@@ -1,8 +1,13 @@
 @import '../../sass/abstracts/variables';
+@import '../../sass/abstracts/mixins';
 
 .layout {
 	display: grid;
 	min-height: 100vh;
 	grid-template-columns: 1fr minmax(min-content, 108rem) 1fr;
-	grid-template-rows: 8rem 1fr 8rem;
+	grid-template-rows: 8rem 1fr 16rem;
+
+	@include respond(500) {
+		grid-template-rows: 5.6rem 1fr 9.6rem;
+	}
 }

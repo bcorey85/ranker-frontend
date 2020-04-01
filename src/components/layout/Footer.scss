@@ -6,8 +6,8 @@
 	background-color: $gray400;
 	padding: 1.6rem;
 	display: flex;
+	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 	color: $white;
-	height: 16rem;
 }

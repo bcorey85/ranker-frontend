@@ -1,4 +1,5 @@
 @import '../../sass/abstracts/variables';
+@import '../../sass/abstracts/mixins';
 
 .form-nav {
 	display: flex;
@@ -17,14 +18,27 @@
 		border-bottom: none;
 		font-weight: 600;
 
+		@include respond(500) {
+			border-top-left-radius: 0;
+			border-top-right-radius: 0;
+		}
+
 		&:hover {
 			background-color: $primary;
 			color: $white;
 		}
 	}
 
+	&__btn:not(:last-of-type) {
+		margin-right: .4rem;
+
+		@include respond(500) {
+			margin-right: 0;
+		}
+	}
+
 	&__btn--active {
-		background-color: $primary;
-		color: $white;
+		background-color: $white;
+		color: $gray200;
 	}
 }

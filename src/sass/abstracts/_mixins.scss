@@ -5,6 +5,12 @@
 		}
 	} //375px
 
+	@if $breakpoint == 500 {
+		@media only screen and (max-width: 31.25em) {
+			@content;
+		} //500px
+	}
+
 	@if $breakpoint == 675 {
 		@media only screen and (max-width: 42.18em) {
 			@content;
@@ -17,9 +23,17 @@
 		} //900px
 	}
 
-	@if $breakpoint == 1200 {
-		@media only screen and (max-width: 75em) {
+	@if $breakpoint == 1280 {
+		@media only screen and (max-width: 80em) {
 			@content;
-		} //1200px
+		} //1280px
 	}
+}
+
+@mixin respondv($breakpoint) {
+	@if $breakpoint == 900 {
+		@media only screen and (max-height: 56.25em) {
+			@content;
+		}
+	} //900px
 }

@@ -7,10 +7,13 @@
 		align-items: flex-start;
 		border: .1rem solid $gray200;
 		margin-bottom: .8rem;
+		border-radius: .4rem;
 
 		& input {
 			border: none;
 			margin-bottom: 0;
+			border-top-left-radius: .4rem;
+			border-bottom-left-radius: .4rem;
 		}
 	}
 }

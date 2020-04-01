@@ -18,10 +18,7 @@ const FormResults = ({ formState, dispatch }) => {
 		return <div>Loading</div>;
 	}
 
-	if (
-		formState.form.items.length === 1 &&
-		formState.form.items[0].label === ''
-	) {
+	if (formState.form.items.every(item => item.label === '')) {
 		return (
 			<div className='form-results'>
 				Please enter at least one Item to rank in Setup.
@@ -29,10 +26,7 @@ const FormResults = ({ formState, dispatch }) => {
 		);
 	}
 
-	if (
-		formState.form.scoreLabels.length === 0 ||
-		formState.form.scoreLabels[0].label === ''
-	) {
+	if (formState.form.scoreLabels.every(label => label.label === '')) {
 		return (
 			<div className='form-results'>
 				Please enter at least one Score Label in Setup.

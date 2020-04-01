@@ -26,6 +26,11 @@
 		&:hover {
 			background-color: $primary;
 			color: $white;
+
+			@include respond(500) {
+				background-color: $white;
+				color: $gray200;
+			}
 		}
 	}
 

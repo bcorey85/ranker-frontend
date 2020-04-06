@@ -8,11 +8,18 @@ import {
 	itemSchema
 } from './formSchemas';
 
-import {
-	calcOverallAverage,
-	calcScoreAverage,
-	updateRanks
-} from '../../utils/formUtils';
+import { calcAverage, updateRanks } from '../../utils/formUtils';
+
+const fields = {
+	item: {
+		schema: itemSchema,
+		stateLocation: 'items'
+	},
+	scoreLabel: {
+		schema: scoreLabelSchema,
+		stateLocation: 'scoreLabels'
+	}
+};
 
 export const createForm = (state, action) => {
 	const newForm = { ...formSchema };
@@ -32,55 +39,56 @@ export const createForm = (state, action) => {
 	});
 };
 
-export const addItem = state => {
-	const newItem = { ...itemSchema, id: uuidv4() };
+export const addField = (state, action) => {
+	if (fields[action.field]) {
+		const newField = { ...fields[action.field].schema, id: uuidv4() };
+		const stateLocation = fields[action.field].stateLocation;
 
-	return produce(state, draftState => {
-		draftState.form.items = [ ...state.form.items, newItem ];
-	});
+		return produce(state, draftState => {
+			draftState.form[stateLocation] = [
+				...state.form[stateLocation],
+				newField
+			];
+		});
+	} else {
+		return state;
+	}
 };
 
-export const addScoreLabel = (state, action) => {
-	const newScoreLabel = { ...scoreLabelSchema, id: uuidv4() };
+export const updateFieldLabel = (state, action) => {
+	if (fields[action.field]) {
+		const stateLocation = fields[action.field].stateLocation;
+		const updatedFields = state.form[stateLocation].map(field => {
+			if (field.id === action.id) {
+				return {
+					...field,
+					label: action.value
+				};
+			}
+			return field;
+		});
 
-	return produce(state, draftState => {
-		draftState.form.scoreLabels = [
-			...state.form.scoreLabels,
-			newScoreLabel
-		];
-	});
+		return produce(state, draftState => {
+			draftState.form[stateLocation] = updatedFields;
+		});
+	} else {
+		return state;
+	}
 };
 
-export const updateItemLabel = (state, action) => {
-	const updatedItemLabels = state.form.items.map(item => {
-		if (item.id === action.id) {
-			return {
-				...item,
-				label: action.value
-			};
-		}
-		return item;
-	});
+export const deleteField = (state, action) => {
+	if (fields[action.field]) {
+		const stateLocation = fields[action.field].stateLocation;
+		const filteredFields = state.form[stateLocation].filter(
+			field => field.id !== action.id
+		);
 
-	return produce(state, draftState => {
-		draftState.form.items = updatedItemLabels;
-	});
-};
-
-export const updateScoreLabel = (state, action) => {
-	const updatedScoreLabels = state.form.scoreLabels.map(label => {
-		if (label.id === action.id) {
-			return {
-				...label,
-				label: action.value
-			};
-		}
-		return label;
-	});
-
-	return produce(state, draftState => {
-		draftState.form.scoreLabels = updatedScoreLabels;
-	});
+		return produce(state, draftState => {
+			draftState.form[stateLocation] = filteredFields;
+		});
+	} else {
+		return state;
+	}
 };
 
 export const updateItemScore = (state, action) => {
@@ -99,7 +107,7 @@ export const updateItemScore = (state, action) => {
 			return {
 				...item,
 				scores: newScores,
-				average: calcScoreAverage(newScores)
+				average: calcAverage(newScores, 'score')
 			};
 		}
 		return item;
@@ -107,26 +115,6 @@ export const updateItemScore = (state, action) => {
 
 	return produce(state, draftState => {
 		draftState.form.items = updateRanks(updatedItems, state.form.sort);
-	});
-};
-
-export const deleteItem = (state, action) => {
-	const filteredItems = state.form.items.filter(
-		item => item.id !== action.id
-	);
-
-	return produce(state, draftState => {
-		draftState.form.items = filteredItems;
-	});
-};
-
-export const deleteScoreLabel = (state, action) => {
-	const filteredScoreLabels = state.form.scoreLabels.filter(
-		item => item.id !== action.id
-	);
-
-	return produce(state, draftState => {
-		draftState.form.scoreLabels = filteredScoreLabels;
 	});
 };
 
@@ -152,7 +140,7 @@ export const mapScores = state => {
 	});
 };
 
-export const calcLabelAverages = state => {
+export const calcResults = state => {
 	const updatedScoreLabels = state.form.scoreLabels.map(scoreLabel => {
 		const newScores = state.form.items
 			.map(item => {
@@ -173,12 +161,21 @@ export const calcLabelAverages = state => {
 		return {
 			...scoreLabel,
 			scores: newScores,
-			average: calcScoreAverage(newScores)
+			average: calcAverage(newScores, 'score')
 		};
 	});
 
 	return produce(state, draftState => {
 		draftState.form.scoreLabels = updatedScoreLabels;
-		draftState.form.overallAverage = calcOverallAverage(updatedScoreLabels);
+		draftState.form.overallAverage = calcAverage(
+			updatedScoreLabels,
+			'average'
+		);
+	});
+};
+
+export const setSort = (state, action) => {
+	return produce(state, draftState => {
+		draftState.form.sort = action.sort;
 	});
 };

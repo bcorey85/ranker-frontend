@@ -18,7 +18,7 @@ const SetupInput = ({ handleChange, handleDelete, index, item, label }) => {
 					value={item.label}
 					onChange={handleChange}
 				/>
-				<DeleteBtn handleDelete={() => handleDelete(item.id)} />
+				<DeleteBtn handleDelete={handleDelete} />
 			</div>
 		</div>
 	);

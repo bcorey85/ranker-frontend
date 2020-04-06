@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import AddBtn from '../shared/AddBtn';
 
@@ -8,41 +8,32 @@ import FormSection from './FormSection';
 import './FormSetup.scss';
 
 const FormSetup = ({ formState, dispatch }) => {
-	const handleNewItem = e => {
-		dispatch({ type: 'ADD_ITEM' });
+	const [ sort, setSort ] = useState(formState.form.sort);
+
+	const handleNewField = (e, field) => {
+		dispatch({ type: 'ADD_FIELD', field });
 	};
 
-	const handleNewScore = e => {
-		dispatch({ type: 'ADD_SCORE' });
-	};
-
-	const handleUpdateItemLabel = e => {
+	const handleUpdateLabel = (e, field) => {
 		dispatch({
-			type: 'UPDATE_ITEM_LABEL',
+			type: 'UPDATE_FIELD_LABEL',
 			value: e.target.value,
-			id: e.target.id
+			id: e.target.id,
+			field
 		});
 	};
 
-	const handleUpdateScoreLabel = e => {
+	const handleDeleteField = (id, field) => {
 		dispatch({
-			type: 'UPDATE_SCORE_LABEL',
-			value: e.target.value,
-			id: e.target.id
+			type: 'DELETE_FIELD',
+			id,
+			field
 		});
 	};
 
-	const handleDeleteItem = id => {
-		dispatch({
-			type: 'DELETE_ITEM',
-			id
-		});
-	};
-	const handleDeleteScoreLabel = id => {
-		dispatch({
-			type: 'DELETE_SCORE_LABEL',
-			id
-		});
+	const handleSort = e => {
+		dispatch({ type: 'SET_SORT', sort: e.target.value });
+		setSort(e.target.value);
 	};
 
 	return (
@@ -55,8 +46,9 @@ const FormSetup = ({ formState, dispatch }) => {
 						return (
 							<SetupInput
 								key={item.id}
-								handleChange={handleUpdateItemLabel}
-								handleDelete={handleDeleteItem}
+								handleChange={e => handleUpdateLabel(e, 'item')}
+								handleDelete={() =>
+									handleDeleteField(item.id, 'item')}
 								item={item}
 								label='Item'
 								index={index}
@@ -65,7 +57,7 @@ const FormSetup = ({ formState, dispatch }) => {
 					})}
 				</FormSection>
 				<div className='form-setup__add-btn'>
-					<AddBtn handleClick={handleNewItem} />
+					<AddBtn handleClick={e => handleNewField(e, 'item')} />
 				</div>
 			</div>
 
@@ -76,8 +68,10 @@ const FormSetup = ({ formState, dispatch }) => {
 						return (
 							<SetupInput
 								key={score.id}
-								handleChange={handleUpdateScoreLabel}
-								handleDelete={handleDeleteScoreLabel}
+								handleChange={e =>
+									handleUpdateLabel(e, 'scoreLabel')}
+								handleDelete={() =>
+									handleDeleteField(score.id, 'scoreLabel')}
 								item={score}
 								label='Label'
 								index={index}
@@ -86,9 +80,36 @@ const FormSetup = ({ formState, dispatch }) => {
 					})}
 				</FormSection>
 				<div className='form-setup__add-btn'>
-					<AddBtn handleClick={handleNewScore} />
+					<AddBtn
+						handleClick={e => handleNewField(e, 'scoreLabel')}
+					/>
 				</div>
 			</div>
+			<h3>Sort Results</h3>
+			<FormSection>
+				<div className='form-results__sort'>
+					<div onClick={handleSort}>
+						<label htmlFor='desc'>High to Low</label>
+						<input
+							type='radio'
+							id='desc'
+							name='sort'
+							value='desc'
+							defaultChecked={sort === 'desc'}
+						/>
+					</div>
+					<div onClick={handleSort}>
+						<label htmlFor='asc'>Low to High</label>
+						<input
+							type='radio'
+							id='asc'
+							name='sort'
+							value='asc'
+							defaultChecked={sort === 'asc'}
+						/>
+					</div>
+				</div>
+			</FormSection>
 		</div>
 	);
 };

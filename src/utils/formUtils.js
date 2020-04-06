@@ -1,17 +1,10 @@
-export const calcScoreAverage = array => {
+export const calcAverage = (array, unit) => {
 	const sum = array.reduce((acc, cur) => {
-		if (cur.score !== '') {
-			return acc + parseFloat(cur.score);
+		if (cur[unit] !== '' && !isNaN(cur[unit])) {
+			return acc + parseFloat(cur[unit]);
 		} else {
 			return acc + 0;
 		}
-	}, 0);
-	return sum / array.length;
-};
-
-export const calcOverallAverage = array => {
-	const sum = array.reduce((acc, cur) => {
-		return acc + cur.average;
 	}, 0);
 	return sum / array.length;
 };

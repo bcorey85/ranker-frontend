@@ -10,7 +10,7 @@ const FormResults = ({ formState, dispatch }) => {
 
 	useEffect(
 		() => {
-			dispatch({ type: 'CALC_LABEL_AVERAGES' });
+			dispatch({ type: 'CALC_RESULTS' });
 
 			setIsLoading(false);
 		},

@@ -24,10 +24,6 @@ const FormInput = ({ formState, dispatch }) => {
 		});
 	};
 
-	if (isLoading) {
-		return <div>Loading</div>;
-	}
-
 	if (formState.form.items.every(item => item.label === '')) {
 		return (
 			<div className='form-score'>
@@ -44,46 +40,46 @@ const FormInput = ({ formState, dispatch }) => {
 		);
 	}
 
+	const scores = formState.form.items.map((item, itemIndex) => {
+		return (
+			<div key={item.id}>
+				<h3>{item.label}</h3>
+				<FormSection>
+					{item.scores.map((score, scoreIndex) => {
+						return (
+							<React.Fragment
+								key={`item${itemIndex + 1}-${score.id}`}>
+								<label
+									htmlFor={`item${itemIndex +
+										1}-${score.id}`}>
+									{score.label}
+								</label>
+								<input
+									type='number'
+									id={`item${itemIndex + 1}-${score.id}`}
+									value={score.score}
+									onChange={handleUpdateScore}
+									data-itemindex={item.id}
+									data-scoreindex={score.id}
+								/>
+							</React.Fragment>
+						);
+					})}
+				</FormSection>
+				<div className='form-score__average'>
+					<h2>
+						<span>Average: </span>
+						{Math.round(item.average * 100) / 100}
+					</h2>
+				</div>
+			</div>
+		);
+	});
+
 	return (
 		<div className='form-score'>
 			<h1>Scores</h1>
-			{formState.form.items.map((item, itemIndex) => {
-				return (
-					<div key={item.id}>
-						<h3>{item.label}</h3>
-						<FormSection>
-							{item.scores.map((score, scoreIndex) => {
-								return (
-									<React.Fragment
-										key={`item${itemIndex +
-											1}-${score.id}`}>
-										<label
-											htmlFor={`item${itemIndex +
-												1}-${score.id}`}>
-											{score.label}
-										</label>
-										<input
-											type='number'
-											id={`item${itemIndex +
-												1}-${score.id}`}
-											value={score.score}
-											onChange={handleUpdateScore}
-											data-itemindex={item.id}
-											data-scoreindex={score.id}
-										/>
-									</React.Fragment>
-								);
-							})}
-						</FormSection>
-						<div className='form-score__average'>
-							<h2>
-								<span>Average: </span>
-								{Math.round(item.average * 100) / 100}
-							</h2>
-						</div>
-					</div>
-				);
-			})}
+			{isLoading ? 'Loading...' : scores}
 		</div>
 	);
 };

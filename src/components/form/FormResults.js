@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
 import FormSection from './FormSection';
+
+import { sortScores } from '../../utils/formUtils';
 import './FormResults.scss';
 
 const FormResults = ({ formState, dispatch }) => {
@@ -9,14 +11,11 @@ const FormResults = ({ formState, dispatch }) => {
 	useEffect(
 		() => {
 			dispatch({ type: 'CALC_LABEL_AVERAGES' });
+
 			setIsLoading(false);
 		},
 		[ dispatch ]
 	);
-
-	if (isLoading) {
-		return <div>Loading</div>;
-	}
 
 	if (formState.form.items.every(item => item.label === '')) {
 		return (
@@ -34,9 +33,65 @@ const FormResults = ({ formState, dispatch }) => {
 		);
 	}
 
-	return (
-		<div className='form-results'>
-			<h1>Results</h1>
+	const items = sortScores(
+		formState.form.items,
+		formState.form.sort,
+		'average'
+	).map((item, index) => {
+		return (
+			<tr key={item.id}>
+				<td>{index + 1}</td>
+				<td>{item.label}</td>
+				<td>{Math.round(item.average * 100) / 100}</td>
+			</tr>
+		);
+	});
+
+	const scoreLabels = formState.form.scoreLabels.map(label => {
+		return (
+			<React.Fragment key={label.id}>
+				<h3>{label.label}</h3>
+				<FormSection>
+					<table className='form-results__table'>
+						<thead>
+							<tr>
+								<th>Rank</th>
+								<th>Item</th>
+								<th>Score</th>
+							</tr>
+						</thead>
+						<tbody>
+							{sortScores(
+								label.scores,
+								formState.form.sort,
+								'score'
+							).map((score, index) => {
+								return (
+									<tr key={score.id}>
+										<td>{index + 1}</td>
+										<td>{score.label}</td>
+										<td>
+											{Math.round(score.score * 100) /
+												100}
+										</td>
+									</tr>
+								);
+							})}
+						</tbody>
+					</table>
+				</FormSection>
+				<div className='form-results__average'>
+					<h2>
+						<span>Average: </span>
+						{Math.round(label.average * 100) / 100}
+					</h2>
+				</div>
+			</React.Fragment>
+		);
+	});
+
+	const results = (
+		<React.Fragment>
 			<h3>Overview</h3>
 			<FormSection>
 				<table className='form-results__table'>
@@ -47,22 +102,7 @@ const FormResults = ({ formState, dispatch }) => {
 							<th>Score</th>
 						</tr>
 					</thead>
-					<tbody>
-						{formState.form.items
-							.sort((a, b) => b.average - a.average)
-							.map((item, index) => {
-								return (
-									<tr key={item.id}>
-										<td>{index + 1}</td>
-										<td>{item.label}</td>
-										<td>
-											{Math.round(item.average * 100) /
-												100}
-										</td>
-									</tr>
-								);
-							})}
-					</tbody>
+					<tbody>{items}</tbody>
 				</table>
 			</FormSection>
 			<div className='form-results__average'>
@@ -71,47 +111,14 @@ const FormResults = ({ formState, dispatch }) => {
 					{Math.round(formState.form.overallAverage * 100) / 100}
 				</h2>
 			</div>
-			{formState.form.scoreLabels.map(label => {
-				return (
-					<React.Fragment key={label.id}>
-						<h3>{label.label}</h3>
-						<FormSection>
-							<table className='form-results__table'>
-								<thead>
-									<tr>
-										<th>Rank</th>
-										<th>Item</th>
-										<th>Score</th>
-									</tr>
-								</thead>
-								<tbody>
-									{label.scores
-										.sort((a, b) => b.score - a.score)
-										.map((score, index) => {
-											return (
-												<tr key={score.id}>
-													<td>{index + 1}</td>
-													<td>{score.label}</td>
-													<td>
-														{Math.round(
-															score.score * 100
-														) / 100}
-													</td>
-												</tr>
-											);
-										})}
-								</tbody>
-							</table>
-						</FormSection>
-						<div className='form-results__average'>
-							<h2>
-								<span>Average: </span>
-								{Math.round(label.average * 100) / 100}
-							</h2>
-						</div>
-					</React.Fragment>
-				);
-			})}
+			{scoreLabels}
+		</React.Fragment>
+	);
+
+	return (
+		<div className='form-results'>
+			<h1>Results</h1>
+			{isLoading ? 'Loading...' : results}
 		</div>
 	);
 };

@@ -1,17 +1,27 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 
 import AuthForm from '../components/auth/AuthForm';
 import Button from '../components/shared/Button';
+import Input from '../components/shared/Input';
+
+import useInputState from '../hooks/useInputState';
 
 const Register = () => {
+	const [ email, setEmail ] = useInputState('');
+
 	const resetPassword = () => {};
 
 	return (
 		<AuthForm>
 			<form>
-				<label htmlFor='email'>Please enter your account email:</label>
-				<input type='text' placeholder='Email' id='email' />
+				<Input
+					type='text'
+					id='email'
+					placeholder='Email'
+					label
+					handleChange={setEmail}
+					value={email}
+				/>
 				<Button handleClick={resetPassword}>Reset Password</Button>
 			</form>
 		</AuthForm>

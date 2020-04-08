@@ -5,21 +5,10 @@ import {
 	formSchema,
 	scoreLabelSchema,
 	scoreSchema,
-	itemSchema
+	itemSchema,
+	fields
 } from './formSchemas';
-
 import { calcAverage, updateRanks } from '../../utils/formUtils';
-
-const fields = {
-	item: {
-		schema: itemSchema,
-		stateLocation: 'items'
-	},
-	scoreLabel: {
-		schema: scoreLabelSchema,
-		stateLocation: 'scoreLabels'
-	}
-};
 
 export const createForm = (state, action) => {
 	const newForm = { ...formSchema };

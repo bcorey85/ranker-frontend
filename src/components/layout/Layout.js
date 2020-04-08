@@ -6,11 +6,11 @@ import Footer from './Footer';
 
 import './Layout.scss';
 
-const Layout = () => {
+const Layout = props => {
 	return (
 		<div className='layout'>
 			<Header />
-			<Content />
+			<Content>{props.children}</Content>
 			<Footer />
 		</div>
 	);

@@ -1,15 +1,9 @@
 import React from 'react';
 
-import Form from '../form/Form';
-
 import './Content.scss';
 
-const Content = () => {
-	return (
-		<main className='content'>
-			<Form />
-		</main>
-	);
+const Content = props => {
+	return <main className='content'>{props.children}</main>;
 };
 
 export default Content;

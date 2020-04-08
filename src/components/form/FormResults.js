@@ -7,6 +7,7 @@ import './FormResults.scss';
 
 const FormResults = ({ formState, dispatch }) => {
 	const [ isLoading, setIsLoading ] = useState(true);
+	console.log(formState);
 
 	useEffect(
 		() => {

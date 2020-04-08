@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Button from '../shared/Button';
 
 import './FormFooterNav.scss';
 
@@ -26,14 +27,16 @@ const FormFooterNav = ({ handlePageChange, currentPage }) => {
 		<nav className='form-footer-nav'>
 			<div>
 				{previous && (
-					<button onClick={() => handlePageChange(previous)}>
+					<Button handleClick={() => handlePageChange(previous)}>
 						Back
-					</button>
+					</Button>
 				)}
 			</div>
 			<div>
 				{next && (
-					<button onClick={() => handlePageChange(next)}>Next</button>
+					<Button handleClick={() => handlePageChange(next)}>
+						Next
+					</Button>
 				)}
 			</div>
 		</nav>

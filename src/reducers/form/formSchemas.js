@@ -25,3 +25,14 @@ export const itemSchema = {
 	rank: null,
 	average: null
 };
+
+export const fields = {
+	item: {
+		schema: itemSchema,
+		stateLocation: 'items'
+	},
+	scoreLabel: {
+		schema: scoreLabelSchema,
+		stateLocation: 'scoreLabels'
+	}
+};

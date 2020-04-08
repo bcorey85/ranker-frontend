@@ -46,6 +46,16 @@ input[type=number] {
 }
 
 a {
+	color: $primary;
+	text-decoration: underline;
+
+	&:hover {
+		color: $black;
+	}
+}
+
+.header a,
+.footer a {
 	color: $white;
 	text-decoration: none;
 

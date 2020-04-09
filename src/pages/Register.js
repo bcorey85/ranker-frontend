@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 import { NavLink } from 'react-router-dom';
 
 import AuthForm from '../components/auth/AuthForm';
@@ -7,12 +8,31 @@ import Input from '../components/shared/Input';
 
 import useInputState from '../hooks/useInputState';
 
-const Register = () => {
+const Register = props => {
 	const [ username, setUsername ] = useInputState('');
 	const [ email, setEmail ] = useInputState('');
 	const [ password, setPassword ] = useInputState('');
 
-	const register = () => {};
+	const register = async e => {
+		e.preventDefault();
+		const newUser = {
+			username,
+			email,
+			password
+		};
+		try {
+			const response = await axios.post(
+				`${process.env.REACT_APP_API_URL}/auth/register`,
+				newUser
+			);
+
+			if (response.status === 200) {
+				props.history.push('/');
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 	return (
 		<AuthForm>
@@ -45,7 +65,6 @@ const Register = () => {
 
 				<Button handleClick={register}>Register</Button>
 			</form>
-			<NavLink to='/resetpassword'>Reset password</NavLink>
 			<NavLink to='/login'>Already have an account?</NavLink>
 		</AuthForm>
 	);

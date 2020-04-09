@@ -1,11 +1,11 @@
-import { v4 as uuidv4 } from 'uuid';
 import produce from 'immer';
 
 import { Form, Score, fields } from './formSchemas';
 import { calcAverage, updateRanks } from '../../utils/formUtils';
 
 export const createForm = (state, action) => {
-	const newForm = Form(3, 3, 'desc');
+	const { numItems, numScoreLabels, sort } = action.newForm;
+	const newForm = Form(numItems, numScoreLabels, sort);
 
 	return produce(state, draftState => {
 		draftState.form = newForm;

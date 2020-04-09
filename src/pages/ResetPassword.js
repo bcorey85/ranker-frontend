@@ -13,6 +13,7 @@ const Register = () => {
 
 	return (
 		<AuthForm>
+			<h1>Reset Password</h1>
 			<form>
 				<Input
 					type='text'

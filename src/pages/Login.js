@@ -15,6 +15,7 @@ const Login = () => {
 
 	return (
 		<AuthForm>
+			<h1>Login</h1>
 			<form>
 				<Input
 					type='text'

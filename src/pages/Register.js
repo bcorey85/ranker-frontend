@@ -16,6 +16,7 @@ const Register = () => {
 
 	return (
 		<AuthForm>
+			<h1>Register</h1>
 			<form>
 				<Input
 					type='text'

@@ -1,27 +1,11 @@
 import { v4 as uuidv4 } from 'uuid';
 import produce from 'immer';
 
-import {
-	formSchema,
-	scoreLabelSchema,
-	scoreSchema,
-	itemSchema,
-	fields
-} from './formSchemas';
+import { Form, Score, fields } from './formSchemas';
 import { calcAverage, updateRanks } from '../../utils/formUtils';
 
 export const createForm = (state, action) => {
-	const newForm = { ...formSchema };
-
-	for (let i = 0; i < action.newForm.numItems; i++) {
-		newForm.items.push({ ...itemSchema, id: uuidv4() });
-	}
-
-	for (let i = 0; i < action.newForm.numScoreLabels; i++) {
-		newForm.scoreLabels.push({ ...scoreLabelSchema, id: uuidv4() });
-	}
-
-	newForm.sort = action.newForm.sort;
+	const newForm = Form(3, 3, 'desc');
 
 	return produce(state, draftState => {
 		draftState.form = newForm;
@@ -30,7 +14,7 @@ export const createForm = (state, action) => {
 
 export const addField = (state, action) => {
 	if (fields[action.field]) {
-		const newField = { ...fields[action.field].schema, id: uuidv4() };
+		const newField = fields[action.field].schema();
 		const stateLocation = fields[action.field].stateLocation;
 
 		return produce(state, draftState => {
@@ -117,7 +101,7 @@ export const mapScores = state => {
 			if (existingScore >= 0) {
 				return item.scores[existingScore];
 			} else {
-				return { ...scoreSchema, id: uuidv4(), label: label.label };
+				return Score(label.label);
 			}
 		});
 
@@ -136,12 +120,7 @@ export const calcResults = state => {
 				const itemScores = item.scores
 					.filter(score => score.label === scoreLabel.label)
 					.map(score => {
-						return {
-							...scoreSchema,
-							id: uuidv4(),
-							score: score.score,
-							label: item.label
-						};
+						return Score(item.label, score.score);
 					});
 
 				return itemScores;

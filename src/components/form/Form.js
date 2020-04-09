@@ -14,7 +14,6 @@ const Form = () => {
 	const [ currentPage, setCurrentPage ] = useState('Setup');
 	const [ formState, dispatch ] = useReducer(formReducer, {});
 	const [ isLoading, setIsLoading ] = useState(true);
-
 	useEffect(() => {
 		dispatch({
 			type: 'CREATE_FORM',

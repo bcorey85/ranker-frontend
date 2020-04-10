@@ -1,7 +1,8 @@
 import produce from 'immer';
 
 import { Form, Score, fields } from './formSchemas';
-import { calcAverage, updateRanks } from '../../utils/formUtils';
+import { updateRanks } from '../../utils/formUtils';
+import { average } from '../../utils/math';
 
 export const createForm = (state, action) => {
 	const { numItems, numScoreLabels, sort } = action.newForm;
@@ -80,7 +81,7 @@ export const updateItemScore = (state, action) => {
 			return {
 				...item,
 				scores: newScores,
-				average: calcAverage(newScores, 'score')
+				average: average(newScores, 'score')
 			};
 		}
 		return item;
@@ -129,16 +130,13 @@ export const calcResults = state => {
 		return {
 			...scoreLabel,
 			scores: newScores,
-			average: calcAverage(newScores, 'score')
+			average: average(newScores, 'score')
 		};
 	});
 
 	return produce(state, draftState => {
 		draftState.form.scoreLabels = updatedScoreLabels;
-		draftState.form.overallAverage = calcAverage(
-			updatedScoreLabels,
-			'average'
-		);
+		draftState.form.overallAverage = average(updatedScoreLabels, 'average');
 	});
 };
 

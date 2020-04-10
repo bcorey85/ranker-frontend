@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import FormSection from './FormSection';
 
-import { sortScores } from '../../utils/formUtils';
+import { sort } from '../../utils/sort';
 import './FormResults.scss';
 
 const FormResults = ({ formState, dispatch }) => {
@@ -34,7 +34,7 @@ const FormResults = ({ formState, dispatch }) => {
 		);
 	}
 
-	const items = sortScores(
+	const items = sort(
 		formState.form.items,
 		formState.form.sort,
 		'average'
@@ -62,7 +62,7 @@ const FormResults = ({ formState, dispatch }) => {
 							</tr>
 						</thead>
 						<tbody>
-							{sortScores(
+							{sort(
 								label.scores,
 								formState.form.sort,
 								'score'

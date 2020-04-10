@@ -4,17 +4,19 @@ import axios from 'axios';
 import AuthForm from '../components/auth/AuthForm';
 import Button from '../components/shared/Button';
 import Input from '../components/shared/Input';
+import MessageContainer from '../components/MessageContainer/MessageContainer';
 
 import useInputState from '../hooks/useInputState';
 
 const ForgotPassword = () => {
 	const [ email, setEmail ] = useInputState('');
 	const [ responseSent, setResponseSent ] = useState(false);
+	const [ message, setMessage ] = useState({ description: '', type: '' });
 
 	const resetPassword = async e => {
 		e.preventDefault();
 		try {
-			const response = await axios.post(
+			await axios.post(
 				`${process.env.REACT_APP_API_URL}/auth/forgotpassword`,
 				{ email }
 			);
@@ -22,6 +24,12 @@ const ForgotPassword = () => {
 			setResponseSent(true);
 		} catch (error) {
 			console.log(error.response);
+			if (error.response.data.message) {
+				setMessage({
+					description: error.response.data.message,
+					type: 'error'
+				});
+			}
 		}
 	};
 
@@ -38,6 +46,10 @@ const ForgotPassword = () => {
 	return (
 		<AuthForm>
 			<h1>Reset Password</h1>
+			<MessageContainer
+				description={message.description}
+				type={message.type}
+			/>
 			<form>
 				<Input
 					type='text'

@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
 
 import AuthForm from '../components/auth/AuthForm';
 import Button from '../components/shared/Button';
 import Input from '../components/shared/Input';
+import MessageContainer from '../components/MessageContainer/MessageContainer';
 
 import useInputState from '../hooks/useInputState';
 
 const Login = props => {
 	const [ email, setEmail ] = useInputState('');
 	const [ password, setPassword ] = useInputState('');
+	const [ message, setMessage ] = useState({ description: '', type: '' });
 
 	const login = async e => {
 		e.preventDefault();
@@ -25,13 +27,23 @@ const Login = props => {
 				props.history.push(`/user/${response.data.payload.id}`);
 			}
 		} catch (error) {
-			console.log(error.response.data);
+			console.log(error);
+			if (error.response.data.message) {
+				setMessage({
+					description: error.response.data.message,
+					type: 'error'
+				});
+			}
 		}
 	};
 
 	return (
 		<AuthForm>
 			<h1>Login</h1>
+			<MessageContainer
+				description={message.description}
+				type={message.type}
+			/>
 			<form>
 				<Input
 					type='text'

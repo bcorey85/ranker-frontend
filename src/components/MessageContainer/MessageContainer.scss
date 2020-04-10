@@ -1,0 +1,45 @@
+$msg-red-light: hsl(0, 100%, 90%);
+$msg-red-dark: hsl(0, 100%, 25%);
+$msg-green-light: hsl(118, 100%, 90%);
+$msg-green-dark: hsl(118, 100%, 25%);
+
+.message-container {
+	min-height: 2.4rem;
+	width: 100%;
+	padding: 0 .8rem;
+	margin: .8rem 0;
+	font-size: 1.2rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+
+	&--error {
+		opacity: 1;
+		background-color: $msg-red-light;
+		color: $msg-red-dark;
+		animation: fade-out 5s;
+	}
+
+	&--success {
+		opacity: 1;
+		background-color: $msg-green-light;
+		color: $msg-green-dark;
+		animation: fade-out 5s;
+	}
+
+	&--hidden {
+		opacity: 0;
+	}
+}
+
+@keyframes fade-out {
+	0% {
+		opacity: 1;
+	}
+	95% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}

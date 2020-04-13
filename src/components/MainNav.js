@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 
+import AuthContext from '../contexts/AuthContext';
 const MainNav = () => {
+	const { isLoggedIn, userId } = useContext(AuthContext);
+
 	return (
-		<div className='main-nav'>
-			<NavLink to='/login'>Login</NavLink>
-		</div>
+		<ul className='main-nav'>
+			{isLoggedIn ? (
+				<li>
+					<NavLink to={`/user/${userId}`}>Dashboard</NavLink>
+				</li>
+			) : (
+				<li>
+					<NavLink to='/login'>Login</NavLink>
+				</li>
+			)}
+		</ul>
 	);
 };
 

@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
 import FormSection from './FormSection';
 
+import { FormContext } from '../../contexts/FormContext';
 import './FormScore.scss';
 
-const FormInput = ({ formState, dispatch }) => {
+const FormInput = () => {
 	const [ isLoading, setIsLoading ] = useState(true);
+	const { dispatch, formState } = useContext(FormContext);
 
 	useEffect(
 		() => {

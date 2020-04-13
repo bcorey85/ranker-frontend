@@ -1,12 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 
 import FormSection from './FormSection';
 
+import { FormContext } from '../../contexts/FormContext';
 import { sort } from '../../utils/sort';
+
 import './FormResults.scss';
 
-const FormResults = ({ formState, dispatch }) => {
+const FormResults = () => {
 	const [ isLoading, setIsLoading ] = useState(true);
+	const { dispatch, formState } = useContext(FormContext);
+
 	console.log(formState);
 
 	useEffect(

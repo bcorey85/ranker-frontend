@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
 
@@ -7,14 +7,16 @@ import Button from '../components/shared/Button';
 import Input from '../components/shared/Input';
 import MessageContainer from '../components/MessageContainer/MessageContainer';
 
+import AuthContext from '../contexts/AuthContext';
 import useInputState from '../hooks/useInputState';
 
 const Login = props => {
 	const [ email, setEmail ] = useInputState('');
 	const [ password, setPassword ] = useInputState('');
 	const [ message, setMessage ] = useState({ description: '', type: '' });
+	const { login } = useContext(AuthContext);
 
-	const login = async e => {
+	const handleLogin = async e => {
 		e.preventDefault();
 
 		try {
@@ -24,7 +26,9 @@ const Login = props => {
 			);
 
 			if (response.status === 200) {
-				props.history.push(`/user/${response.data.payload.id}`);
+				const { id, token } = response.data.payload;
+				login(id, token);
+				props.history.push(`/user/${id}`);
 			}
 		} catch (error) {
 			console.log(error);
@@ -61,7 +65,7 @@ const Login = props => {
 					handleChange={setPassword}
 					value={password}
 				/>
-				<Button handleClick={login}>Login</Button>
+				<Button handleClick={handleLogin}>Login</Button>
 			</form>
 			<NavLink to='/forgotpassword'>Reset password</NavLink>
 			<NavLink to='/register'>Need an account?</NavLink>

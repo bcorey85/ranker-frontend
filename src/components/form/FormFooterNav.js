@@ -1,11 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+
 import Button from '../shared/Button';
 
+import AuthContext from '../../contexts/AuthContext';
+import { FormContext } from '../../contexts/FormContext';
 import './FormFooterNav.scss';
 
 const FormFooterNav = ({ handlePageChange, currentPage }) => {
 	const [ previous, setPrevious ] = useState(null);
 	const [ next, setNext ] = useState(null);
+	const { isLoggedIn, token } = useContext(AuthContext);
+	const { formState, saveForm } = useContext(FormContext);
 
 	useEffect(
 		() => {
@@ -23,6 +28,19 @@ const FormFooterNav = ({ handlePageChange, currentPage }) => {
 		[ currentPage ]
 	);
 
+	const handleFormSave = e => {
+		saveForm(formState.form, token);
+	};
+
+	let saveButton;
+	if (isLoggedIn && !next) {
+		saveButton = (
+			<div>
+				<Button handleClick={e => handleFormSave(e)}>Save Form</Button>
+			</div>
+		);
+	}
+
 	return (
 		<nav className='form-footer-nav'>
 			<div>
@@ -39,6 +57,7 @@ const FormFooterNav = ({ handlePageChange, currentPage }) => {
 					</Button>
 				)}
 			</div>
+			{saveButton}
 		</nav>
 	);
 };

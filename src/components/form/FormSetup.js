@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
 import AddBtn from '../shared/AddBtn';
 
 import SetupInput from './SetupInput';
 import FormSection from './FormSection';
 
+import { FormContext } from '../../contexts/FormContext';
+
 import './FormSetup.scss';
 
-const FormSetup = ({ formState, dispatch }) => {
+const FormSetup = () => {
+	const { dispatch, formState } = useContext(FormContext);
+
 	const [ sort, setSort ] = useState(formState.form.sort);
 
 	const handleNewField = (e, field) => {

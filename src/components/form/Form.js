@@ -7,6 +7,7 @@ import FormSetup from './FormSetup';
 import FormScore from './FormScore';
 import FormResults from './FormResults';
 
+import { FormProvider } from '../../contexts/FormContext';
 import formReducer from '../../reducers/form/formReducer';
 import './Form.scss';
 
@@ -27,17 +28,14 @@ const Form = () => {
 		setIsLoading(false);
 	}, []);
 
+	if (isLoading) {
+		return <div>Loading...</div>;
+	}
 	const formBody = (
 		<React.Fragment>
-			{currentPage === 'Setup' && (
-				<FormSetup formState={formState} dispatch={dispatch} />
-			)}
-			{currentPage === 'Score' && (
-				<FormScore formState={formState} dispatch={dispatch} />
-			)}
-			{currentPage === 'Results' && (
-				<FormResults formState={formState} dispatch={dispatch} />
-			)}
+			{currentPage === 'Setup' && <FormSetup />}
+			{currentPage === 'Score' && <FormScore />}
+			{currentPage === 'Results' && <FormResults />}
 
 			<FormFooterNav
 				handlePageChange={setCurrentPage}
@@ -52,7 +50,9 @@ const Form = () => {
 				handlePageChange={setCurrentPage}
 				currentPage={currentPage}
 			/>
-			<FormBody>{isLoading ? 'Loading...' : formBody}</FormBody>
+			<FormProvider formState={formState} dispatch={dispatch}>
+				<FormBody>{formBody}</FormBody>
+			</FormProvider>
 		</div>
 	);
 };

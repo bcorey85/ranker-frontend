@@ -145,3 +145,9 @@ export const setSort = (state, action) => {
 		draftState.form.sort = action.sort;
 	});
 };
+
+export const updateMetaInfo = (state, action) => {
+	return produce(state, draftState => {
+		draftState.form[action.field] = action.value;
+	});
+};

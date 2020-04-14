@@ -13,6 +13,9 @@ export const Form = (numItems = 3, numScoreLabels = 3, sort = 'desc') => {
 	}
 
 	return {
+		date: '',
+		title: '',
+		category: '',
 		items,
 		scoreLabels,
 		overallAverage: null,

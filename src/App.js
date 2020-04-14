@@ -18,7 +18,7 @@ const routes = (
 		<Route path='/login' exact component={Login} />
 		<Route path='/register' exact component={Register} />
 		<Route path='/forgotpassword' exact component={ForgotPassword} />
-		<ProtectedRoute path='/user/:userId' exact component={UserDashboard} />
+		<ProtectedRoute path='/users/:userId' exact component={UserDashboard} />
 		<Redirect to='/' />
 	</Switch>
 );

@@ -1,17 +1,20 @@
 import React, { useEffect, useState, useContext } from 'react';
 
 import FormSection from './FormSection';
+import Modal from '../Modal/Modal';
 
 import { FormContext } from '../../contexts/FormContext';
 import { sort } from '../../utils/sort';
 
 import './FormResults.scss';
+import ModalContent from '../Modal/ModalContent';
+import FormSave from './FormSave';
 
-const FormResults = () => {
+const FormResults = props => {
 	const [ isLoading, setIsLoading ] = useState(true);
-	const { dispatch, formState } = useContext(FormContext);
-
-	console.log(formState);
+	const { dispatch, formState, saveModalOpen, setSaveModalOpen } = useContext(
+		FormContext
+	);
 
 	useEffect(
 		() => {
@@ -124,6 +127,13 @@ const FormResults = () => {
 		<div className='form-results'>
 			<h1>Results</h1>
 			{isLoading ? 'Loading...' : results}
+			{saveModalOpen && (
+				<Modal toggleModal={setSaveModalOpen}>
+					<ModalContent>
+						<FormSave />
+					</ModalContent>
+				</Modal>
+			)}
 		</div>
 	);
 };

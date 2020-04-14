@@ -9,8 +9,8 @@ import './FormFooterNav.scss';
 const FormFooterNav = ({ handlePageChange, currentPage }) => {
 	const [ previous, setPrevious ] = useState(null);
 	const [ next, setNext ] = useState(null);
-	const { isLoggedIn, token } = useContext(AuthContext);
-	const { formState, saveForm } = useContext(FormContext);
+	const { isLoggedIn } = useContext(AuthContext);
+	const { setSaveModalOpen } = useContext(FormContext);
 
 	useEffect(
 		() => {
@@ -28,15 +28,15 @@ const FormFooterNav = ({ handlePageChange, currentPage }) => {
 		[ currentPage ]
 	);
 
-	const handleFormSave = e => {
-		saveForm(formState.form, token);
-	};
+	// const handleFormSave = e => {
+	// 	saveForm(formState.form, token);
+	// };
 
 	let saveButton;
 	if (isLoggedIn && !next) {
 		saveButton = (
 			<div>
-				<Button handleClick={e => handleFormSave(e)}>Save Form</Button>
+				<Button handleClick={setSaveModalOpen}>Save Form</Button>
 			</div>
 		);
 	}

@@ -6,7 +6,8 @@ import {
 	updateItemScore,
 	mapScores,
 	calcResults,
-	setSort
+	setSort,
+	updateMetaInfo
 } from './formActions';
 
 const formReducer = (state, action) => {
@@ -27,6 +28,8 @@ const formReducer = (state, action) => {
 			return calcResults(state, action);
 		case 'SET_SORT':
 			return setSort(state, action);
+		case 'UPDATE_META_INFO':
+			return updateMetaInfo(state, action);
 		default: {
 			return state;
 		}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 
-import Layout from './components/layout/Layout';
+import Layout from './components/Layout/Layout';
 import Index from './pages/Index';
 import Login from './pages/Login';
 import Register from './pages/Register';

@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
 
-import AuthForm from '../components/auth/AuthForm';
+import AuthForm from '../components/Auth/AuthForm';
 import Button from '../components/shared/Button';
 import Input from '../components/shared/Input';
 import MessageContainer from '../components/MessageContainer/MessageContainer';

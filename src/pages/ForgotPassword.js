@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-import AuthForm from '../components/auth/AuthForm';
+import AuthForm from '../components/Auth/AuthForm';
 import Button from '../components/shared/Button';
 import Input from '../components/shared/Input';
 import MessageContainer from '../components/MessageContainer/MessageContainer';

@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 
 import Button from '../components/shared/Button';
 import Accordion from '../components/Accordion/Accordion';
 import AccordionHeader from '../components/Accordion/AccordionHeader';
 import AccordionBody from '../components/Accordion/AccordionBody';
+import EditUserDetails from '../components/UserDashboard/EditUserDetails';
 
+import useToggle from '../hooks/useToggle';
 import AuthContext from '../contexts/AuthContext';
 import './UserDashboard.scss';
 
@@ -14,6 +15,7 @@ const UserDashboard = props => {
 	const { logout, userId } = useContext(AuthContext);
 	const [ isLoading, setIsLoading ] = useState(true);
 	const [ userData, setUserData ] = useState({});
+	const [ editDetailsMode, setEditDetailsMode ] = useToggle(false);
 
 	useEffect(
 		() => {
@@ -36,13 +38,23 @@ const UserDashboard = props => {
 
 	const handleLogout = () => {
 		logout();
+
 		props.history.push('/');
 	};
 
 	if (isLoading) {
 		return <div>Loading...</div>;
 	}
-	console.log(userData);
+
+	if (editDetailsMode) {
+		return (
+			<EditUserDetails
+				userData={userData}
+				history={props.history}
+				setEditDetailsMode={setEditDetailsMode}
+			/>
+		);
+	}
 
 	return (
 		<div className='user-dashboard'>
@@ -54,7 +66,9 @@ const UserDashboard = props => {
 				<div>
 					<strong>Email:</strong> {userData.email}
 				</div>
-				<NavLink to='#'>Edit User Details</NavLink>
+				<Button handleClick={setEditDetailsMode} style='link'>
+					Edit Details
+				</Button>
 			</section>
 			<section className='user-dashboard__past-rankings'>
 				<h2>Past Rankings</h2>
@@ -125,7 +139,7 @@ const UserDashboard = props => {
 				</Accordion>
 			</section>
 
-			<Button onClick={handleLogout}>Logout</Button>
+			<Button handleClick={handleLogout}>Logout</Button>
 		</div>
 	);
 };

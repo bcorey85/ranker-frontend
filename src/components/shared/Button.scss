@@ -14,3 +14,15 @@
 		background-color: $primary;
 	}
 }
+
+.link {
+	color: $primary;
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	text-decoration: underline;
+
+	&:hover {
+		color: $black;
+	}
+}

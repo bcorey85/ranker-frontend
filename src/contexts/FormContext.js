@@ -1,31 +1,3 @@
-// import React, {useState} from 'react';
-// import axios from 'axios';
-
-// const saveForm = async (form, token) => {
-// 	try {
-// 		const response = await axios.post(
-// 			`${process.env.REACT_APP_API_URL}/rank`,
-// 			form,
-// 			{
-// 				headers: {
-// 					Authorization: 'Bearer ' + token
-// 				}
-// 			}
-// 		);
-// 		console.log(response);
-// 	} catch (error) {
-// 		console.log(error);
-// 	}
-// };
-
-// export const FormContext = React.createContext({
-// 	formState: null,
-// 	dispatch: null,
-// 	saveForm: saveForm
-// });
-
-// export default FormContext;
-
 import React from 'react';
 import axios from 'axios';
 
@@ -61,5 +33,3 @@ export const FormProvider = props => {
 		</FormContext.Provider>
 	);
 };
-
-export default FormProvider;

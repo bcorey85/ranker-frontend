@@ -1,0 +1,11 @@
+@import '../../sass/abstracts/variables';
+
+.accordion__header {
+	width: 100%;
+	height: 4rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: 1px solid $gray200;
+	cursor: pointer;
+}

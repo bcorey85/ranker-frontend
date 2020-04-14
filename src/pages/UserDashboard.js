@@ -3,8 +3,12 @@ import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 
 import Button from '../components/shared/Button';
+import Accordion from '../components/Accordion/Accordion';
+import AccordionHeader from '../components/Accordion/AccordionHeader';
+import AccordionBody from '../components/Accordion/AccordionBody';
 
 import AuthContext from '../contexts/AuthContext';
+import './UserDashboard.scss';
 
 const UserDashboard = props => {
 	const { logout, userId } = useContext(AuthContext);
@@ -41,19 +45,85 @@ const UserDashboard = props => {
 	console.log(userData);
 
 	return (
-		<div>
-			<div>
+		<div className='user-dashboard'>
+			<section className='user-dashboard__user-info'>
 				<h2>User Info</h2>
-				<div>{userData.username}</div>
-				<div>{userData.email}</div>
+				<div>
+					<strong>Username:</strong> {userData.username}
+				</div>
+				<div>
+					<strong>Email:</strong> {userData.email}
+				</div>
 				<NavLink to='#'>Edit User Details</NavLink>
-			</div>
-			<div>
+			</section>
+			<section className='user-dashboard__past-rankings'>
 				<h2>Past Rankings</h2>
 				{userData.rankForms.map(form => {
 					return <div key={form._id}>{form._id}</div>;
 				})}
-			</div>
+				<h3>Whiskey</h3>
+				<Accordion>
+					<AccordionHeader>8/5/2019 - Irish Whiskey</AccordionHeader>
+					<AccordionBody>
+						These transition properties allow elements to change
+						values over a specified duration, animating the property
+						changes, rather than having them occur immediately. Here
+						is a simple example that transitions the background
+						color of a element on hover
+					</AccordionBody>
+				</Accordion>
+				<Accordion>
+					<AccordionHeader>8/5/2019 - Irish Whiskey</AccordionHeader>
+					<AccordionBody>
+						These transition properties allow elements to change
+						values over a specified duration, animating the property
+						changes, rather than having them occur immediately. Here
+						is a simple example that transitions the background
+						color of a element on hover
+					</AccordionBody>
+				</Accordion>
+				<Accordion>
+					<AccordionHeader>8/5/2019 - Irish Whiskey</AccordionHeader>
+					<AccordionBody>
+						These transition properties allow elements to change
+						values over a specified duration, animating the property
+						changes, rather than having them occur immediately. Here
+						is a simple example that transitions the background
+						color of a element on hover
+					</AccordionBody>
+				</Accordion>
+				<h3>Whiskey</h3>
+				<Accordion>
+					<AccordionHeader>8/5/2019 - Irish Whiskey</AccordionHeader>
+					<AccordionBody>
+						These transition properties allow elements to change
+						values over a specified duration, animating the property
+						changes, rather than having them occur immediately. Here
+						is a simple example that transitions the background
+						color of a element on hover
+					</AccordionBody>
+				</Accordion>
+				<Accordion>
+					<AccordionHeader>8/5/2019 - Irish Whiskey</AccordionHeader>
+					<AccordionBody>
+						These transition properties allow elements to change
+						values over a specified duration, animating the property
+						changes, rather than having them occur immediately. Here
+						is a simple example that transitions the background
+						color of a element on hover
+					</AccordionBody>
+				</Accordion>
+				<Accordion>
+					<AccordionHeader>8/5/2019 - Irish Whiskey</AccordionHeader>
+					<AccordionBody>
+						These transition properties allow elements to change
+						values over a specified duration, animating the property
+						changes, rather than having them occur immediately. Here
+						is a simple example that transitions the background
+						color of a element on hover
+					</AccordionBody>
+				</Accordion>
+			</section>
 
 			<Button onClick={handleLogout}>Logout</Button>
 		</div>

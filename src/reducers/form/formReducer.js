@@ -6,8 +6,7 @@ import {
 	updateItemScore,
 	mapScores,
 	calcResults,
-	setSort,
-	saveForm
+	setSort
 } from './formActions';
 
 const formReducer = (state, action) => {

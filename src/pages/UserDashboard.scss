@@ -1,0 +1,11 @@
+.user-dashboard {
+	&__user-info {
+		margin-bottom: 4rem;
+		& div:last-of-type {
+			margin-bottom: .8rem;
+		}
+	}
+
+	&__past-rankings {
+	}
+}

@@ -56,6 +56,7 @@ const Login = props => {
 					label
 					handleChange={setEmail}
 					value={email}
+					autoComplete='email'
 				/>
 				<Input
 					type='password'

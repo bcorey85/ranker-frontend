@@ -60,6 +60,7 @@ const Register = props => {
 					label
 					handleChange={setUsername}
 					value={username}
+					autoComplete='username'
 				/>
 				<Input
 					type='text'
@@ -68,6 +69,7 @@ const Register = props => {
 					label
 					handleChange={setEmail}
 					value={email}
+					autoComplete='email'
 				/>
 				<Input
 					type='password'
@@ -76,7 +78,7 @@ const Register = props => {
 					label
 					handleChange={setPassword}
 					value={password}
-					autoComplete='current-password'
+					autoComplete='password'
 				/>
 
 				<Button handleClick={handleRegister}>Register</Button>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 
 import AuthForm from '../components/Auth/AuthForm';
@@ -61,6 +62,7 @@ const ForgotPassword = () => {
 				/>
 				<Button handleClick={resetPassword}>Reset Password</Button>
 			</form>
+			<NavLink to='/login'>Back to Login</NavLink>
 		</AuthForm>
 	);
 };

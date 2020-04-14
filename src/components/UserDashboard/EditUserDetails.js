@@ -15,7 +15,7 @@ const UpdateUserDetails = ({ userData, setEditDetailsMode, history }) => {
 	const [ password, setPassword ] = useInputState('');
 	const [ confirmPassword, setConfirmPassword ] = useInputState('');
 	const [ message, setMessage ] = useState('');
-	const auth = useContext(AuthContext);
+	const { token } = useContext(AuthContext);
 
 	const submitUserDetails = async e => {
 		e.preventDefault();
@@ -30,7 +30,6 @@ const UpdateUserDetails = ({ userData, setEditDetailsMode, history }) => {
 				password,
 				confirmPassword
 			);
-			console.log(passwordValid.description);
 
 			if (passwordValid.type === 'error') {
 				setMessage({
@@ -46,7 +45,7 @@ const UpdateUserDetails = ({ userData, setEditDetailsMode, history }) => {
 			const response = await httpRequest({
 				method: 'put',
 				url: `${process.env.REACT_APP_API_URL}/users/${userData._id}`,
-				token: auth.token,
+				token: token,
 				payload: {
 					inputState
 				}
@@ -61,16 +60,11 @@ const UpdateUserDetails = ({ userData, setEditDetailsMode, history }) => {
 				return;
 			}
 
-			auth.login(
-				response.data.userId,
-				response.data.token,
-				response.data.isAdmin
-			);
-
 			setMessage({
 				type: 'success',
 				description: 'User details update successful'
 			});
+
 			setTimeout(() => {
 				setEditDetailsMode(false);
 			}, 1000);

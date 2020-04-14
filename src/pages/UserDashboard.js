@@ -33,7 +33,7 @@ const UserDashboard = props => {
 
 			getUserProfile();
 		},
-		[ userId ]
+		[ userId, editDetailsMode ]
 	);
 
 	const handleLogout = () => {
@@ -66,7 +66,7 @@ const UserDashboard = props => {
 				<div>
 					<strong>Email:</strong> {userData.email}
 				</div>
-				<Button handleClick={setEditDetailsMode} style='link'>
+				<Button handleClick={setEditDetailsMode} link>
 					Edit Details
 				</Button>
 			</section>

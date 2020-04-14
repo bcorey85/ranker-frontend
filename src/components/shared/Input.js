@@ -1,6 +1,14 @@
 import React from 'react';
 
-const Input = ({ type, id, placeholder, label, handleChange, value }) => {
+const Input = ({
+	type,
+	id,
+	placeholder,
+	label,
+	handleChange,
+	value,
+	autoComplete
+}) => {
 	const labelElement = <label htmlFor={id}>{placeholder}</label>;
 
 	return (
@@ -12,6 +20,7 @@ const Input = ({ type, id, placeholder, label, handleChange, value }) => {
 				placeholder={placeholder}
 				onChange={handleChange}
 				value={value}
+				autoComplete={autoComplete}
 			/>
 		</React.Fragment>
 	);

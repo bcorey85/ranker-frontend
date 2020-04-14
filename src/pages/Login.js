@@ -64,6 +64,7 @@ const Login = props => {
 					label
 					handleChange={setPassword}
 					value={password}
+					autoComplete='current-password'
 				/>
 				<Button handleClick={handleLogin}>Login</Button>
 			</form>

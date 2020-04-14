@@ -76,6 +76,7 @@ const Register = props => {
 					label
 					handleChange={setPassword}
 					value={password}
+					autoComplete='current-password'
 				/>
 
 				<Button handleClick={handleRegister}>Register</Button>

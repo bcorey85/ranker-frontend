@@ -2,12 +2,13 @@
 
 .accordion__body {
 	max-height: 0;
+	overflow: hidden;
 	visibility: hidden;
 
 	&--open {
 		max-height: 100rem;
 		background-color: $gray50;
-
+		overflow: auto;
 		padding: 1.6rem;
 		visibility: visible;
 		transition: max-height .15s ease-out;

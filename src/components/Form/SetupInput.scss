@@ -1,0 +1,19 @@
+@import '../../sass/abstracts/variables';
+
+.setup-input {
+	&__group {
+		display: flex;
+		justify-content: center;
+		align-items: flex-start;
+		border: 1px solid $gray200;
+		margin-bottom: .8rem;
+		border-radius: 2px;
+
+		& input {
+			border: none;
+			margin-bottom: 0;
+			border-top-left-radius: 4px;
+			border-bottom-left-radius: 4px;
+		}
+	}
+}

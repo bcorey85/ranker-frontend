@@ -7,8 +7,9 @@
 	&--open {
 		max-height: 100rem;
 		background-color: $gray50;
+
 		padding: 1.6rem;
 		visibility: visible;
-		transition: max-height .25s ease-in;
+		transition: max-height .15s ease-out;
 	}
 }

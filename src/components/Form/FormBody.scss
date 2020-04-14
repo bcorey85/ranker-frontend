@@ -1,0 +1,10 @@
+@import '../../sass/abstracts/variables';
+@import '../../sass/abstracts/mixins';
+
+.form-body {
+	padding: 4.8rem;
+
+	@include respond(675) {
+		padding: 1.6rem;
+	}
+}

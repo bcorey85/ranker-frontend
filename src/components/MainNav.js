@@ -9,7 +9,7 @@ const MainNav = () => {
 		<ul className='main-nav'>
 			{isLoggedIn ? (
 				<li>
-					<NavLink to={`/user/${userId}`}>Dashboard</NavLink>
+					<NavLink to={`/users/${userId}`}>Dashboard</NavLink>
 				</li>
 			) : (
 				<li>

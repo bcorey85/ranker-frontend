@@ -1,0 +1,22 @@
+@import '../../sass/abstracts/variables';
+
+.form-footer-nav {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	& button {
+		height: 4rem;
+		background-color: $gray300;
+		color: $white;
+		border: none;
+		padding: .8rem 2.4rem;
+		cursor: pointer;
+		border-radius: 2px;
+		margin-bottom: 2.4rem;
+
+		&:hover {
+			background-color: $primary;
+		}
+	}
+}

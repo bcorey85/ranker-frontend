@@ -1,4 +1,6 @@
 .user-dashboard {
+	padding: 1.6rem;
+
 	&__user-info {
 		margin-bottom: 4rem;
 		& div:last-of-type {
@@ -7,5 +9,10 @@
 	}
 
 	&__past-rankings {
+	}
+
+	&__controls {
+		display: flex;
+		justify-content: space-between;
 	}
 }

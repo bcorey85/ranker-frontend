@@ -1,0 +1,18 @@
+.form-save {
+	width: 100%;
+	max-width: 40rem;
+	display: flex;
+	flex-direction: column;
+
+	& input {
+		width: 100%;
+	}
+
+	& form {
+		margin-bottom: 5.6rem;
+	}
+
+	& button {
+		width: 100%;
+	}
+}

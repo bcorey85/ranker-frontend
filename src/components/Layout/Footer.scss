@@ -1,0 +1,13 @@
+@import '../../sass/abstracts/variables';
+
+.footer {
+	grid-column: 1/end;
+	grid-row: 3/end;
+	background-color: $gray400;
+	padding: 1.6rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	color: $white;
+}

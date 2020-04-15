@@ -1,7 +1,6 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 
 import { validate } from '../../utils/validate';
-import { FormContext } from '../../contexts/FormContext';
 import './Input.scss';
 
 const Input = ({
@@ -19,7 +18,6 @@ const Input = ({
 }) => {
 	const [ isTouched, setIsTouched ] = useState(false);
 	const [ isValid, setIsValid ] = useState(true);
-	const { handleFormValidation } = useContext(FormContext);
 
 	const error = isTouched && !isValid;
 	const errorLabel = label + ` - ${errorText}`;
@@ -27,7 +25,7 @@ const Input = ({
 		<label
 			htmlFor={id}
 			className={`input__label ${error ? 'input__label--error' : ''}`}>
-			{isValid ? label : errorLabel}
+			{error ? errorLabel : label}
 		</label>
 	);
 
@@ -36,14 +34,12 @@ const Input = ({
 		const isValid = validate(value, validators);
 
 		setIsValid(isValid);
-		handleFormValidation(isValid);
 		handleChange(e);
 	};
 
 	const handleBlur = () => {
 		const isValid = validate(value, validators);
 		setIsValid(isValid);
-		handleFormValidation(isValid);
 		setIsTouched(true);
 	};
 

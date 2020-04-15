@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 
 import FormSection from './FormSection';
+import Input from '../shared/Input';
 
 import { FormContext } from '../../contexts/FormContext';
 import './FormScore.scss';
@@ -51,18 +52,16 @@ const FormInput = () => {
 						return (
 							<React.Fragment
 								key={`item${itemIndex + 1}-${score.id}`}>
-								<label
-									htmlFor={`item${itemIndex +
-										1}-${score.id}`}>
-									{score.label}
-								</label>
-								<input
+								<Input
 									type='number'
 									id={`item${itemIndex + 1}-${score.id}`}
 									value={score.score}
 									onChange={handleUpdateScore}
 									data-itemindex={item.id}
 									data-scoreindex={score.id}
+									placeholder={null}
+									label={score.label}
+									errorText='Please enter a value.'
 								/>
 							</React.Fragment>
 						);

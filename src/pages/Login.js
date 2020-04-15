@@ -28,7 +28,7 @@ const Login = props => {
 			if (response.status === 200) {
 				const { id, token } = response.data.payload;
 				login(id, token);
-				props.history.push(`/user/${id}`);
+				props.history.push(`/users/${id}`);
 			}
 		} catch (error) {
 			console.log(error);
@@ -53,7 +53,7 @@ const Login = props => {
 					type='text'
 					id='email'
 					placeholder='Email'
-					label
+					label='Email'
 					handleChange={setEmail}
 					value={email}
 					autoComplete='email'
@@ -62,7 +62,7 @@ const Login = props => {
 					type='password'
 					id='password'
 					placeholder='Password'
-					label
+					label='Password'
 					handleChange={setPassword}
 					value={password}
 					autoComplete='current-password'

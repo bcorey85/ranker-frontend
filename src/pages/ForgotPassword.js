@@ -46,7 +46,7 @@ const ForgotPassword = () => {
 
 	return (
 		<AuthForm>
-			<h1>Reset Password</h1>
+			<h1>Forgot Password</h1>
 			<MessageContainer
 				description={message.description}
 				type={message.type}
@@ -56,7 +56,7 @@ const ForgotPassword = () => {
 					type='text'
 					id='email'
 					placeholder='Email'
-					label
+					label='Email'
 					handleChange={setEmail}
 					value={email}
 				/>

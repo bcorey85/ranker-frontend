@@ -1,0 +1,19 @@
+@import '../../sass/abstracts/variables';
+
+.input {
+	width: 100%;
+
+	margin-bottom: .8rem;
+
+	&__label--error {
+		color: $red;
+	}
+
+	&--error {
+		color: $red;
+	}
+
+	& input {
+		width: 100%;
+	}
+}

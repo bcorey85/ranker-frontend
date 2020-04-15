@@ -6,6 +6,7 @@ import Index from './pages/Index';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 import UserDashboard from './pages/UserDashboard';
 import ProtectedRoute from './components/ProtectedRoute';
 
@@ -18,6 +19,11 @@ const routes = (
 		<Route path='/login' exact component={Login} />
 		<Route path='/register' exact component={Register} />
 		<Route path='/forgotpassword' exact component={ForgotPassword} />
+		<Route
+			path='/resetpassword/:resetToken'
+			exact
+			component={ResetPassword}
+		/>
 		<ProtectedRoute path='/users/:userId' exact component={UserDashboard} />
 		<Redirect to='/' />
 	</Switch>

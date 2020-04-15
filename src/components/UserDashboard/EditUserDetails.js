@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 
 import MessageContainer from '../../components/MessageContainer/MessageContainer';
+import Input from '../../components/shared/Input';
 
 import httpRequest from '../../utils/httpRequest';
 import useInputState from '../../hooks/useInputState';
@@ -80,32 +81,36 @@ const UpdateUserDetails = ({ userData, setEditDetailsMode, history }) => {
 				Go Back
 			</button>
 			<h3>Update Details</h3>
-			<label htmlFor='email'>Email</label>
-			<input
+			<Input
 				type='email'
 				id='email'
 				value={email}
-				onChange={setEmail}
+				placeholder='Email'
+				label='Email'
+				handleChange={setEmail}
 				autoComplete='email'
 			/>
+
 			<h3>Update Password</h3>
-			<label htmlFor='password'>Password</label>
-			<input
+			<Input
 				type='password'
 				id='password'
 				value={password}
+				placeholder='Password'
+				label='Password'
 				onChange={setPassword}
 				autoComplete='new-password'
 			/>
-
-			<label htmlFor='confirm-password'>Confirm Password</label>
-			<input
+			<Input
 				type='password'
 				id='confirm-password'
 				value={confirmPassword}
+				placeholder='Confirm Password'
+				label='Confirm Password'
 				onChange={setConfirmPassword}
 				autoComplete='confirm-new-password'
 			/>
+
 			<Button className='btn btn-primary' handleClick={submitUserDetails}>
 				Submit
 			</Button>

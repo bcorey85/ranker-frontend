@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
+import { NavLink, withRouter } from 'react-router-dom';
 import axios from 'axios';
-import { NavLink } from 'react-router-dom';
 
 import AuthForm from '../components/Auth/AuthForm';
 import Button from '../components/shared/Button';
@@ -10,30 +10,25 @@ import MessageContainer from '../components/MessageContainer/MessageContainer';
 import AuthContext from '../contexts/AuthContext';
 import useInputState from '../hooks/useInputState';
 
-const Register = props => {
-	const [ username, setUsername ] = useInputState('');
-	const [ email, setEmail ] = useInputState('');
+const ResetPassword = props => {
 	const [ password, setPassword ] = useInputState('');
+	const [ confirmPassword, setConfirmPassword ] = useInputState('');
 	const [ message, setMessage ] = useState({ description: '', type: '' });
 	const { login } = useContext(AuthContext);
+	const resetToken = props.match.params.resetToken;
 
-	const handleRegister = async e => {
+	const resetPassword = async e => {
 		e.preventDefault();
-		const newUser = {
-			username,
-			email,
-			password
-		};
 		try {
-			const response = await axios.post(
-				`${process.env.REACT_APP_API_URL}/auth/register`,
-				newUser
+			const response = await axios.put(
+				`${process.env
+					.REACT_APP_API_URL}/auth/resetpassword/${resetToken}`,
+				{ password, confirmPassword }
 			);
-
-			if (response.status === 201) {
+			if (response.status === 200) {
 				const { id, token } = response.data.payload;
 				login(id, token);
-				props.history.push(`/user/${id}`);
+				props.history.push(`/users/${id}`);
 			}
 		} catch (error) {
 			if (error.response.data.message) {
@@ -47,45 +42,33 @@ const Register = props => {
 
 	return (
 		<AuthForm>
-			<h1>Register</h1>
+			<h1>Reset Password</h1>
 			<MessageContainer
 				description={message.description}
 				type={message.type}
 			/>
 			<form>
 				<Input
-					type='text'
-					id='username'
-					placeholder='Username'
-					label='Username'
-					handleChange={setUsername}
-					value={username}
-					autoComplete='username'
-				/>
-				<Input
-					type='text'
-					id='email'
-					placeholder='Email'
-					label='Email'
-					handleChange={setEmail}
-					value={email}
-					autoComplete='email'
+					type='password'
+					id='password'
+					placeholder='New Password'
+					label='New Password'
+					handleChange={setPassword}
+					value={password}
 				/>
 				<Input
 					type='password'
 					id='password'
-					placeholder='Password'
-					label='Password'
-					handleChange={setPassword}
-					value={password}
-					autoComplete='password'
+					placeholder='Confirm New Password'
+					label='Confirm New Password'
+					handleChange={setConfirmPassword}
+					value={confirmPassword}
 				/>
-
-				<Button handleClick={handleRegister}>Register</Button>
+				<Button handleClick={resetPassword}>Reset Password</Button>
 			</form>
-			<NavLink to='/login'>Already have an account?</NavLink>
+			<NavLink to='/login'>Back to Login</NavLink>
 		</AuthForm>
 	);
 };
 
-export default Register;
+export default withRouter(ResetPassword);

@@ -46,11 +46,12 @@ const Form = () => {
 
 	return (
 		<div className='form'>
-			<FormNav
-				handlePageChange={setCurrentPage}
-				currentPage={currentPage}
-			/>
 			<FormProvider formState={formState} dispatch={dispatch}>
+				<FormNav
+					handlePageChange={setCurrentPage}
+					currentPage={currentPage}
+				/>
+
 				<FormBody>{formBody}</FormBody>
 			</FormProvider>
 		</div>

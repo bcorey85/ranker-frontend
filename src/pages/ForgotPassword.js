@@ -7,6 +7,7 @@ import Button from '../components/shared/Button';
 import Input from '../components/shared/Input';
 import MessageContainer from '../components/MessageContainer/MessageContainer';
 
+import { isEmail } from '../utils/validate';
 import useInputState from '../hooks/useInputState';
 
 const ForgotPassword = () => {
@@ -59,6 +60,8 @@ const ForgotPassword = () => {
 					label='Email'
 					handleChange={setEmail}
 					value={email}
+					validators={[ isEmail() ]}
+					errorText='Please enter a valid email'
 				/>
 				<Button handleClick={resetPassword}>Reset Password</Button>
 			</form>

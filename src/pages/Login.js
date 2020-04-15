@@ -7,6 +7,7 @@ import Button from '../components/shared/Button';
 import Input from '../components/shared/Input';
 import MessageContainer from '../components/MessageContainer/MessageContainer';
 
+import { isEmail, isMinLength } from '../utils/validate';
 import AuthContext from '../contexts/AuthContext';
 import useInputState from '../hooks/useInputState';
 
@@ -57,6 +58,8 @@ const Login = props => {
 					handleChange={setEmail}
 					value={email}
 					autoComplete='email'
+					validators={[ isEmail() ]}
+					errorText='Please enter a valid email'
 				/>
 				<Input
 					type='password'
@@ -66,6 +69,8 @@ const Login = props => {
 					handleChange={setPassword}
 					value={password}
 					autoComplete='current-password'
+					validators={[ isMinLength(6) ]}
+					errorText='Password must be at least 6 characters'
 				/>
 				<Button handleClick={handleLogin}>Login</Button>
 			</form>

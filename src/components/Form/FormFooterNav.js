@@ -10,7 +10,7 @@ const FormFooterNav = ({ handlePageChange, currentPage }) => {
 	const [ previous, setPrevious ] = useState(null);
 	const [ next, setNext ] = useState(null);
 	const { isLoggedIn } = useContext(AuthContext);
-	const { setSaveModalOpen } = useContext(FormContext);
+	const { setSaveModalOpen, isValid } = useContext(FormContext);
 
 	useEffect(
 		() => {
@@ -36,7 +36,9 @@ const FormFooterNav = ({ handlePageChange, currentPage }) => {
 	if (isLoggedIn && !next) {
 		saveButton = (
 			<div>
-				<Button handleClick={setSaveModalOpen}>Save Form</Button>
+				<Button handleClick={setSaveModalOpen} disabled={!isValid}>
+					Save Form
+				</Button>
 			</div>
 		);
 	}
@@ -45,14 +47,18 @@ const FormFooterNav = ({ handlePageChange, currentPage }) => {
 		<nav className='form-footer-nav'>
 			<div>
 				{previous && (
-					<Button handleClick={() => handlePageChange(previous)}>
+					<Button
+						handleClick={() => handlePageChange(previous)}
+						disabled={!isValid}>
 						Back
 					</Button>
 				)}
 			</div>
 			<div>
 				{next && (
-					<Button handleClick={() => handlePageChange(next)}>
+					<Button
+						handleClick={() => handlePageChange(next)}
+						disabled={!isValid}>
 						Next
 					</Button>
 				)}

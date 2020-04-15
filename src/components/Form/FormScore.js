@@ -3,6 +3,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import FormSection from './FormSection';
 import Input from '../shared/Input';
 
+import { isRequired } from '../../utils/validate';
 import { FormContext } from '../../contexts/FormContext';
 import './FormScore.scss';
 
@@ -56,12 +57,13 @@ const FormInput = () => {
 									type='number'
 									id={`item${itemIndex + 1}-${score.id}`}
 									value={score.score}
-									onChange={handleUpdateScore}
+									handleChange={handleUpdateScore}
 									data-itemindex={item.id}
 									data-scoreindex={score.id}
 									placeholder={null}
 									label={score.label}
-									errorText='Please enter a value.'
+									validators={[ isRequired() ]}
+									errorText='Please enter a value'
 								/>
 							</React.Fragment>
 						);

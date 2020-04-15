@@ -5,6 +5,7 @@ import AddBtn from '../shared/AddBtn';
 import SetupInput from './SetupInput';
 import FormSection from './FormSection';
 
+import { isUnique } from '../../utils/validate';
 import { FormContext } from '../../contexts/FormContext';
 
 import './FormSetup.scss';
@@ -56,6 +57,10 @@ const FormSetup = () => {
 								item={item}
 								label='Item'
 								index={index}
+								errorText='Please enter a unique value'
+								validators={[
+									isUnique(formState.form.items, 'label')
+								]}
 							/>
 						);
 					})}
@@ -79,6 +84,13 @@ const FormSetup = () => {
 								item={score}
 								label='Label'
 								index={index}
+								errorText='Please enter a unique value'
+								validators={[
+									isUnique(
+										formState.form.scoreLabels,
+										'label'
+									)
+								]}
 							/>
 						);
 					})}

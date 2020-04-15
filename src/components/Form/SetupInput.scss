@@ -16,4 +16,16 @@
 			border-bottom-left-radius: 4px;
 		}
 	}
+
+	&--error {
+		color: $red;
+
+		& .setup-input__group {
+			border: 1px solid $red;
+		}
+
+		& label {
+			color: $red;
+		}
+	}
 }

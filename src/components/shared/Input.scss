@@ -11,6 +11,10 @@
 
 	&--error {
 		color: $red;
+
+		& input {
+			border: 1px solid $red;
+		}
 	}
 
 	& input {

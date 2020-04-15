@@ -7,6 +7,7 @@ import Button from '../components/shared/Button';
 import Input from '../components/shared/Input';
 import MessageContainer from '../components/MessageContainer/MessageContainer';
 
+import { isRequired, isEmail, isMinLength } from '../utils/validate';
 import AuthContext from '../contexts/AuthContext';
 import useInputState from '../hooks/useInputState';
 
@@ -61,6 +62,8 @@ const Register = props => {
 					handleChange={setUsername}
 					value={username}
 					autoComplete='username'
+					validators={[ isRequired() ]}
+					errorText='Please enter a username'
 				/>
 				<Input
 					type='text'
@@ -70,6 +73,8 @@ const Register = props => {
 					handleChange={setEmail}
 					value={email}
 					autoComplete='email'
+					validators={[ isEmail() ]}
+					errorText='Please enter a valid email'
 				/>
 				<Input
 					type='password'
@@ -79,6 +84,8 @@ const Register = props => {
 					handleChange={setPassword}
 					value={password}
 					autoComplete='password'
+					validators={[ isMinLength(6) ]}
+					errorText='Password must be at least 6 characters'
 				/>
 
 				<Button handleClick={handleRegister}>Register</Button>

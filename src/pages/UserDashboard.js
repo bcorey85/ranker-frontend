@@ -7,6 +7,7 @@ import AccordionHeader from '../components/Accordion/AccordionHeader';
 import AccordionBody from '../components/Accordion/AccordionBody';
 import EditUserDetails from '../components/UserDashboard/EditUserDetails';
 import FormResultsTable from '../components/Form/FormResultsTable';
+import Category from '../components/UserDashboard/Category';
 
 import useToggle from '../hooks/useToggle';
 import AuthContext from '../contexts/AuthContext';
@@ -81,17 +82,22 @@ const UserDashboard = props => {
 			</section>
 			<section className='user-dashboard__past-rankings'>
 				<h2>Past Rankings</h2>
-				{userData.rankForms.map(form => {
-					return (
-						<Accordion key={form._id}>
-							<AccordionHeader>
-								{formatDate(form.date)} - {form.title}
-							</AccordionHeader>
-							<AccordionBody>
-								<FormResultsTable formData={form} />
-							</AccordionBody>
-						</Accordion>
-					);
+				{[ ...categories ].sort().map(category => {
+					const forms = userData.rankForms.map(form => {
+						if (form.category === category) {
+							return (
+								<Accordion key={form._id}>
+									<AccordionHeader>
+										{formatDate(form.date)} - {form.title}
+									</AccordionHeader>
+									<AccordionBody>
+										<FormResultsTable formData={form} />
+									</AccordionBody>
+								</Accordion>
+							);
+						}
+					});
+					return <Category title={category}>{forms}</Category>;
 				})}
 			</section>
 		</div>

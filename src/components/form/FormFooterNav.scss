@@ -1,4 +1,5 @@
 @import '../../sass/abstracts/variables';
+@import '../../sass/abstracts/mixins';
 
 .form-footer-nav {
 	display: flex;
@@ -14,6 +15,10 @@
 		cursor: pointer;
 		border-radius: 2px;
 		margin-bottom: 2.4rem;
+
+		@include respond(500) {
+			margin-bottom: 6.4rem;
+		}
 
 		&:hover {
 			background-color: $primary;

@@ -1,10 +1,11 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 
 import Input from '../shared/Input';
 import Button from '../shared/Button';
 import MessageContainer from '../MessageContainer/MessageContainer';
 
+import HttpRequest from '../../utils/httpRequest';
 import { FormContext } from '../../contexts/FormContext';
 import AuthContext from '../../contexts/AuthContext';
 
@@ -12,8 +13,31 @@ import './FormSave.scss';
 
 const FormSave = ({ history }) => {
 	const [ message, setMessage ] = useState({ type: '', description: '' });
+	const [ userData, setUserData ] = useState({});
+	const [ isLoading, setIsLoading ] = useState(true);
+	const [ existingCategory, setExistingCategory ] = useState('');
+	const [ newCategory, setNewCategory ] = useState('');
 	const { formState, dispatch, saveForm } = useContext(FormContext);
 	const { token, userId } = useContext(AuthContext);
+
+	useEffect(
+		() => {
+			const getData = async () => {
+				try {
+					const response = await HttpRequest({
+						method: 'get',
+						url: `${process.env.REACT_APP_API_URL}/users/${userId}`
+					});
+					setUserData(response.data.payload);
+					setIsLoading(false);
+				} catch (error) {
+					console.log(error);
+				}
+			};
+			getData();
+		},
+		[ userId ]
+	);
 
 	const handleMetaInfoChange = (e, field) => {
 		dispatch({
@@ -21,6 +45,17 @@ const FormSave = ({ history }) => {
 			field,
 			value: e.target.value
 		});
+	};
+
+	const handleCategory = (e, field) => {
+		if (field === 'new') {
+			setExistingCategory('');
+			setNewCategory(e.target.value);
+		} else {
+			setNewCategory('');
+			setExistingCategory(e.target.value);
+		}
+		handleMetaInfoChange(e, 'category');
 	};
 
 	const handleSaveForm = async () => {
@@ -46,31 +81,56 @@ const FormSave = ({ history }) => {
 		}
 	};
 
+	if (isLoading) {
+		return (
+			<div className='form-save'>
+				<h1>Save Form</h1>
+				Loading user profile...
+				<MessageContainer
+					description={message.description}
+					type={message.type}
+				/>
+			</div>
+		);
+	}
+	console.log(userData);
+
 	return (
 		<div className='form-save'>
 			<h1>Save Form</h1>
-			<h3>Please enter the following information:</h3>
+			<h3>Please enter the following:</h3>
 			<form>
 				<Input
 					type='date'
 					placeholder='Date'
-					label
+					label='Date'
 					value={formState.form.date}
 					handleChange={e => handleMetaInfoChange(e, 'date')}
 				/>
 				<Input
 					type='text'
 					placeholder='Title'
-					label
+					label='Title'
 					value={formState.form.title}
 					handleChange={e => handleMetaInfoChange(e, 'title')}
 				/>
+				<label htmlFor='existing-category'>Existing Category</label>
+				<select
+					name='existing-category'
+					id='existing-category'
+					onChange={e => handleCategory(e, 'existing')}
+					value={existingCategory}>
+					<option value='' />
+					{userData.categories.map(category => {
+						return <option value={category}>{category}</option>;
+					})}
+				</select>
 				<Input
 					type='text'
-					placeholder='Category'
-					label
-					value={formState.form.category}
-					handleChange={e => handleMetaInfoChange(e, 'category')}
+					placeholder='New Category'
+					label='New Category'
+					value={newCategory}
+					handleChange={e => handleCategory(e, 'new')}
 				/>
 			</form>
 			<Button handleClick={handleSaveForm}>Save Form</Button>

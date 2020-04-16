@@ -17,6 +17,7 @@ const UserDashboard = props => {
 	const { logout, userId } = useContext(AuthContext);
 	const [ isLoading, setIsLoading ] = useState(true);
 	const [ userData, setUserData ] = useState({});
+	const [ categories, setCategories ] = useState({});
 	const [ editDetailsMode, setEditDetailsMode ] = useToggle(false);
 
 	useEffect(
@@ -26,7 +27,8 @@ const UserDashboard = props => {
 					const response = await axios.get(
 						`${process.env.REACT_APP_API_URL}/users/${userId}`
 					);
-					setUserData(response.data.payload);
+					setUserData(response.data.payload.user);
+					setCategories(response.data.payload.categories);
 					setIsLoading(false);
 				} catch (error) {
 					console.log(error);
@@ -81,7 +83,7 @@ const UserDashboard = props => {
 				<h2>Past Rankings</h2>
 				{userData.rankForms.map(form => {
 					return (
-						<Accordion>
+						<Accordion key={form._id}>
 							<AccordionHeader>
 								{formatDate(form.date)} - {form.title}
 							</AccordionHeader>

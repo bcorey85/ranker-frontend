@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import useToggle from '../hooks/useToggle';
@@ -13,6 +13,7 @@ export const FormProvider = props => {
 	const { formState, dispatch } = props;
 	const [ saveModalOpen, setSaveModalOpen ] = useToggle(false);
 	const [ isValid, setIsValid ] = useState(true);
+	const [ invalidInputs, setInvalidInputs ] = useState([]);
 
 	const saveForm = async (form, token) => {
 		try {
@@ -31,9 +32,16 @@ export const FormProvider = props => {
 		}
 	};
 
-	const handleFormValidation = isValid => {
-		setIsValid(isValid);
-	};
+	// Handle form validation
+	useEffect(
+		() => {
+			if (invalidInputs.length > 0) {
+				return setIsValid(false);
+			}
+			setIsValid(true);
+		},
+		[ invalidInputs ]
+	);
 
 	return (
 		<FormContext.Provider
@@ -43,8 +51,9 @@ export const FormProvider = props => {
 				saveForm,
 				saveModalOpen,
 				setSaveModalOpen,
-				handleFormValidation,
-				isValid
+				isValid,
+				invalidInputs,
+				setInvalidInputs
 			}}>
 			{props.children}
 		</FormContext.Provider>

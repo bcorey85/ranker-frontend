@@ -22,6 +22,10 @@ export const validate = (value, validators) => {
 				/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value);
 		}
 		if (validator.type === 'isUnique') {
+			if (!value) {
+				return (isValid = true);
+			}
+
 			const match = validator.array.filter(
 				item => item[validator.path] === value
 			);

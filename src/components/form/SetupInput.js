@@ -20,13 +20,28 @@ const SetupInput = ({
 	const error = isTouched && !isValid;
 	const labelText = `${label} ${index + 1}`;
 	const errorLabelText = `${label} ${index + 1} - ${errorText}`;
-	const { handleFormValidation } = useContext(FormContext);
+	const { setInvalidInputs, invalidInputs } = useContext(FormContext);
 
 	const checkValidation = (e, handleChange, validators) => {
 		const value = e.target.value;
-		const isValid = validate(value, validators);
-		setIsValid(isValid);
-		handleFormValidation(isValid);
+		const id = e.target.id;
+
+		if (validators) {
+			const isValid = validate(value, validators);
+			setIsValid(isValid);
+
+			let newInvalidInputs;
+			if (!isValid) {
+				newInvalidInputs = [ ...invalidInputs ];
+				newInvalidInputs.push(id);
+			} else {
+				newInvalidInputs = invalidInputs.filter(
+					inputId => inputId !== id
+				);
+			}
+			setInvalidInputs(newInvalidInputs);
+		}
+
 		handleChange(e);
 	};
 

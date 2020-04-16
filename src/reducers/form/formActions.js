@@ -93,9 +93,14 @@ export const updateItemScore = (state, action) => {
 };
 
 export const mapScores = state => {
-	const mappedItems = state.form.items.map(item => {
+	const filterEmptyItems = state.form.items.filter(item => item.label !== '');
+	const filterEmptyScoreLabels = state.form.scoreLabels.filter(
+		label => label.label !== ''
+	);
+
+	const mappedItems = filterEmptyItems.map(item => {
 		// If score exists on item already, return item, if not create a new score
-		const scores = state.form.scoreLabels.map(label => {
+		const scores = filterEmptyScoreLabels.map(label => {
 			const existingScore = item.scores.findIndex(
 				score => score.label === label.label
 			);
@@ -111,6 +116,7 @@ export const mapScores = state => {
 
 	return produce(state, draftState => {
 		draftState.form.items = mappedItems;
+		draftState.form.scoreLabels = filterEmptyScoreLabels;
 	});
 };
 

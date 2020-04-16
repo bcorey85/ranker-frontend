@@ -31,15 +31,16 @@ const Input = ({
 
 	const checkValidation = (e, handleChange, validators) => {
 		const value = e.target.value;
-		const isValid = validate(value, validators);
 
-		setIsValid(isValid);
+		if (validators) {
+			const isValid = validate(value, validators);
+			setIsValid(isValid);
+		}
+
 		handleChange(e);
 	};
 
 	const handleBlur = () => {
-		const isValid = validate(value, validators);
-		setIsValid(isValid);
 		setIsTouched(true);
 	};
 

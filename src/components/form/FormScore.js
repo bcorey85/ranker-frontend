@@ -3,7 +3,6 @@ import React, { useState, useEffect, useContext } from 'react';
 import FormSection from './FormSection';
 import Input from '../shared/Input';
 
-import { isRequired } from '../../utils/validate';
 import { FormContext } from '../../contexts/FormContext';
 import './FormScore.scss';
 
@@ -62,7 +61,6 @@ const FormInput = () => {
 									data-scoreindex={score.id}
 									placeholder={null}
 									label={score.label}
-									validators={[ isRequired() ]}
 									errorText='Please enter a value'
 								/>
 							</React.Fragment>

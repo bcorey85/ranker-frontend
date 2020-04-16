@@ -1,0 +1,9 @@
+@import '../../sass/abstracts/variables';
+@import '../../sass/abstracts/mixins';
+
+.form-section-header {
+	@include respond(500) {
+		border-bottom: 4px solid $primary;
+		padding-bottom: .4rem;
+	}
+}

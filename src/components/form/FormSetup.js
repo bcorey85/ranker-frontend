@@ -4,6 +4,7 @@ import AddBtn from '../shared/AddBtn';
 
 import SetupInput from './SetupInput';
 import FormSection from './FormSection';
+import FormSectionHeader from './FormSectionHeader';
 
 import { isUnique } from '../../utils/validate';
 import { FormContext } from '../../contexts/FormContext';
@@ -44,7 +45,8 @@ const FormSetup = () => {
 	return (
 		<div className='form-setup'>
 			<h1>Setup</h1>
-			<h3>What are you ranking?</h3>
+
+			<FormSectionHeader>What are you ranking?</FormSectionHeader>
 			<div className='form-setup__section'>
 				<FormSection>
 					{formState.form.items.map((item, index) => {
@@ -70,7 +72,7 @@ const FormSetup = () => {
 				</div>
 			</div>
 
-			<h3>How are you scoring?</h3>
+			<FormSectionHeader>How are you scoring?</FormSectionHeader>
 			<div className='form-setup__section'>
 				<FormSection>
 					{formState.form.scoreLabels.map((score, index) => {
@@ -101,7 +103,8 @@ const FormSetup = () => {
 					/>
 				</div>
 			</div>
-			<h3>Sort Results</h3>
+			<FormSectionHeader>Sort Results</FormSectionHeader>
+
 			<FormSection>
 				<div className='form-results__sort'>
 					<div onClick={handleSort}>

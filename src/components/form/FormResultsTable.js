@@ -1,6 +1,7 @@
 import React from 'react';
 
 import FormSection from './FormSection';
+import FormSectionHeader from './FormSectionHeader';
 import { sort } from '../../utils/sort';
 
 const FormResultsTable = ({ formData }) => {
@@ -21,7 +22,7 @@ const FormResultsTable = ({ formData }) => {
 	const scoreLabels = formData.scoreLabels.map(label => {
 		return (
 			<React.Fragment key={label.id}>
-				<h3>{label.label}</h3>
+				<FormSectionHeader>{label.label}</FormSectionHeader>
 				<FormSection>
 					<table className='form-results__table'>
 						<thead>
@@ -63,7 +64,7 @@ const FormResultsTable = ({ formData }) => {
 
 	return (
 		<React.Fragment>
-			<h3>Overview</h3>
+			<FormSectionHeader>Overview</FormSectionHeader>
 			<FormSection>
 				<table className='form-results__table'>
 					<thead>

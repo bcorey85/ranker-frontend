@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 
 import FormSection from './FormSection';
 import Input from '../shared/Input';
+import FormSectionHeader from './FormSectionHeader';
 
 import { FormContext } from '../../contexts/FormContext';
 import './FormScore.scss';
@@ -46,7 +47,7 @@ const FormInput = () => {
 	const scores = formState.form.items.map((item, itemIndex) => {
 		return (
 			<div key={item.id}>
-				<h3>{item.label}</h3>
+				<FormSectionHeader>{item.label}</FormSectionHeader>
 				<FormSection>
 					{item.scores.map((score, scoreIndex) => {
 						return (

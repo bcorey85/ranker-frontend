@@ -49,10 +49,7 @@ const Register = props => {
 	return (
 		<AuthForm>
 			<h1>Register</h1>
-			<MessageContainer
-				description={message.description}
-				type={message.type}
-			/>
+
 			<form>
 				<Input
 					type='text'
@@ -86,6 +83,10 @@ const Register = props => {
 					autoComplete='password'
 					validators={[ isMinLength(6) ]}
 					errorText='Password must be at least 6 characters'
+				/>
+				<MessageContainer
+					description={message.description}
+					type={message.type}
 				/>
 
 				<Button handleClick={handleRegister}>Register</Button>

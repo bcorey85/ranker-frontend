@@ -48,10 +48,6 @@ const ForgotPassword = () => {
 	return (
 		<AuthForm>
 			<h1>Forgot Password</h1>
-			<MessageContainer
-				description={message.description}
-				type={message.type}
-			/>
 			<form>
 				<Input
 					type='text'
@@ -62,6 +58,10 @@ const ForgotPassword = () => {
 					value={email}
 					validators={[ isEmail() ]}
 					errorText='Please enter a valid email'
+				/>
+				<MessageContainer
+					description={message.description}
+					type={message.type}
 				/>
 				<Button handleClick={resetPassword}>Reset Password</Button>
 			</form>

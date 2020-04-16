@@ -64,7 +64,7 @@ const UserDashboard = props => {
 
 	const deleteForm = async id => {
 		try {
-			const response = await HttpRequest({
+			await HttpRequest({
 				method: 'delete',
 				url: `${process.env.REACT_APP_API_URL}/rank/${id}`,
 				token

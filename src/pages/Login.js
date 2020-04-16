@@ -45,10 +45,7 @@ const Login = props => {
 	return (
 		<AuthForm>
 			<h1>Login</h1>
-			<MessageContainer
-				description={message.description}
-				type={message.type}
-			/>
+
 			<form>
 				<Input
 					type='text'
@@ -71,6 +68,10 @@ const Login = props => {
 					autoComplete='current-password'
 					validators={[ isMinLength(6) ]}
 					errorText='Password must be at least 6 characters'
+				/>
+				<MessageContainer
+					description={message.description}
+					type={message.type}
 				/>
 				<Button handleClick={handleLogin}>Login</Button>
 			</form>

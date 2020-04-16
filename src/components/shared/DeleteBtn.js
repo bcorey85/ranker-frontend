@@ -3,12 +3,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 import './DeleteBtn.scss';
-const DeleteBtn = ({ handleDelete }) => {
+const DeleteBtn = ({ handleClick }) => {
 	return (
 		<div
 			role='button'
 			tabIndex='0'
-			onClick={handleDelete}
+			onClick={handleClick}
 			className='delete-btn'
 			aria-label='delete'>
 			<FontAwesomeIcon icon={faTrashAlt} />

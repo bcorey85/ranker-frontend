@@ -8,11 +8,14 @@
 		}
 	}
 
-	&__past-rankings {
-	}
-
 	&__controls {
 		display: flex;
 		justify-content: space-between;
 	}
+}
+
+.past-ranking-controls {
+	display: flex;
+	justify-content: flex-end;
+	margin-right: -1.6rem;
 }

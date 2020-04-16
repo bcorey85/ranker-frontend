@@ -1,0 +1,19 @@
+@import '../../sass/abstracts/variables';
+
+.edit-btn {
+	height: 4rem;
+	width: 4.8rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: $gray100;
+	cursor: pointer;
+
+	& svg {
+		font-size: 1.8rem;
+	}
+
+	&:hover {
+		color: $green;
+	}
+}

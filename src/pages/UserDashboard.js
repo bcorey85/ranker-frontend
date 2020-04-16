@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 import axios from 'axios';
 
 import Button from '../components/shared/Button';
@@ -8,42 +8,74 @@ import AccordionBody from '../components/Accordion/AccordionBody';
 import EditUserDetails from '../components/UserDashboard/EditUserDetails';
 import FormResultsTable from '../components/Form/FormResultsTable';
 import Category from '../components/UserDashboard/Category';
+import DeleteButton from '../components/shared/DeleteBtn';
+import EditButton from '../components/shared/EditBtn';
 
+import HttpRequest from '../utils/httpRequest';
 import useToggle from '../hooks/useToggle';
 import AuthContext from '../contexts/AuthContext';
 import formatDate from '../utils/formateDate';
 import './UserDashboard.scss';
 
 const UserDashboard = props => {
-	const { logout, userId } = useContext(AuthContext);
+	const { logout, userId, token } = useContext(AuthContext);
 	const [ isLoading, setIsLoading ] = useState(true);
 	const [ userData, setUserData ] = useState({});
 	const [ categories, setCategories ] = useState({});
 	const [ editDetailsMode, setEditDetailsMode ] = useToggle(false);
 
+	const getUserProfile = useCallback(
+		async () => {
+			try {
+				const response = await axios.get(
+					`${process.env.REACT_APP_API_URL}/users/${userId}`
+				);
+				setUserData(response.data.payload.user);
+				setCategories(response.data.payload.categories);
+				setIsLoading(false);
+			} catch (error) {
+				console.log(error);
+			}
+		},
+		[ userId ]
+	);
+
 	useEffect(
 		() => {
-			const getUserProfile = async () => {
-				try {
-					const response = await axios.get(
-						`${process.env.REACT_APP_API_URL}/users/${userId}`
-					);
-					setUserData(response.data.payload.user);
-					setCategories(response.data.payload.categories);
-					setIsLoading(false);
-				} catch (error) {
-					console.log(error);
-				}
-			};
-
 			getUserProfile();
 		},
-		[ userId, editDetailsMode ]
+		[ getUserProfile ]
 	);
 
 	const handleLogout = () => {
 		logout();
 		props.history.push('/');
+	};
+
+	const handleDelete = async (e, id) => {
+		console.log('hit');
+
+		e.preventDefault();
+		try {
+			const response = await HttpRequest({
+				method: 'delete',
+				url: `${process.env.REACT_APP_API_URL}/rank/${id}`,
+				token
+			});
+			console.log(response);
+			getUserProfile();
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	const handleEdit = form => {
+		props.history.push({
+			pathname: '/',
+			state: {
+				formData: form
+			}
+		});
 	};
 
 	if (isLoading) {
@@ -91,13 +123,28 @@ const UserDashboard = props => {
 										{formatDate(form.date)} - {form.title}
 									</AccordionHeader>
 									<AccordionBody>
+										<div className='past-ranking-controls'>
+											<DeleteButton
+												handleClick={e =>
+													handleDelete(e, form._id)}
+											/>
+											<EditButton
+												handleClick={() =>
+													handleEdit(form)}
+											/>
+										</div>
 										<FormResultsTable formData={form} />
 									</AccordionBody>
 								</Accordion>
 							);
 						}
+						return null;
 					});
-					return <Category title={category}>{forms}</Category>;
+					return (
+						<Category title={category} key={category}>
+							{forms}
+						</Category>
+					);
 				})}
 			</section>
 		</div>

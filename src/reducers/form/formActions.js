@@ -13,6 +13,13 @@ export const createForm = (state, action) => {
 	});
 };
 
+export const editForm = (state, action) => {
+	return produce(state, draftState => {
+		draftState.form = action.form;
+		draftState.form.editMode = true;
+	});
+};
+
 export const addField = (state, action) => {
 	if (fields[action.field]) {
 		const newField = fields[action.field].schema();

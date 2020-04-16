@@ -64,7 +64,7 @@ const SetupInput = ({
 					onBlur={handleBlur}
 				/>
 
-				<DeleteBtn handleDelete={handleDelete} />
+				<DeleteBtn handleClick={handleDelete} />
 			</div>
 		</div>
 	);

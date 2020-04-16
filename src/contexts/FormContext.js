@@ -16,16 +16,32 @@ export const FormProvider = props => {
 	const [ invalidInputs, setInvalidInputs ] = useState([]);
 
 	const saveForm = async (form, token) => {
+		console.log(form);
+
 		try {
-			const response = await axios.post(
-				`${process.env.REACT_APP_API_URL}/rank`,
-				form,
-				{
-					headers: {
-						Authorization: 'Bearer ' + token
+			let response;
+			if (form.editMode === true) {
+				response = await axios.put(
+					`${process.env.REACT_APP_API_URL}/rank/${form._id}`,
+					form,
+					{
+						headers: {
+							Authorization: 'Bearer ' + token
+						}
 					}
-				}
-			);
+				);
+			} else {
+				response = await axios.post(
+					`${process.env.REACT_APP_API_URL}/rank`,
+					form,
+					{
+						headers: {
+							Authorization: 'Bearer ' + token
+						}
+					}
+				);
+			}
+
 			return response;
 		} catch (error) {
 			return error.response;

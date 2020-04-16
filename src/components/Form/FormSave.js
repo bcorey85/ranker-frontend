@@ -60,7 +60,7 @@ const FormSave = ({ history }) => {
 
 	const handleSaveForm = async () => {
 		try {
-			const response = await saveForm(formState, token);
+			const response = await saveForm(formState.form, token);
 
 			if (response.status === 400) {
 				return setMessage({
@@ -93,7 +93,6 @@ const FormSave = ({ history }) => {
 			</div>
 		);
 	}
-	console.log(userData);
 
 	return (
 		<div className='form-save'>
@@ -122,7 +121,11 @@ const FormSave = ({ history }) => {
 					value={existingCategory}>
 					<option value='' />
 					{userData.categories.map(category => {
-						return <option value={category}>{category}</option>;
+						return (
+							<option value={category} key={category}>
+								{category}
+							</option>
+						);
 					})}
 				</select>
 				<Input

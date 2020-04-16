@@ -11,22 +11,32 @@ import { FormProvider } from '../../contexts/FormContext';
 import formReducer from '../../reducers/form/formReducer';
 import './Form.scss';
 
-const Form = () => {
+const Form = ({ formData }) => {
 	const [ currentPage, setCurrentPage ] = useState('Setup');
 	const [ formState, dispatch ] = useReducer(formReducer, {});
 	const [ isLoading, setIsLoading ] = useState(true);
-	useEffect(() => {
-		dispatch({
-			type: 'CREATE_FORM',
-			newForm: {
-				numItems: 3,
-				numScoreLabels: 3,
-				sort: 'desc'
+	useEffect(
+		() => {
+			if (formData) {
+				dispatch({
+					type: 'EDIT_FORM',
+					form: formData
+				});
+			} else {
+				dispatch({
+					type: 'CREATE_FORM',
+					newForm: {
+						numItems: 3,
+						numScoreLabels: 3,
+						sort: 'desc'
+					}
+				});
 			}
-		});
 
-		setIsLoading(false);
-	}, []);
+			setIsLoading(false);
+		},
+		[ formData ]
+	);
 
 	if (isLoading) {
 		return <div>Loading...</div>;

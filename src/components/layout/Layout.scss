@@ -8,6 +8,6 @@
 	grid-template-rows: 6.4rem 1fr 9.6rem;
 
 	@include respond(500) {
-		grid-template-rows: 5.6rem 1fr 9.6rem;
+		grid-template-rows: 5.6rem minmax(min-content, 60rem) 9.6rem;
 	}
 }

@@ -48,13 +48,12 @@ const FormResults = props => {
 			) : (
 				<FormResultsTable formData={formState.form} />
 			)}
-			{saveModalOpen && (
-				<Modal toggleModal={setSaveModalOpen}>
-					<ModalContent>
-						<FormSave />
-					</ModalContent>
-				</Modal>
-			)}
+
+			<Modal toggleModal={setSaveModalOpen} isOpen={saveModalOpen}>
+				<ModalContent>
+					<FormSave />
+				</ModalContent>
+			</Modal>
 		</div>
 	);
 };

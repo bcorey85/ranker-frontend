@@ -10,6 +10,9 @@ import FormResultsTable from '../components/Form/FormResultsTable';
 import Category from '../components/UserDashboard/Category';
 import DeleteButton from '../components/shared/DeleteBtn';
 import EditButton from '../components/shared/EditBtn';
+import Modal from '../components/Modal/Modal';
+import ModalContent from '../components/Modal/ModalContent';
+import ModalControls from '../components/Modal/ModalControls';
 
 import HttpRequest from '../utils/httpRequest';
 import useToggle from '../hooks/useToggle';
@@ -23,6 +26,8 @@ const UserDashboard = props => {
 	const [ userData, setUserData ] = useState({});
 	const [ categories, setCategories ] = useState({});
 	const [ editDetailsMode, setEditDetailsMode ] = useToggle(false);
+	const [ deleteModalOpen, setDeleteModalOpen ] = useToggle(false);
+	const [ deleteFormId, setDeleteFormId ] = useState('');
 
 	const getUserProfile = useCallback(
 		async () => {
@@ -52,17 +57,19 @@ const UserDashboard = props => {
 		props.history.push('/');
 	};
 
-	const handleDelete = async (e, id) => {
-		console.log('hit');
+	const handleDelete = async id => {
+		setDeleteModalOpen(true);
+		setDeleteFormId(id);
+	};
 
-		e.preventDefault();
+	const deleteForm = async id => {
 		try {
 			const response = await HttpRequest({
 				method: 'delete',
 				url: `${process.env.REACT_APP_API_URL}/rank/${id}`,
 				token
 			});
-			console.log(response);
+			setDeleteModalOpen(false);
 			getUserProfile();
 		} catch (error) {
 			console.log(error);
@@ -126,7 +133,7 @@ const UserDashboard = props => {
 										<div className='past-ranking-controls'>
 											<DeleteButton
 												handleClick={e =>
-													handleDelete(e, form._id)}
+													handleDelete(form._id)}
 											/>
 											<EditButton
 												handleClick={() =>
@@ -147,6 +154,22 @@ const UserDashboard = props => {
 					);
 				})}
 			</section>
+
+			<Modal toggleModal={setDeleteModalOpen} isOpen={deleteModalOpen}>
+				<ModalContent>
+					<h1>Delete Form</h1>
+					<p>
+						Are you sure you wish to delete this form? This action
+						is can not be undone.
+					</p>
+					<ModalControls>
+						<Button handleClick={setDeleteModalOpen}>Cancel</Button>
+						<Button handleClick={() => deleteForm(deleteFormId)}>
+							Delete
+						</Button>
+					</ModalControls>
+				</ModalContent>
+			</Modal>
 		</div>
 	);
 };

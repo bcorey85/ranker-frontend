@@ -2,6 +2,9 @@ import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import AuthContext from '../contexts/AuthContext';
+
+import './MainNav.scss';
+
 const MainNav = () => {
 	const { isLoggedIn, userId } = useContext(AuthContext);
 
@@ -9,7 +12,7 @@ const MainNav = () => {
 		<ul className='main-nav'>
 			{isLoggedIn ? (
 				<li>
-					<NavLink to={`/users/${userId}`}>Dashboard</NavLink>
+					<NavLink to={`/users/${userId}`}>Profile</NavLink>
 				</li>
 			) : (
 				<li>

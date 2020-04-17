@@ -1,0 +1,12 @@
+@import '../sass/abstracts/variables';
+
+.main-nav {
+	height: 100%;
+	display: flex;
+	align-items: center;
+	border-left: 1px solid $primary-dark;
+
+	& li {
+		padding: 0 2.4rem;
+	}
+}

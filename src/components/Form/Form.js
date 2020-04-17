@@ -41,6 +41,7 @@ const Form = ({ formData }) => {
 	if (isLoading) {
 		return <div>Loading...</div>;
 	}
+
 	const formBody = (
 		<React.Fragment>
 			{currentPage === 'Setup' && <FormSetup />}

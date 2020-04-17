@@ -19,6 +19,30 @@ const FormResultsTable = ({ formData }) => {
 		);
 	});
 
+	const overview = (
+		<React.Fragment>
+			<FormSectionHeader>Overview</FormSectionHeader>
+			<FormSection>
+				<table className='form-results__table'>
+					<thead>
+						<tr>
+							<th>Rank</th>
+							<th>Item</th>
+							<th>Score</th>
+						</tr>
+					</thead>
+					<tbody>{items}</tbody>
+				</table>
+			</FormSection>
+			<div className='form-results__average'>
+				<h2>
+					<span>Average: </span>
+					{Math.round(formData.overallAverage * 100) / 100}
+				</h2>
+			</div>
+		</React.Fragment>
+	);
+
 	const scoreLabels = formData.scoreLabels.map(label => {
 		return (
 			<React.Fragment key={label.id}>
@@ -64,25 +88,7 @@ const FormResultsTable = ({ formData }) => {
 
 	return (
 		<React.Fragment>
-			<FormSectionHeader>Overview</FormSectionHeader>
-			<FormSection>
-				<table className='form-results__table'>
-					<thead>
-						<tr>
-							<th>Rank</th>
-							<th>Item</th>
-							<th>Score</th>
-						</tr>
-					</thead>
-					<tbody>{items}</tbody>
-				</table>
-			</FormSection>
-			<div className='form-results__average'>
-				<h2>
-					<span>Average: </span>
-					{Math.round(formData.overallAverage * 100) / 100}
-				</h2>
-			</div>
+			{overview}
 			{scoreLabels}
 		</React.Fragment>
 	);

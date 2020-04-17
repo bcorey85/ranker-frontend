@@ -28,10 +28,6 @@ const FormFooterNav = ({ handlePageChange, currentPage }) => {
 		[ currentPage ]
 	);
 
-	// const handleFormSave = e => {
-	// 	saveForm(formState.form, token);
-	// };
-
 	let saveButton;
 	if (isLoggedIn && !next) {
 		saveButton = (

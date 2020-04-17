@@ -5,6 +5,9 @@ import AddBtn from '../shared/AddBtn';
 import SetupInput from './SetupInput';
 import FormSection from './FormSection';
 import FormSectionHeader from './FormSectionHeader';
+import Accordion from '../Accordion/Accordion';
+import AccordionBody from '../Accordion/AccordionBody';
+import AccordionHeader from '../Accordion/AccordionHeader';
 
 import { isUnique } from '../../utils/validate';
 import { FormContext } from '../../contexts/FormContext';
@@ -103,32 +106,39 @@ const FormSetup = () => {
 					/>
 				</div>
 			</div>
-			<FormSectionHeader>Sort Results</FormSectionHeader>
+			<Accordion>
+				<AccordionHeader>
+					<h3>Advanced Options</h3>
+				</AccordionHeader>
+				<AccordionBody>
+					<FormSectionHeader>Sort Results</FormSectionHeader>
 
-			<FormSection>
-				<div className='form-results__sort'>
-					<div onClick={handleSort}>
-						<label htmlFor='desc'>High to Low</label>
-						<input
-							type='radio'
-							id='desc'
-							name='sort'
-							value='desc'
-							defaultChecked={sort === 'desc'}
-						/>
-					</div>
-					<div onClick={handleSort}>
-						<label htmlFor='asc'>Low to High</label>
-						<input
-							type='radio'
-							id='asc'
-							name='sort'
-							value='asc'
-							defaultChecked={sort === 'asc'}
-						/>
-					</div>
-				</div>
-			</FormSection>
+					<FormSection>
+						<div className='form-setup__sort'>
+							<div onClick={handleSort}>
+								<label htmlFor='desc'>High to Low</label>
+								<input
+									type='radio'
+									id='desc'
+									name='sort'
+									value='desc'
+									defaultChecked={sort === 'desc'}
+								/>
+							</div>
+							<div onClick={handleSort}>
+								<label htmlFor='asc'>Low to High</label>
+								<input
+									type='radio'
+									id='asc'
+									name='sort'
+									value='asc'
+									defaultChecked={sort === 'asc'}
+								/>
+							</div>
+						</div>
+					</FormSection>
+				</AccordionBody>
+			</Accordion>
 		</div>
 	);
 };

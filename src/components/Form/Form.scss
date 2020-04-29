@@ -12,4 +12,8 @@
 	& label {
 		display: block;
 	}
+
+	@include respond(500) {
+		border-radius: 0;
+	}
 }

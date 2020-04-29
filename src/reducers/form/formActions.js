@@ -100,30 +100,46 @@ export const updateItemScore = (state, action) => {
 };
 
 export const mapScores = state => {
+	let items, scoreLabels;
+	// Remove empty labels
 	const filterEmptyItems = state.form.items.filter(item => item.label !== '');
 	const filterEmptyScoreLabels = state.form.scoreLabels.filter(
 		label => label.label !== ''
 	);
 
-	const mappedItems = filterEmptyItems.map(item => {
-		// If score exists on item already, return item, if not create a new score
-		const scores = filterEmptyScoreLabels.map(label => {
-			const existingScore = item.scores.findIndex(
-				score => score.label === label.label
-			);
-			if (existingScore >= 0) {
-				return item.scores[existingScore];
-			} else {
-				return Score(label.label);
-			}
+	// If all items empty, return default state
+	if (filterEmptyItems.length === 0) {
+		items = state.form.items;
+	} else {
+		const mappedItems = filterEmptyItems.map(item => {
+			// If score exists on item already, return item, if not create a new score
+			const scores = filterEmptyScoreLabels.map(label => {
+				const existingScore = item.scores.findIndex(
+					score => score.label === label.label
+				);
+				if (existingScore >= 0) {
+					return item.scores[existingScore];
+				} else {
+					return Score(label.label);
+				}
+			});
+
+			return { ...item, scores };
 		});
 
-		return { ...item, scores };
-	});
+		items = mappedItems;
+	}
+
+	// If all scorelabels empty, return default state
+	if (filterEmptyScoreLabels.length === 0) {
+		scoreLabels = state.form.scoreLabels;
+	} else {
+		scoreLabels = filterEmptyScoreLabels;
+	}
 
 	return produce(state, draftState => {
-		draftState.form.items = mappedItems;
-		draftState.form.scoreLabels = filterEmptyScoreLabels;
+		draftState.form.items = items;
+		draftState.form.scoreLabels = scoreLabels;
 	});
 };
 

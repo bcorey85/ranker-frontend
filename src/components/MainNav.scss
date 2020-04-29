@@ -4,9 +4,16 @@
 	height: 100%;
 	display: flex;
 	align-items: center;
-	border-left: 1px solid $primary-dark;
 
 	& li {
 		padding: 0 2.4rem;
+
+		& a {
+			color: $primary;
+
+			&:hover {
+				text-decoration: underline;
+			}
+		}
 	}
 }

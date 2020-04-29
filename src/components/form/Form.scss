@@ -10,14 +10,6 @@
 	border-radius: 2px;
 	box-shadow: 0 4px 6px 0 rgba(0, 0, 0, .4);
 
-	@include respond(500) {
-		border-bottom-right-radius: 0;
-		border-bottom-left-radius: 0;
-		border-top: none;
-		border-bottom: none;
-		box-shadow: none;
-	}
-
 	& label {
 		display: block;
 	}

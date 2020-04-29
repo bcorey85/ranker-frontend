@@ -3,10 +3,12 @@
 
 .form-section {
 	border-left: 4px solid $primary;
-	padding-left: 1.2rem;
+	padding-left: .8rem;
+	margin-left: -1.2rem;
 
 	@include respond(500) {
 		border-left: none;
 		padding-left: 0;
+		margin-left: 0;
 	}
 }

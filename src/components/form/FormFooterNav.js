@@ -39,17 +39,9 @@ const FormFooterNav = ({ handlePageChange, currentPage }) => {
 		);
 	}
 
-	return (
-		<nav className='form-footer-nav'>
-			<div>
-				{previous && (
-					<Button
-						handleClick={() => handlePageChange(previous)}
-						disabled={!isValid}>
-						Back
-					</Button>
-				)}
-			</div>
+	let nextButton;
+	if (next) {
+		nextButton = (
 			<div>
 				{next && (
 					<Button
@@ -59,7 +51,34 @@ const FormFooterNav = ({ handlePageChange, currentPage }) => {
 					</Button>
 				)}
 			</div>
-			{saveButton}
+		);
+	} else if (isLoggedIn && !next) {
+		nextButton = saveButton;
+	} else {
+		nextButton = <div />;
+	}
+
+	let prevButton;
+	if (previous) {
+		prevButton = (
+			<div>
+				{previous && (
+					<Button
+						handleClick={() => handlePageChange(previous)}
+						disabled={!isValid}>
+						Back
+					</Button>
+				)}
+			</div>
+		);
+	} else {
+		prevButton = <div />;
+	}
+
+	return (
+		<nav className='form-footer-nav'>
+			{prevButton}
+			{nextButton}
 		</nav>
 	);
 };

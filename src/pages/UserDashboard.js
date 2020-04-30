@@ -6,6 +6,7 @@ import Accordion from '../components/Accordion/Accordion';
 import AccordionHeader from '../components/Accordion/AccordionHeader';
 import AccordionBody from '../components/Accordion/AccordionBody';
 import EditUserDetails from '../components/UserDashboard/EditUserDetails';
+import FormDelete from '../components/Form/FormDelete';
 import FormResultsTable from '../components/Form/FormResultsTable';
 import Category from '../components/UserDashboard/Category';
 import DeleteButton from '../components/shared/DeleteBtn';
@@ -157,11 +158,7 @@ const UserDashboard = props => {
 
 			<Modal toggleModal={setDeleteModalOpen} isOpen={deleteModalOpen}>
 				<ModalContent>
-					<h1>Delete Form</h1>
-					<p>
-						Are you sure you wish to delete this form? This action
-						is can not be undone.
-					</p>
+					<FormDelete />
 					<ModalControls>
 						<Button handleClick={setDeleteModalOpen}>Cancel</Button>
 						<Button handleClick={() => deleteForm(deleteFormId)}>

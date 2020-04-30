@@ -1,4 +1,5 @@
 @import '../../sass/abstracts/variables';
+@import '../../sass/abstracts//mixins';
 
 .modal {
 	display: flex;
@@ -19,6 +20,10 @@
 		max-width: 80rem;
 		background-color: #fff;
 		padding: 3.2rem;
+
+		@include respond(500) {
+			padding: 1.6rem;
+		}
 	}
 
 	&__close {

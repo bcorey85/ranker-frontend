@@ -1,0 +1,12 @@
+@import '../../sass/abstracts/variables';
+.form-reset {
+	& h3 {
+		margin-bottom: 0;
+		text-align: center;
+	}
+
+	&__warning {
+		text-align: center;
+		color: $gray200;
+	}
+}

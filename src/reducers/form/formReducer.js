@@ -1,5 +1,6 @@
 import {
 	createForm,
+	resumeForm,
 	editForm,
 	addField,
 	updateFieldLabel,
@@ -15,6 +16,8 @@ const formReducer = (state, action) => {
 	switch (action.type) {
 		case 'CREATE_FORM':
 			return createForm(state, action);
+		case 'RESUME_FORM':
+			return resumeForm(state, action);
 		case 'EDIT_FORM':
 			return editForm(state, action);
 		case 'ADD_FIELD':

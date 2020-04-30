@@ -4,12 +4,24 @@ import { Form, Score, fields } from './formSchemas';
 import { updateRanks } from '../../utils/formUtils';
 import { average } from '../../utils/math';
 
+const setLocalStorage = form => {
+	localStorage.setItem('RankerAppForm', JSON.stringify(form));
+};
+
 export const createForm = (state, action) => {
 	const { numItems, numScoreLabels, sort } = action.newForm;
 	const newForm = Form(numItems, numScoreLabels, sort);
 
 	return produce(state, draftState => {
 		draftState.form = newForm;
+		setLocalStorage(draftState);
+	});
+};
+
+export const resumeForm = (state, action) => {
+	return produce(state, draftState => {
+		draftState.form = action.form;
+		setLocalStorage(draftState);
 	});
 };
 
@@ -17,6 +29,7 @@ export const editForm = (state, action) => {
 	return produce(state, draftState => {
 		draftState.form = action.form;
 		draftState.form.editMode = true;
+		setLocalStorage(draftState);
 	});
 };
 
@@ -30,8 +43,10 @@ export const addField = (state, action) => {
 				...state.form[stateLocation],
 				newField
 			];
+			setLocalStorage(draftState);
 		});
 	} else {
+		setLocalStorage(state);
 		return state;
 	}
 };
@@ -51,8 +66,10 @@ export const updateFieldLabel = (state, action) => {
 
 		return produce(state, draftState => {
 			draftState.form[stateLocation] = updatedFields;
+			setLocalStorage(draftState);
 		});
 	} else {
+		setLocalStorage(state);
 		return state;
 	}
 };
@@ -66,8 +83,10 @@ export const deleteField = (state, action) => {
 
 		return produce(state, draftState => {
 			draftState.form[stateLocation] = filteredFields;
+			setLocalStorage(draftState);
 		});
 	} else {
+		setLocalStorage(state);
 		return state;
 	}
 };
@@ -96,6 +115,7 @@ export const updateItemScore = (state, action) => {
 
 	return produce(state, draftState => {
 		draftState.form.items = updateRanks(updatedItems, state.form.sort);
+		setLocalStorage(draftState);
 	});
 };
 
@@ -140,6 +160,7 @@ export const mapScores = state => {
 	return produce(state, draftState => {
 		draftState.form.items = items;
 		draftState.form.scoreLabels = scoreLabels;
+		setLocalStorage(draftState);
 	});
 };
 
@@ -166,17 +187,20 @@ export const calcResults = state => {
 	return produce(state, draftState => {
 		draftState.form.scoreLabels = updatedScoreLabels;
 		draftState.form.overallAverage = average(updatedScoreLabels, 'average');
+		setLocalStorage(draftState);
 	});
 };
 
 export const setSort = (state, action) => {
 	return produce(state, draftState => {
 		draftState.form.sort = action.sort;
+		setLocalStorage(draftState);
 	});
 };
 
 export const updateMetaInfo = (state, action) => {
 	return produce(state, draftState => {
 		draftState.form[action.field] = action.value;
+		setLocalStorage(draftState);
 	});
 };

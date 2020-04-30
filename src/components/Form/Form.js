@@ -9,15 +9,28 @@ import FormResults from './FormResults';
 
 import { FormProvider } from '../../contexts/FormContext';
 import formReducer from '../../reducers/form/formReducer';
+import useLocalStorage from '../../hooks/useLocalStorage';
+
 import './Form.scss';
 
 const Form = ({ formData }) => {
-	const [ currentPage, setCurrentPage ] = useState('Setup');
 	const [ formState, dispatch ] = useReducer(formReducer, {});
 	const [ isLoading, setIsLoading ] = useState(true);
+	const [ currentPage, setCurrentPage ] = useState('Setup');
+	const { getLocalStorage, clearLocalStorage } = useLocalStorage(
+		'RankerAppForm'
+	);
+
 	useEffect(
 		() => {
-			if (formData) {
+			const currentForm = getLocalStorage('RankerAppForm');
+
+			if (currentForm !== null) {
+				dispatch({
+					type: 'RESUME_FORM',
+					form: currentForm.form
+				});
+			} else if (formData) {
 				dispatch({
 					type: 'EDIT_FORM',
 					form: formData
@@ -32,10 +45,9 @@ const Form = ({ formData }) => {
 					}
 				});
 			}
-
 			setIsLoading(false);
 		},
-		[ formData ]
+		[ formData, getLocalStorage ]
 	);
 
 	if (isLoading) {
@@ -44,7 +56,9 @@ const Form = ({ formData }) => {
 
 	const formBody = (
 		<React.Fragment>
-			{currentPage === 'Setup' && <FormSetup />}
+			{currentPage === 'Setup' && (
+				<FormSetup clearLocalStorage={clearLocalStorage} />
+			)}
 			{currentPage === 'Score' && <FormScore />}
 			{currentPage === 'Results' && <FormResults />}
 

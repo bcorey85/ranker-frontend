@@ -11,7 +11,7 @@ import AuthContext from '../../contexts/AuthContext';
 
 import './FormSave.scss';
 
-const FormSave = ({ history }) => {
+const FormSave = ({ history, clearLocalStorage }) => {
 	const [ message, setMessage ] = useState({ type: '', description: '' });
 	const [ userData, setUserData ] = useState({});
 	const [ isLoading, setIsLoading ] = useState(true);
@@ -72,6 +72,8 @@ const FormSave = ({ history }) => {
 				type: 'success',
 				description: response.data.message
 			});
+
+			clearLocalStorage();
 
 			setTimeout(() => {
 				history.push(`/users/${userId}`);

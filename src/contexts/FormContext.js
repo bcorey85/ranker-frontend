@@ -11,13 +11,13 @@ export const FormContext = React.createContext({
 
 export const FormProvider = props => {
 	const { formState, dispatch } = props;
+
 	const [ saveModalOpen, setSaveModalOpen ] = useToggle(false);
+	const [ resetModalOpen, setResetModalOpen ] = useToggle(false);
 	const [ isValid, setIsValid ] = useState(true);
 	const [ invalidInputs, setInvalidInputs ] = useState([]);
 
 	const saveForm = async (form, token) => {
-		console.log(form);
-
 		try {
 			let response;
 			if (form.editMode === true) {
@@ -48,6 +48,17 @@ export const FormProvider = props => {
 		}
 	};
 
+	const resetForm = () => {
+		dispatch({
+			type: 'CREATE_FORM',
+			newForm: {
+				numItems: 3,
+				numScoreLabels: 3,
+				sort: 'desc'
+			}
+		});
+	};
+
 	// Handle form validation
 	useEffect(
 		() => {
@@ -65,8 +76,11 @@ export const FormProvider = props => {
 				formState,
 				dispatch,
 				saveForm,
+				resetForm,
 				saveModalOpen,
 				setSaveModalOpen,
+				resetModalOpen,
+				setResetModalOpen,
 				isValid,
 				invalidInputs,
 				setInvalidInputs

@@ -5,9 +5,13 @@ import Input from '../shared/Input';
 import FormSectionHeader from './FormSectionHeader';
 
 import { FormContext } from '../../contexts/FormContext';
+import useScrollToTop from '../../hooks/useScrollToTop';
+
 import './FormScore.scss';
 
 const FormInput = () => {
+	useScrollToTop();
+
 	const [ isLoading, setIsLoading ] = useState(true);
 	const { dispatch, formState } = useContext(FormContext);
 

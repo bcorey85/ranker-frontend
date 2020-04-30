@@ -11,10 +11,12 @@ import AccordionHeader from '../Accordion/AccordionHeader';
 
 import { isUnique } from '../../utils/validate';
 import { FormContext } from '../../contexts/FormContext';
+import useScrollToTop from '../../hooks/useScrollToTop';
 
 import './FormSetup.scss';
 
 const FormSetup = () => {
+	useScrollToTop();
 	const { dispatch, formState } = useContext(FormContext);
 
 	const [ sort, setSort ] = useState(formState.form.sort);

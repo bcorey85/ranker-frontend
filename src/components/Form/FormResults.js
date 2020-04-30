@@ -2,14 +2,15 @@ import React, { useEffect, useState, useContext } from 'react';
 
 import FormResultsTable from './FormResultsTable';
 import Modal from '../Modal/Modal';
-
-import { FormContext } from '../../contexts/FormContext';
-
-import './FormResults.scss';
 import ModalContent from '../Modal/ModalContent';
 import FormSave from './FormSave';
 
+import useScrollToTop from '../../hooks/useScrollToTop';
+import { FormContext } from '../../contexts/FormContext';
+
+import './FormResults.scss';
 const FormResults = props => {
+	useScrollToTop();
 	const [ isLoading, setIsLoading ] = useState(true);
 	const { dispatch, formState, saveModalOpen, setSaveModalOpen } = useContext(
 		FormContext

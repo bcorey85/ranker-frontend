@@ -3,25 +3,18 @@ import React, { useEffect, useState, useContext } from 'react';
 import FormResultsTable from './FormResultsTable';
 import Modal from '../Modal/Modal';
 import ModalContent from '../Modal/ModalContent';
-import ModalControls from '../Modal/ModalControls';
 import FormSave from './FormSave';
-import FormReset from './FormReset';
-import Button from '../shared/Button';
 
 import useScrollToTop from '../../hooks/useScrollToTop';
 import { FormContext } from '../../contexts/FormContext';
 
 import './FormResults.scss';
-const FormResults = ({ handlePageChange, clearLocalStorage }) => {
+const FormResults = ({ clearLocalStorage }) => {
 	useScrollToTop();
 	const [ isLoading, setIsLoading ] = useState(true);
-	const {
-		dispatch,
-		formState,
-		saveModalOpen,
-		setSaveModalOpen,
-		resetForm
-	} = useContext(FormContext);
+	const { dispatch, formState, saveModalOpen, setSaveModalOpen } = useContext(
+		FormContext
+	);
 
 	useEffect(
 		() => {

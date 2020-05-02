@@ -28,17 +28,6 @@ const FormFooterNav = ({ handlePageChange, currentPage }) => {
 		[ currentPage ]
 	);
 
-	let saveButton;
-	if (isLoggedIn && !next) {
-		saveButton = (
-			<div className='form-footer-nav__right-btn'>
-				<Button handleClick={setSaveModalOpen} disabled={!isValid}>
-					Save Form
-				</Button>
-			</div>
-		);
-	}
-
 	let nextButton;
 	if (next) {
 		nextButton = (
@@ -51,7 +40,13 @@ const FormFooterNav = ({ handlePageChange, currentPage }) => {
 			</div>
 		);
 	} else if (isLoggedIn && !next) {
-		nextButton = saveButton;
+		nextButton = (
+			<div className='form-footer-nav__right-btn'>
+				<Button handleClick={setSaveModalOpen} disabled={!isValid}>
+					Save Form
+				</Button>
+			</div>
+		);
 	}
 
 	let prevButton;

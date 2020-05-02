@@ -50,7 +50,8 @@ input[type=radio] {
 
 a {
 	color: $primary;
-	text-decoration: underline;
+	font-weight: 600;
+	text-decoration: none;
 
 	&:hover {
 		color: $black;
@@ -64,6 +65,7 @@ a {
 
 	&:hover {
 		color: $black;
+		text-decoration: underline;
 	}
 }
 

@@ -73,11 +73,11 @@ const FormSave = ({ history, clearLocalStorage }) => {
 				description: response.data.message
 			});
 
-			clearLocalStorage();
-
 			setTimeout(() => {
 				history.push(`/users/${userId}`);
 			}, 1000);
+
+			clearLocalStorage();
 		} catch (error) {
 			console.log(error);
 		}

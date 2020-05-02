@@ -20,9 +20,10 @@
 	background-color: transparent;
 	border: none;
 	cursor: pointer;
-	text-decoration: underline;
+	font-weight: 600;
 
 	&:hover {
 		color: $black;
+		text-decoration: underline;
 	}
 }

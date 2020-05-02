@@ -20,6 +20,7 @@ const Form = ({ formData }) => {
 	const { getLocalStorage, clearLocalStorage } = useLocalStorage(
 		'RankerAppForm'
 	);
+	console.log(clearLocalStorage);
 
 	useEffect(
 		() => {
@@ -60,7 +61,9 @@ const Form = ({ formData }) => {
 				<FormSetup clearLocalStorage={clearLocalStorage} />
 			)}
 			{currentPage === 'Score' && <FormScore />}
-			{currentPage === 'Results' && <FormResults />}
+			{currentPage === 'Results' && (
+				<FormResults clearLocalStorage={clearLocalStorage} />
+			)}
 
 			<FormFooterNav
 				handlePageChange={setCurrentPage}

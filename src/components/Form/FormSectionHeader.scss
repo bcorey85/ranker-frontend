@@ -3,7 +3,7 @@
 
 .form-section-header {
 	@include respond(500) {
-		border-bottom: 4px solid $primary;
+		border-bottom: 2px solid $primary;
 		padding-bottom: .4rem;
 	}
 }

@@ -20,7 +20,6 @@ const Form = ({ formData }) => {
 	const { getLocalStorage, clearLocalStorage } = useLocalStorage(
 		'RankerAppForm'
 	);
-	console.log(clearLocalStorage);
 
 	useEffect(
 		() => {

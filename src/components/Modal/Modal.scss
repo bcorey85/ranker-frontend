@@ -20,6 +20,7 @@
 		max-width: 80rem;
 		background-color: #fff;
 		padding: 3.2rem;
+		border-top: 8px solid $primary;
 
 		@include respond(500) {
 			padding: 1.6rem;
@@ -41,6 +42,7 @@
 
 			& svg {
 				font-size: 2.4rem;
+				color: $gray400;
 			}
 		}
 	}

@@ -3,6 +3,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import FormSection from './FormSection';
 import Input from '../shared/Input';
 import FormSectionHeader from './FormSectionHeader';
+import FormErrorBoundary from './FormErrorBoundary';
 
 import { FormContext } from '../../contexts/FormContext';
 import useScrollToTop from '../../hooks/useScrollToTop';
@@ -31,22 +32,6 @@ const FormInput = () => {
 			itemId: e.target.dataset.itemindex
 		});
 	};
-
-	if (formState.form.items.every(item => item.label === '')) {
-		return (
-			<div className='form-score'>
-				Please enter at least one Item to rank in Setup.
-			</div>
-		);
-	}
-
-	if (formState.form.scoreLabels.every(label => label.label === '')) {
-		return (
-			<div className='form-score'>
-				Please enter at least one Score Label in Setup.
-			</div>
-		);
-	}
 
 	const scores = formState.form.items.map((item, itemIndex) => {
 		return (
@@ -84,8 +69,10 @@ const FormInput = () => {
 
 	return (
 		<div className='form-score'>
-			<h1>Scores</h1>
-			{isLoading ? 'Loading...' : scores}
+			<FormErrorBoundary formState={formState}>
+				<h1>Scores</h1>
+				{isLoading ? 'Loading...' : scores}
+			</FormErrorBoundary>
 		</div>
 	);
 };

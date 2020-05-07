@@ -10,7 +10,7 @@ const FormFooterNav = ({ handlePageChange, currentPage }) => {
 	const [ previous, setPrevious ] = useState(null);
 	const [ next, setNext ] = useState(null);
 	const { isLoggedIn } = useContext(AuthContext);
-	const { setSaveModalOpen, isValid } = useContext(FormContext);
+	const { formState, setSaveModalOpen, isValid } = useContext(FormContext);
 
 	useEffect(
 		() => {
@@ -26,6 +26,13 @@ const FormFooterNav = ({ handlePageChange, currentPage }) => {
 			}
 		},
 		[ currentPage ]
+	);
+
+	const emptyItemsError = formState.form.items.every(
+		item => item.label === ''
+	);
+	const emptyScoreLabelsError = formState.form.scoreLabels.every(
+		label => label.label === ''
 	);
 
 	let nextButton;
@@ -60,6 +67,19 @@ const FormFooterNav = ({ handlePageChange, currentPage }) => {
 				</Button>
 			</div>
 		);
+	}
+
+	if (currentPage !== 'Setup' && (emptyItemsError || emptyScoreLabelsError)) {
+		prevButton = (
+			<div className='form-footer-nav__left-btn'>
+				<Button
+					handleClick={() => handlePageChange('Setup')}
+					disabled={!isValid}>
+					Back
+				</Button>
+			</div>
+		);
+		nextButton = null;
 	}
 
 	return (

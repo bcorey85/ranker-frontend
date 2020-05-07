@@ -2,13 +2,11 @@
 @import '../../sass/abstracts/mixins';
 
 .form {
-	width: 100%;
-	max-width: 70.4rem;
+	max-width: 68rem;
 	margin: 0 auto;
-	border-top: 8px solid $primary;
 	border-bottom: 8px solid $primary;
 	border-radius: 2px;
-	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);
+	box-shadow: $box-shadow;
 
 	& label {
 		display: block;
@@ -16,5 +14,7 @@
 
 	@include respond(500) {
 		border-radius: 0;
+		border-bottom: 4px solid $primary;
+		margin-top: 2.4rem;
 	}
 }

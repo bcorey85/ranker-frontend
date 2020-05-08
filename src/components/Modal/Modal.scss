@@ -15,6 +15,10 @@
 	color: $black;
 	background-color: rgba(0, 0, 0, .5);
 
+	@include respond(500) {
+		padding: .8rem;
+	}
+
 	&__container {
 		width: 100%;
 		max-width: 40rem;

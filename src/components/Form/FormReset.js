@@ -8,10 +8,11 @@ const FormReset = () => {
 
 	let warningMessage;
 	if (isLoggedIn) {
-		warningMessage = 'Save your current form to prevent losing data';
+		warningMessage =
+			'(Save your current form to if you want to prevent losing progress)';
 	} else {
 		warningMessage =
-			'Please login and save your current form to prevent losing data';
+			'(Please login and save your current form if you want to prevent losing progress)';
 	}
 
 	return (

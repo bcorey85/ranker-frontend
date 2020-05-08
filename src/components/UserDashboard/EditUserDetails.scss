@@ -10,7 +10,7 @@
 	padding: 1.6rem;
 
 	@include respond(500) {
-		max-width: auto;
+		max-width: 100%;
 	}
 
 	& h3 {

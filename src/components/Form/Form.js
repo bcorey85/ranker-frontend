@@ -21,12 +21,15 @@ const Form = ({ formData }) => {
 	const { getLocalStorage, clearLocalStorage } = useLocalStorage(
 		'RankerAppForm'
 	);
-	console.log();
 
 	useEffect(
 		() => {
 			const currentForm = getLocalStorage('RankerAppForm');
-			const emptyForm = checkEmptyForm(currentForm.form).empty;
+
+			let emptyForm;
+			if (currentForm) {
+				emptyForm = checkEmptyForm(currentForm.form).empty;
+			}
 
 			if (formData) {
 				dispatch({

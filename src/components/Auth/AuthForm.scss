@@ -6,13 +6,9 @@
 	height: 100%;
 	max-width: 40rem;
 	margin: auto;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
 
 	@include respond(500) {
-		max-width: auto;
+		max-width: 100%;
 	}
 
 	& form {

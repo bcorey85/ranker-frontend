@@ -6,20 +6,19 @@
 	height: 100%;
 	max-width: 40rem;
 	margin: auto;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
 
 	@include respond(500) {
-		max-width: auto;
+		max-width: 100%;
+		height: 100vh;
 	}
 
 	& img {
 		max-width: 9.6rem;
 		margin-bottom: 4rem;
+		opacity: 1;
+
 		@include respond(500) {
-			max-width: 8rem;
+			opacity: 0;
 		}
 	}
 
@@ -35,7 +34,7 @@
 
 		&::after {
 			display: block;
-			margin: 2.4rem auto 12rem auto;
+			margin: 2.4rem auto 8rem auto;
 			content: '';
 			height: .4rem;
 			width: 4rem;
@@ -67,6 +66,10 @@
 			& button {
 				margin-left: auto;
 				padding-right: 3.6rem;
+
+				@include respond(500) {
+					padding-right: 1.6rem;
+				}
 			}
 
 			& svg {
@@ -78,6 +81,10 @@
 			& button {
 				margin-right: auto;
 				padding-left: 3.6rem;
+
+				@include respond(500) {
+					padding-left: 1.6rem;
+				}
 			}
 		}
 	}

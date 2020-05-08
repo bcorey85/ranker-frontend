@@ -11,6 +11,10 @@
 	justify-content: center;
 	align-items: center;
 
+	@include respond(500) {
+		max-width: auto;
+	}
+
 	& form {
 		width: 100%;
 	}

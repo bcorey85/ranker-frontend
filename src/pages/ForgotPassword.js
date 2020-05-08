@@ -39,8 +39,7 @@ const ForgotPassword = () => {
 		return (
 			<AuthForm>
 				<h1>Reset Password</h1>
-				Please check your email for link to reset your password. Thank
-				you!
+				Please check your email for link to reset your password
 			</AuthForm>
 		);
 	}

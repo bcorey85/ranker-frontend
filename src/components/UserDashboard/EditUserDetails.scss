@@ -1,3 +1,5 @@
+@import '../../sass/abstracts/mixins';
+
 .edit-user-details {
 	display: flex;
 	flex-direction: column;
@@ -6,6 +8,10 @@
 	max-width: 40rem;
 	margin: 0 auto;
 	padding: 1.6rem;
+
+	@include respond(500) {
+		max-width: auto;
+	}
 
 	& h3 {
 		align-self: flex-start;

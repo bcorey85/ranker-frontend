@@ -10,6 +10,8 @@ import MessageContainer from '../components/MessageContainer/MessageContainer';
 import AuthContext from '../contexts/AuthContext';
 import useInputState from '../hooks/useInputState';
 
+import './ResetPassword.scss';
+
 const ResetPassword = props => {
 	const [ password, setPassword ] = useInputState('');
 	const [ confirmPassword, setConfirmPassword ] = useInputState('');
@@ -41,33 +43,35 @@ const ResetPassword = props => {
 	};
 
 	return (
-		<AuthForm>
-			<h1>Reset Password</h1>
-			<MessageContainer
-				description={message.description}
-				type={message.type}
-			/>
-			<form>
-				<Input
-					type='password'
-					id='password'
-					placeholder='New Password'
-					label='New Password'
-					handleChange={setPassword}
-					value={password}
+		<div className='reset-password'>
+			<AuthForm>
+				<h1>Reset Password</h1>
+				<MessageContainer
+					description={message.description}
+					type={message.type}
 				/>
-				<Input
-					type='password'
-					id='password'
-					placeholder='Confirm New Password'
-					label='Confirm New Password'
-					handleChange={setConfirmPassword}
-					value={confirmPassword}
-				/>
-				<Button handleClick={resetPassword}>Reset Password</Button>
-			</form>
-			<NavLink to='/login'>Back to Login</NavLink>
-		</AuthForm>
+				<form>
+					<Input
+						type='password'
+						id='password'
+						placeholder='New Password'
+						label='New Password'
+						handleChange={setPassword}
+						value={password}
+					/>
+					<Input
+						type='password'
+						id='password'
+						placeholder='Confirm New Password'
+						label='Confirm New Password'
+						handleChange={setConfirmPassword}
+						value={confirmPassword}
+					/>
+					<Button handleClick={resetPassword}>Reset Password</Button>
+				</form>
+				<NavLink to='/login'>Back to Login</NavLink>
+			</AuthForm>
+		</div>
 	);
 };
 

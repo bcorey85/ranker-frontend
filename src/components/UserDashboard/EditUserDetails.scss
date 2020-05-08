@@ -1,20 +1,22 @@
 @import '../../sass/abstracts/mixins';
 
 .edit-user-details {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
 	width: 100%;
 	max-width: 40rem;
 	margin: 0 auto;
-	padding: 1.6rem;
+
+	& .panel {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
 
 	@include respond(500) {
 		max-width: 100%;
 	}
 
 	& h3 {
-		align-self: flex-start;
 		margin-top: 1.6rem;
 		margin-bottom: .8rem;
 	}
@@ -33,6 +35,7 @@
 	}
 
 	& button.btn {
+		width: 100%;
 		margin-top: 3.6rem;
 	}
 }

@@ -164,11 +164,14 @@ const UserDashboard = props => {
 					<ModalContent>
 						<FormDelete />
 						<ModalControls>
-							<Button handleClick={setDeleteModalOpen}>
+							<Button
+								handleClick={setDeleteModalOpen}
+								type='primary'>
 								Cancel
 							</Button>
 							<Button
-								handleClick={() => deleteForm(deleteFormId)}>
+								handleClick={() => deleteForm(deleteFormId)}
+								type='delete'>
 								Delete
 							</Button>
 						</ModalControls>

@@ -16,10 +16,12 @@ const Register = props => {
 	const [ email, setEmail ] = useInputState('');
 	const [ password, setPassword ] = useInputState('');
 	const [ message, setMessage ] = useState({ description: '', type: '' });
+	const [ awaitingResponse, setAwaitingResponse ] = useState(false);
 	const { login } = useContext(AuthContext);
 
 	const handleRegister = async e => {
 		e.preventDefault();
+		setAwaitingResponse(true);
 		const newUser = {
 			username,
 			email,
@@ -30,6 +32,7 @@ const Register = props => {
 				`${process.env.REACT_APP_API_URL}/auth/register`,
 				newUser
 			);
+			setAwaitingResponse(false);
 
 			if (response.status === 201) {
 				const { id, token } = response.data.payload;
@@ -37,6 +40,7 @@ const Register = props => {
 				props.history.push(`/user/${id}`);
 			}
 		} catch (error) {
+			setAwaitingResponse(false);
 			if (error.response.data.message) {
 				setMessage({
 					description: error.response.data.message,
@@ -89,7 +93,9 @@ const Register = props => {
 					type={message.type}
 				/>
 
-				<Button handleClick={handleRegister}>Register</Button>
+				<Button handleClick={handleRegister}>
+					{!awaitingResponse ? 'Register' : 'Loading...'}
+				</Button>
 			</form>
 			<NavLink to='/login'>Already have an account?</NavLink>
 		</AuthForm>

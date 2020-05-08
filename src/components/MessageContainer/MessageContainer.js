@@ -27,7 +27,7 @@ const MessageContainer = ({ description, type, duration }) => {
 	let text;
 	if (Array.isArray(message.description)) {
 		text = message.description.map(message => {
-			return <div>{message}</div>;
+			return <div key={message}>{message}</div>;
 		});
 	} else {
 		text = message.description;

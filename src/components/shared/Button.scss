@@ -2,16 +2,30 @@
 
 .btn {
 	height: 4rem;
-	background-color: $gray300;
-	color: $white;
-	border: none;
 	padding: .8rem 2.4rem;
 	cursor: pointer;
 	border-radius: 2px;
 	margin-bottom: 2.4rem;
+}
+
+.btn--primary {
+	background-color: $gray300;
+	color: $white;
+	border: none;
 
 	&:hover {
 		background-color: $primary;
+	}
+}
+
+.btn--delete {
+	background-color: transparent;
+	color: $red;
+	border: 1px solid $red;
+
+	&:hover {
+		background-color: $red;
+		color: $white;
 	}
 }
 

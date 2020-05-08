@@ -9,6 +9,7 @@ import ModalControls from '../Modal/ModalControls';
 import FormReset from '../Form/FormReset';
 import Button from '../shared/Button';
 import Panel from '../shared/Panel';
+import DividerBlock from '../shared/DividerBlock';
 
 import checkEmptyForm from '../../utils/checkEmptyForm';
 import useToggle from '../../hooks/useToggle';
@@ -48,6 +49,7 @@ const Landing = ({ history, clearLocalStorage, existingForm }) => {
 				<img src={logo} alt='Ranker App' />
 				<h1>A Simple App for Ranking Stuff</h1>
 				<p>Create an account to save forms for later</p>
+				<DividerBlock />
 				<div className='landing__controls'>
 					<div>
 						<Button
@@ -80,7 +82,7 @@ const Landing = ({ history, clearLocalStorage, existingForm }) => {
 					<FormReset />
 				</ModalContent>
 				<ModalControls>
-					<Button handleClick={() => setResetModalOpen(false)}>
+					<Button handleClick={() => setResetModalOpen(false)} link>
 						Cancel
 					</Button>
 					<Button handleClick={resetForm}>New Form</Button>

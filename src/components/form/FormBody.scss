@@ -16,5 +16,6 @@
 
 	@include respond(500) {
 		padding: 2.4rem 1.6rem;
+		min-height: auto;
 	}
 }

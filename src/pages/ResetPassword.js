@@ -16,10 +16,12 @@ const ResetPassword = props => {
 	const [ password, setPassword ] = useInputState('');
 	const [ confirmPassword, setConfirmPassword ] = useInputState('');
 	const [ message, setMessage ] = useState({ description: '', type: '' });
+	const [ awaitingResponse, setAwaitingResponse ] = useState(false);
 	const { login } = useContext(AuthContext);
 	const resetToken = props.match.params.resetToken;
 
 	const resetPassword = async e => {
+		setAwaitingResponse(true);
 		e.preventDefault();
 		try {
 			const response = await axios.put(
@@ -27,12 +29,14 @@ const ResetPassword = props => {
 					.REACT_APP_API_URL}/auth/resetpassword/${resetToken}`,
 				{ password, confirmPassword }
 			);
+			setAwaitingResponse(false);
 			if (response.status === 200) {
 				const { id, token } = response.data.payload;
 				login(id, token);
 				props.history.push(`/users/${id}`);
 			}
 		} catch (error) {
+			setAwaitingResponse(false);
 			if (error.response.data.message) {
 				setMessage({
 					description: error.response.data.message,
@@ -46,10 +50,7 @@ const ResetPassword = props => {
 		<div className='reset-password'>
 			<AuthForm>
 				<h1>Reset Password</h1>
-				<MessageContainer
-					description={message.description}
-					type={message.type}
-				/>
+
 				<form>
 					<Input
 						type='password'
@@ -61,13 +62,19 @@ const ResetPassword = props => {
 					/>
 					<Input
 						type='password'
-						id='password'
+						id='confirm-password'
 						placeholder='Confirm New Password'
 						label='Confirm New Password'
 						handleChange={setConfirmPassword}
 						value={confirmPassword}
 					/>
-					<Button handleClick={resetPassword}>Reset Password</Button>
+					<MessageContainer
+						description={message.description}
+						type={message.type}
+					/>
+					<Button handleClick={resetPassword}>
+						{!awaitingResponse ? 'Reset Password' : 'Loading...'}
+					</Button>
 				</form>
 				<NavLink to='/login'>Back to Login</NavLink>
 			</AuthForm>

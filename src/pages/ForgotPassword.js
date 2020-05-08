@@ -14,18 +14,20 @@ const ForgotPassword = () => {
 	const [ email, setEmail ] = useInputState('');
 	const [ responseSent, setResponseSent ] = useState(false);
 	const [ message, setMessage ] = useState({ description: '', type: '' });
+	const [ awaitingResponse, setAwaitingResponse ] = useState(false);
 
 	const resetPassword = async e => {
 		e.preventDefault();
+		setAwaitingResponse(true);
 		try {
 			await axios.post(
 				`${process.env.REACT_APP_API_URL}/auth/forgotpassword`,
 				{ email }
 			);
-
+			setAwaitingResponse(false);
 			setResponseSent(true);
 		} catch (error) {
-			console.log(error.response);
+			setAwaitingResponse(false);
 			if (error.response.data.message) {
 				setMessage({
 					description: error.response.data.message,
@@ -62,7 +64,9 @@ const ForgotPassword = () => {
 					description={message.description}
 					type={message.type}
 				/>
-				<Button handleClick={resetPassword}>Reset Password</Button>
+				<Button handleClick={resetPassword}>
+					{!awaitingResponse ? 'Reset Password' : 'Loading...'}
+				</Button>
 			</form>
 			<NavLink to='/login'>Back to Login</NavLink>
 		</AuthForm>

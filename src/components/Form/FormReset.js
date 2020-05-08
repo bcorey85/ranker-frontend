@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 
 import './FormReset.scss';
 import AuthContext from '../../contexts/AuthContext';
+import DividerBlock from '../shared/DividerBlock';
 
 const FormReset = () => {
 	const { isLoggedIn } = useContext(AuthContext);
@@ -20,6 +21,7 @@ const FormReset = () => {
 			<h1>New Form</h1>
 			<h3>Are you sure you wish to create a new form?</h3>
 			<p className='form-reset__warning'>{warningMessage}</p>
+			<DividerBlock />
 		</div>
 	);
 };

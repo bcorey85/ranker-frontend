@@ -15,24 +15,25 @@ const Login = props => {
 	const [ email, setEmail ] = useInputState('');
 	const [ password, setPassword ] = useInputState('');
 	const [ message, setMessage ] = useState({ description: '', type: '' });
+	const [ awaitingResponse, setAwaitingResponse ] = useState(false);
 	const { login } = useContext(AuthContext);
 
 	const handleLogin = async e => {
 		e.preventDefault();
-
+		setAwaitingResponse(true);
 		try {
 			const response = await axios.post(
 				`${process.env.REACT_APP_API_URL}/auth/login`,
 				{ email, password }
 			);
-
+			setAwaitingResponse(false);
 			if (response.status === 200) {
 				const { id, token } = response.data.payload;
 				login(id, token);
 				props.history.push(`/users/${id}`);
 			}
 		} catch (error) {
-			console.log(error);
+			setAwaitingResponse(false);
 			if (error.response.data.message) {
 				setMessage({
 					description: error.response.data.message,
@@ -73,7 +74,9 @@ const Login = props => {
 					description={message.description}
 					type={message.type}
 				/>
-				<Button handleClick={handleLogin}>Login</Button>
+				<Button handleClick={handleLogin}>
+					{!awaitingResponse ? 'Login' : 'Loading...'}
+				</Button>
 			</form>
 			<NavLink to='/forgotpassword'>Reset password</NavLink>
 			<NavLink to='/register'>Need an account?</NavLink>

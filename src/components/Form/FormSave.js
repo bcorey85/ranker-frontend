@@ -28,6 +28,7 @@ const FormSave = ({ history, clearLocalStorage }) => {
 						method: 'get',
 						url: `${process.env.REACT_APP_API_URL}/users/${userId}`
 					});
+
 					setUserData(response.data.payload);
 					setIsLoading(false);
 				} catch (error) {
@@ -138,11 +139,11 @@ const FormSave = ({ history, clearLocalStorage }) => {
 					handleChange={e => handleCategory(e, 'new')}
 				/>
 			</form>
-			<Button handleClick={handleSaveForm}>Save Form</Button>
 			<MessageContainer
 				description={message.description}
 				type={message.type}
 			/>
+			<Button handleClick={handleSaveForm}>Save Form</Button>
 		</div>
 	);
 };

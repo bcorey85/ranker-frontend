@@ -13,7 +13,9 @@
 	}
 
 	& img {
+		display: block;
 		max-width: 9.6rem;
+		margin: auto;
 		margin-bottom: 4rem;
 		opacity: 1;
 
@@ -31,15 +33,6 @@
 	& p {
 		color: $gray200;
 		text-align: center;
-
-		&::after {
-			display: block;
-			margin: 2.4rem auto 8rem auto;
-			content: '';
-			height: .4rem;
-			width: 4rem;
-			background-color: $primary;
-		}
 	}
 
 	&__controls {

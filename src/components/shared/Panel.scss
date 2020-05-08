@@ -3,9 +3,9 @@
 
 .panel {
 	width: 100%;
+	min-height: 56rem;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
 	align-items: center;
 	background-color: $white;
 	padding: 6rem 4.8rem;

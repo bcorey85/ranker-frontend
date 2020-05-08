@@ -104,11 +104,6 @@ const UserDashboard = props => {
 	return (
 		<div className='user-dashboard'>
 			<Panel>
-				<div className='user-dashboard__controls'>
-					<Button handleClick={handleLogout} link>
-						Logout
-					</Button>
-				</div>
 				<section className='user-dashboard__user-info'>
 					<h2>User Info</h2>
 					<div>
@@ -117,9 +112,14 @@ const UserDashboard = props => {
 					<div>
 						<strong>Email:</strong> {userData.email}
 					</div>
-					<Button handleClick={setEditDetailsMode} link>
-						Edit Details
-					</Button>
+					<div className='user-dashboard__controls'>
+						<Button handleClick={setEditDetailsMode} link>
+							Edit Details
+						</Button>{' '}
+						<Button handleClick={handleLogout} link>
+							Logout
+						</Button>
+					</div>
 				</section>
 				<section className='user-dashboard__past-rankings'>
 					<h2>Past Rankings</h2>

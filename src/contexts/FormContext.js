@@ -13,7 +13,7 @@ export const FormProvider = props => {
 	const { formState, dispatch } = props;
 
 	const [ saveModalOpen, setSaveModalOpen ] = useToggle(false);
-	const [ resetModalOpen, setResetModalOpen ] = useToggle(false);
+	// const [ resetModalOpen, setResetModalOpen ] = useToggle(false);
 	const [ isValid, setIsValid ] = useState(true);
 	const [ invalidInputs, setInvalidInputs ] = useState([]);
 
@@ -48,16 +48,16 @@ export const FormProvider = props => {
 		}
 	};
 
-	const resetForm = () => {
-		dispatch({
-			type: 'CREATE_FORM',
-			newForm: {
-				numItems: 3,
-				numScoreLabels: 3,
-				sort: 'desc'
-			}
-		});
-	};
+	// const resetForm = () => {
+	// 	dispatch({
+	// 		type: 'CREATE_FORM',
+	// 		newForm: {
+	// 			numItems: 3,
+	// 			numScoreLabels: 3,
+	// 			sort: 'desc'
+	// 		}
+	// 	});
+	// };
 
 	// Handle form validation
 	useEffect(
@@ -76,11 +76,11 @@ export const FormProvider = props => {
 				formState,
 				dispatch,
 				saveForm,
-				resetForm,
+				// resetForm,
 				saveModalOpen,
 				setSaveModalOpen,
-				resetModalOpen,
-				setResetModalOpen,
+				// resetModalOpen,
+				// setResetModalOpen,
 				isValid,
 				invalidInputs,
 				setInvalidInputs

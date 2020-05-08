@@ -1,15 +1,21 @@
 import React from 'react';
 
-import Form from '../components/Form/Form';
+import Landing from '../components/Landing/Landing';
+import useLocalStorage from '../hooks/useLocalStorage';
+
 const Index = props => {
-	let formData;
-	if (props.location.state && props.location.state.formData) {
-		formData = props.location.state.formData;
-	}
+	const { getLocalStorage, clearLocalStorage } = useLocalStorage(
+		'RankerAppForm'
+	);
+
+	const existingForm = getLocalStorage();
 
 	return (
 		<React.Fragment>
-			<Form formData={formData} />
+			<Landing
+				existingForm={existingForm}
+				clearLocalStorage={clearLocalStorage}
+			/>
 		</React.Fragment>
 	);
 };

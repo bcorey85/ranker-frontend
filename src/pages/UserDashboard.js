@@ -14,6 +14,7 @@ import EditButton from '../components/shared/EditBtn';
 import Modal from '../components/Modal/Modal';
 import ModalContent from '../components/Modal/ModalContent';
 import ModalControls from '../components/Modal/ModalControls';
+import Panel from '../components/shared/Panel';
 
 import HttpRequest from '../utils/httpRequest';
 import useToggle from '../hooks/useToggle';
@@ -79,7 +80,7 @@ const UserDashboard = props => {
 
 	const handleEdit = form => {
 		props.history.push({
-			pathname: '/',
+			pathname: '/form',
 			state: {
 				formData: form
 			}
@@ -102,71 +103,78 @@ const UserDashboard = props => {
 
 	return (
 		<div className='user-dashboard'>
-			<div className='user-dashboard__controls'>
-				<div />
-				<Button handleClick={handleLogout} link>
-					Logout
-				</Button>
-			</div>
-			<section className='user-dashboard__user-info'>
-				<h2>User Info</h2>
-				<div>
-					<strong>Username:</strong> {userData.username}
+			<Panel>
+				<div className='user-dashboard__controls'>
+					<Button handleClick={handleLogout} link>
+						Logout
+					</Button>
 				</div>
-				<div>
-					<strong>Email:</strong> {userData.email}
-				</div>
-				<Button handleClick={setEditDetailsMode} link>
-					Edit Details
-				</Button>
-			</section>
-			<section className='user-dashboard__past-rankings'>
-				<h2>Past Rankings</h2>
-				{[ ...categories ].sort().map(category => {
-					const forms = userData.rankForms.map(form => {
-						if (form.category === category) {
-							return (
-								<Accordion key={form._id}>
-									<AccordionHeader>
-										{formatDate(form.date)} - {form.title}
-									</AccordionHeader>
-									<AccordionBody>
-										<div className='past-ranking-controls'>
-											<DeleteButton
-												handleClick={e =>
-													handleDelete(form._id)}
-											/>
-											<EditButton
-												handleClick={() =>
-													handleEdit(form)}
-											/>
-										</div>
-										<FormResultsTable formData={form} />
-									</AccordionBody>
-								</Accordion>
-							);
-						}
-						return null;
-					});
-					return (
-						<Category title={category} key={category}>
-							{forms}
-						</Category>
-					);
-				})}
-			</section>
+				<section className='user-dashboard__user-info'>
+					<h2>User Info</h2>
+					<div>
+						<strong>Username:</strong> {userData.username}
+					</div>
+					<div>
+						<strong>Email:</strong> {userData.email}
+					</div>
+					<Button handleClick={setEditDetailsMode} link>
+						Edit Details
+					</Button>
+				</section>
+				<section className='user-dashboard__past-rankings'>
+					<h2>Past Rankings</h2>
+					{[ ...categories ].sort().map(category => {
+						const forms = userData.rankForms.map(form => {
+							if (form.category === category) {
+								return (
+									<Accordion key={form._id}>
+										<AccordionHeader>
+											{formatDate(form.date)} -{' '}
+											{form.title}
+										</AccordionHeader>
+										<AccordionBody>
+											<div className='past-ranking-controls'>
+												<DeleteButton
+													handleClick={e =>
+														handleDelete(form._id)}
+												/>
+												<EditButton
+													handleClick={() =>
+														handleEdit(form)}
+												/>
+											</div>
+											<FormResultsTable formData={form} />
+										</AccordionBody>
+									</Accordion>
+								);
+							}
+							return null;
+						});
+						return (
+							<Category title={category} key={category}>
+								{forms}
+							</Category>
+						);
+					})}
+				</section>
 
-			<Modal toggleModal={setDeleteModalOpen} isOpen={deleteModalOpen}>
-				<ModalContent>
-					<FormDelete />
-					<ModalControls>
-						<Button handleClick={setDeleteModalOpen}>Cancel</Button>
-						<Button handleClick={() => deleteForm(deleteFormId)}>
-							Delete
-						</Button>
-					</ModalControls>
-				</ModalContent>
-			</Modal>
+				<Modal
+					toggleModal={setDeleteModalOpen}
+					isOpen={deleteModalOpen}>
+					<ModalContent>
+						<FormDelete />
+						<ModalControls>
+							<Button handleClick={setDeleteModalOpen}>
+								Cancel
+							</Button>
+							<Button
+								handleClick={() => deleteForm(deleteFormId)}>
+								Delete
+							</Button>
+						</ModalControls>
+					</ModalContent>
+				</Modal>
+			</Panel>
 		</div>
 	);
 };

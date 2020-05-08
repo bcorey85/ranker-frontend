@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 
 import Layout from './components/Layout/Layout';
 import Index from './pages/Index';
+import FormPage from './pages/FormPage';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import ForgotPassword from './pages/ForgotPassword';
@@ -17,6 +18,7 @@ const routes = (
 	<Switch>
 		<Route path='/' exact component={Index} />
 		<Route path='/login' exact component={Login} />
+		<Route path='/form' exact component={FormPage} />
 		<Route path='/register' exact component={Register} />
 		<Route path='/forgotpassword' exact component={ForgotPassword} />
 		<Route

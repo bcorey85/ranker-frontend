@@ -2,6 +2,8 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
+import Panel from '../shared/Panel';
+
 import './Modal.scss';
 const Modal = ({ toggleModal, isOpen, children }) => {
 	if (!isOpen) {
@@ -11,12 +13,14 @@ const Modal = ({ toggleModal, isOpen, children }) => {
 	return (
 		<div className='modal'>
 			<div className='modal__container'>
-				<div className='modal__close'>
-					<div onClick={toggleModal}>
-						<FontAwesomeIcon icon={faTimes} />
+				<Panel>
+					<div className='modal__close'>
+						<div onClick={toggleModal}>
+							<FontAwesomeIcon icon={faTimes} />
+						</div>
 					</div>
-				</div>
-				{children}
+					{children}
+				</Panel>
 			</div>
 		</div>
 	);

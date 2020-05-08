@@ -2,14 +2,14 @@ import React, { useState, useContext } from 'react';
 
 import MessageContainer from '../../components/MessageContainer/MessageContainer';
 import Input from '../../components/shared/Input';
+import Button from '../shared/Button';
+import Panel from '../shared/Panel';
 
 import httpRequest from '../../utils/httpRequest';
 import useInputState from '../../hooks/useInputState';
-import Button from '../shared/Button';
 import passwordUpdateValidate from '../../validators/passwordUpdateValidate';
-
-import './EditUserDetails.scss';
 import AuthContext from '../../contexts/AuthContext';
+import './EditUserDetails.scss';
 
 const UpdateUserDetails = ({ userData, setEditDetailsMode, history }) => {
 	const [ email, setEmail ] = useInputState(userData.email);
@@ -77,47 +77,53 @@ const UpdateUserDetails = ({ userData, setEditDetailsMode, history }) => {
 
 	return (
 		<form className='edit-user-details'>
-			<button onClick={() => setEditDetailsMode(false)} className='link'>
-				Go Back
-			</button>
-			<h3>Update Details</h3>
-			<Input
-				type='email'
-				id='email'
-				value={email}
-				placeholder='Email'
-				label='Email'
-				handleChange={setEmail}
-				autoComplete='email'
-			/>
+			<Panel>
+				<button
+					onClick={() => setEditDetailsMode(false)}
+					className='link'>
+					Go Back
+				</button>
+				<h3>Update Details</h3>
+				<Input
+					type='email'
+					id='email'
+					value={email}
+					placeholder='Email'
+					label='Email'
+					handleChange={setEmail}
+					autoComplete='email'
+				/>
 
-			<h3>Update Password</h3>
-			<Input
-				type='password'
-				id='password'
-				value={password}
-				placeholder='Password'
-				label='Password'
-				onChange={setPassword}
-				autoComplete='new-password'
-			/>
-			<Input
-				type='password'
-				id='confirm-password'
-				value={confirmPassword}
-				placeholder='Confirm Password'
-				label='Confirm Password'
-				onChange={setConfirmPassword}
-				autoComplete='confirm-new-password'
-			/>
+				<h3>Update Password</h3>
+				<Input
+					type='password'
+					id='password'
+					value={password}
+					placeholder='Password'
+					label='Password'
+					onChange={setPassword}
+					autoComplete='new-password'
+				/>
+				<Input
+					type='password'
+					id='confirm-password'
+					value={confirmPassword}
+					placeholder='Confirm Password'
+					label='Confirm Password'
+					onChange={setConfirmPassword}
+					autoComplete='confirm-new-password'
+				/>
 
-			<Button className='btn btn-primary' handleClick={submitUserDetails}>
-				Submit
-			</Button>
-			<MessageContainer
-				type={message.type}
-				description={message.description}
-			/>
+				<Button
+					className='btn btn-primary'
+					handleClick={submitUserDetails}>
+					Submit
+				</Button>
+				<MessageContainer
+					type={message.type}
+					description={message.description}
+				/>
+			</Panel>
 		</form>
 	);
 };

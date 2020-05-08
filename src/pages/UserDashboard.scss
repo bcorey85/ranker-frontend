@@ -1,16 +1,23 @@
-.user-dashboard {
-	padding: 4rem 1.6rem;
+@import '../sass/abstracts/variables';
+@import '../sass/abstracts/mixins';
 
+.user-dashboard {
 	&__user-info {
+		width: 100%;
 		margin-bottom: 4rem;
 		& div:last-of-type {
 			margin-bottom: .8rem;
 		}
 	}
 
+	&__past-rankings {
+		width: 100%;
+	}
+
 	&__controls {
+		width: 100%;
 		display: flex;
-		justify-content: space-between;
+		justify-content: flex-end;
 	}
 }
 

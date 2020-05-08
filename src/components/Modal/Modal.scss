@@ -17,20 +17,14 @@
 
 	&__container {
 		width: 100%;
-		max-width: 80rem;
-		background-color: #fff;
-		padding: 3.2rem;
-		border-top: 8px solid $primary;
-
-		@include respond(500) {
-			padding: 1.6rem;
-		}
+		max-width: 40rem;
+		position: relative;
 	}
 
 	&__close {
-		display: flex;
-		justify-content: flex-end;
-		cursor: pointer;
+		position: absolute;
+		top: 2.4rem;
+		right: 2.4rem;
 
 		& div {
 			color: $black;

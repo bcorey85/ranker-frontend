@@ -1,9 +1,12 @@
 import React from 'react';
 
+import checkEmptyForm from '../../utils/checkEmptyForm';
 import './FormErrorBoundary.scss';
 
 const FormErrorBoundary = ({ formState, children }) => {
-	if (formState.form.items.every(item => item.label === '')) {
+	const emptyFormCheck = checkEmptyForm(formState.form);
+
+	if (emptyFormCheck.itemsEmpty) {
 		return (
 			<div className='form-errorboundary'>
 				Please enter at least one Item to rank in Setup.
@@ -11,7 +14,7 @@ const FormErrorBoundary = ({ formState, children }) => {
 		);
 	}
 
-	if (formState.form.scoreLabels.every(label => label.label === '')) {
+	if (emptyFormCheck.scoreLabelsEmpty) {
 		return (
 			<div className='form-errorboundary'>
 				Please enter at least one Score Label in Setup.

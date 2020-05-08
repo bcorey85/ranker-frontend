@@ -7,6 +7,7 @@ h1 {
 	line-height: calc-lh(4rem, 1.1);
 	font-weight: 600;
 	margin-bottom: 4rem;
+	color: $primary;
 
 	@include respond(675) {
 		font-size: 3.2rem;
@@ -20,6 +21,11 @@ h2 {
 	line-height: calc-lh(2.8rem, 1.1);
 	font-weight: 600;
 	margin-bottom: 1.6rem;
+
+	@include respond(675) {
+		font-size: 2.4rem;
+		line-height: calc-lh(2.4rem, 1.1);
+	}
 }
 
 h3 {
@@ -27,6 +33,7 @@ h3 {
 	line-height: calc-lh(2rem, 1.1);
 	font-weight: 600;
 	margin-bottom: 1.6rem;
+	color: $primary;
 
 	@include respond(675) {
 		font-size: 1.6rem;

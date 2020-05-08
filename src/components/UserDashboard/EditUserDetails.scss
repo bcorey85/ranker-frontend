@@ -8,6 +8,7 @@
 	padding: 1.6rem;
 
 	& h3 {
+		align-self: flex-start;
 		margin-top: 1.6rem;
 		margin-bottom: .8rem;
 	}
@@ -20,7 +21,12 @@
 		margin-bottom: 1.6rem;
 	}
 
-	& button {
+	& button.link {
+		align-self: flex-start;
+		margin-bottom: 2.4rem;
+	}
+
+	& button.btn {
 		margin-top: 3.6rem;
 	}
 }

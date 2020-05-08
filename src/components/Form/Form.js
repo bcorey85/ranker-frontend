@@ -20,20 +20,20 @@ const Form = ({ formData }) => {
 	const { getLocalStorage, clearLocalStorage } = useLocalStorage(
 		'RankerAppForm'
 	);
+	console.log();
 
 	useEffect(
 		() => {
 			const currentForm = getLocalStorage('RankerAppForm');
-
-			if (currentForm !== null) {
-				dispatch({
-					type: 'RESUME_FORM',
-					form: currentForm.form
-				});
-			} else if (formData) {
+			if (formData) {
 				dispatch({
 					type: 'EDIT_FORM',
 					form: formData
+				});
+			} else if (currentForm !== null) {
+				dispatch({
+					type: 'RESUME_FORM',
+					form: currentForm.form
 				});
 			} else {
 				dispatch({
@@ -56,9 +56,7 @@ const Form = ({ formData }) => {
 
 	const formBody = (
 		<React.Fragment>
-			{currentPage === 'Setup' && (
-				<FormSetup clearLocalStorage={clearLocalStorage} />
-			)}
+			{currentPage === 'Setup' && <FormSetup />}
 			{currentPage === 'Score' && <FormScore />}
 			{currentPage === 'Results' && (
 				<FormResults clearLocalStorage={clearLocalStorage} />

@@ -99,7 +99,7 @@ const FormSave = ({ history, clearLocalStorage }) => {
 	return (
 		<div className='form-save'>
 			<h1>Save Form</h1>
-			<h3>Please enter the following:</h3>
+
 			<form>
 				<Input
 					type='date'

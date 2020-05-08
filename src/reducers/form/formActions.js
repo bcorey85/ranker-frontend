@@ -176,7 +176,7 @@ export const calcResults = state => {
 
 				return itemScores;
 			})
-			.flat();
+			.reduce((acc, val) => acc.concat(val), []);
 		return {
 			...scoreLabel,
 			scores: newScores,

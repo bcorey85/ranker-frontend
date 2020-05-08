@@ -47,7 +47,7 @@ const Landing = ({ history, clearLocalStorage, existingForm }) => {
 			<Panel>
 				<img src={logo} alt='Ranker App' />
 				<h1>A Simple App for Ranking Stuff</h1>
-				<p>Create an account to save forms for later use</p>
+				<p>Create an account to save forms for later</p>
 				<div className='landing__controls'>
 					<div>
 						<Button

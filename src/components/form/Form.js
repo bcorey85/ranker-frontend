@@ -7,6 +7,7 @@ import FormSetup from './FormSetup';
 import FormScore from './FormScore';
 import FormResults from './FormResults';
 
+import checkEmptyForm from '../../utils/checkEmptyForm';
 import { FormProvider } from '../../contexts/FormContext';
 import formReducer from '../../reducers/form/formReducer';
 import useLocalStorage from '../../hooks/useLocalStorage';
@@ -25,12 +26,14 @@ const Form = ({ formData }) => {
 	useEffect(
 		() => {
 			const currentForm = getLocalStorage('RankerAppForm');
+			const emptyForm = checkEmptyForm(currentForm.form).empty;
+
 			if (formData) {
 				dispatch({
 					type: 'EDIT_FORM',
 					form: formData
 				});
-			} else if (currentForm !== null) {
+			} else if (currentForm !== null && !emptyForm) {
 				dispatch({
 					type: 'RESUME_FORM',
 					form: currentForm.form

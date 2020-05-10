@@ -37,6 +37,7 @@
 		border-top: 1px solid $gray100;
 		height: 4.8rem;
 		margin-bottom: 2.4rem;
+		color: $primary;
 
 		@include respond(500) {
 			border-top: none;

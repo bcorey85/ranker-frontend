@@ -58,7 +58,6 @@ const SetupInput = ({
 				<input
 					type='text'
 					id={item.id}
-					placeholder={`${label} ${index + 1}`}
 					value={item.label}
 					onChange={e => checkValidation(e, handleChange, validators)}
 					onBlur={handleBlur}

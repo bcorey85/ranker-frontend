@@ -53,7 +53,6 @@ const ForgotPassword = () => {
 				<Input
 					type='text'
 					id='email'
-					placeholder='Email'
 					label='Email'
 					handleChange={setEmail}
 					value={email}

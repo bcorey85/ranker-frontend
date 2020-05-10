@@ -51,7 +51,6 @@ const Login = props => {
 				<Input
 					type='text'
 					id='email'
-					placeholder='Email'
 					label='Email'
 					handleChange={setEmail}
 					value={email}
@@ -62,7 +61,6 @@ const Login = props => {
 				<Input
 					type='password'
 					id='password'
-					placeholder='Password'
 					label='Password'
 					handleChange={setPassword}
 					value={password}

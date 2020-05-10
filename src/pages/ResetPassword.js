@@ -55,7 +55,6 @@ const ResetPassword = props => {
 					<Input
 						type='password'
 						id='password'
-						placeholder='New Password'
 						label='New Password'
 						handleChange={setPassword}
 						value={password}
@@ -63,8 +62,7 @@ const ResetPassword = props => {
 					<Input
 						type='password'
 						id='confirm-password'
-						placeholder='Confirm New Password'
-						label='Confirm New Password'
+						label='Confirm Password'
 						handleChange={setConfirmPassword}
 						value={confirmPassword}
 					/>

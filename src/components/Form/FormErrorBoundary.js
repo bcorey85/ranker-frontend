@@ -16,9 +16,9 @@ const FormErrorBoundary = ({ formState, children }) => {
 
 	if (emptyFormCheck.scoreLabelsEmpty) {
 		return (
-			<div className='form-errorboundary'>
+			<h3 className='form-errorboundary'>
 				Please enter at least one Score Label in Setup.
-			</div>
+			</h3>
 		);
 	}
 

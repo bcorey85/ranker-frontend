@@ -33,7 +33,7 @@ h3 {
 	line-height: calc-lh(2rem, 1.1);
 	font-weight: 600;
 	margin-bottom: 1.6rem;
-	color: $primary;
+	color: $gray500;
 
 	@include respond(675) {
 		font-size: 1.6rem;

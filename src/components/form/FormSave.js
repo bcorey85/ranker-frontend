@@ -104,14 +104,12 @@ const FormSave = ({ history, clearLocalStorage }) => {
 			<form>
 				<Input
 					type='date'
-					placeholder='Date'
 					label='Date'
 					value={formState.form.date}
 					handleChange={e => handleMetaInfoChange(e, 'date')}
 				/>
 				<Input
 					type='text'
-					placeholder='Title'
 					label='Title'
 					value={formState.form.title}
 					handleChange={e => handleMetaInfoChange(e, 'title')}
@@ -133,7 +131,6 @@ const FormSave = ({ history, clearLocalStorage }) => {
 				</select>
 				<Input
 					type='text'
-					placeholder='New Category'
 					label='New Category'
 					value={newCategory}
 					handleChange={e => handleCategory(e, 'new')}

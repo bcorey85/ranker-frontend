@@ -88,7 +88,6 @@ const UpdateUserDetails = ({ userData, setEditDetailsMode, history }) => {
 					type='email'
 					id='email'
 					value={email}
-					placeholder='Email'
 					label='Email'
 					handleChange={setEmail}
 					autoComplete='email'
@@ -99,7 +98,6 @@ const UpdateUserDetails = ({ userData, setEditDetailsMode, history }) => {
 					type='password'
 					id='password'
 					value={password}
-					placeholder='Password'
 					label='Password'
 					onChange={setPassword}
 					autoComplete='new-password'
@@ -108,7 +106,6 @@ const UpdateUserDetails = ({ userData, setEditDetailsMode, history }) => {
 					type='password'
 					id='confirm-password'
 					value={confirmPassword}
-					placeholder='Confirm Password'
 					label='Confirm Password'
 					onChange={setConfirmPassword}
 					autoComplete='confirm-new-password'

@@ -8,9 +8,9 @@ const FormErrorBoundary = ({ formState, children }) => {
 
 	if (emptyFormCheck.itemsEmpty) {
 		return (
-			<div className='form-errorboundary'>
+			<h3 className='form-errorboundary'>
 				Please enter at least one Item to rank in Setup.
-			</div>
+			</h3>
 		);
 	}
 

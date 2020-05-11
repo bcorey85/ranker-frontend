@@ -9,18 +9,15 @@ const FormReset = () => {
 
 	let warningMessage;
 	if (isLoggedIn) {
-		warningMessage =
-			'(Save your current form to if you want to prevent losing progress)';
+		warningMessage = 'Save current form to avoid losing progress';
 	} else {
-		warningMessage =
-			'(Please login and save your current form if you want to prevent losing progress)';
+		warningMessage = 'Create an account or login to save current form';
 	}
 
 	return (
 		<div className='form-reset'>
-			<h1>New Form</h1>
-			<h3>Are you sure you wish to create a new form?</h3>
-			<p className='form-reset__warning'>{warningMessage}</p>
+			<h1>Are you sure you want to create a new form?</h1>
+			<p>{warningMessage}</p>
 			<DividerBlock />
 		</div>
 	);

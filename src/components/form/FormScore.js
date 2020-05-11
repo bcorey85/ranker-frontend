@@ -4,6 +4,7 @@ import FormSection from './FormSection';
 import Input from '../shared/Input';
 import FormSectionHeader from './FormSectionHeader';
 import FormErrorBoundary from './FormErrorBoundary';
+import FormAverage from './FormAverage';
 
 import { FormContext } from '../../contexts/FormContext';
 import useScrollToTop from '../../hooks/useScrollToTop';
@@ -57,12 +58,7 @@ const FormInput = () => {
 						);
 					})}
 				</FormSection>
-				<div className='form-score__average'>
-					<h2>
-						<span>Average: </span>
-						{Math.round(item.average * 100) / 100}
-					</h2>
-				</div>
+				<FormAverage average={item.average} />
 			</div>
 		);
 	});

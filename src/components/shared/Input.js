@@ -62,7 +62,7 @@ const Input = ({
 	}
 
 	return (
-		<div className={`input ${error && 'input--error'}`}>
+		<div className={`input ${error ? 'input--error' : ''}`}>
 			{label ? labelElement : ''}
 			<input
 				type={type}

@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHome, faUser, faSignInAlt } from '@fortawesome/free-solid-svg-icons';
 
 import AuthContext from '../contexts/AuthContext';
 
@@ -10,13 +12,22 @@ const MainNav = () => {
 
 	return (
 		<ul className='main-nav'>
+			<li>
+				<NavLink to='/'>
+					<FontAwesomeIcon icon={faHome} />
+				</NavLink>
+			</li>
 			{isLoggedIn ? (
 				<li>
-					<NavLink to={`/users/${userId}`}>Profile</NavLink>
+					<NavLink to={`/users/${userId}`}>
+						<FontAwesomeIcon icon={faUser} />
+					</NavLink>
 				</li>
 			) : (
 				<li>
-					<NavLink to='/login'>Login</NavLink>
+					<NavLink to='/login'>
+						<FontAwesomeIcon icon={faSignInAlt} />
+					</NavLink>
 				</li>
 			)}
 		</ul>

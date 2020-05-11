@@ -3,6 +3,11 @@
 
 .form-footer-nav {
 	display: flex;
+	margin-top: 4rem;
+
+	@include respond(500) {
+		margin-top: 3.2rem;
+	}
 
 	& button {
 		height: 4rem;

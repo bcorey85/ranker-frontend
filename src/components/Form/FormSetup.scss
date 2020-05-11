@@ -2,8 +2,6 @@
 @import '../../sass/abstracts/mixins';
 
 .form-setup {
-	margin-bottom: 6.4rem;
-
 	&__category {
 		margin-bottom: 5.6rem;
 
@@ -21,7 +19,7 @@
 	&__add-btn {
 		display: flex;
 		justify-content: flex-end;
-		margin-bottom: 2.4rem;
+		margin-bottom: 1.6rem;
 	}
 
 	&__sort {

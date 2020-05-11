@@ -2,6 +2,7 @@ import React from 'react';
 
 import FormSection from './FormSection';
 import FormSectionHeader from './FormSectionHeader';
+import FormAverage from './FormAverage';
 import { sort } from '../../utils/sort';
 
 const FormResultsTable = ({ formData }) => {
@@ -34,12 +35,7 @@ const FormResultsTable = ({ formData }) => {
 					<tbody>{items}</tbody>
 				</table>
 			</FormSection>
-			<div className='form-results__average'>
-				<h2>
-					<span>Average: </span>
-					{Math.round(formData.overallAverage * 100) / 100}
-				</h2>
-			</div>
+			<FormAverage average={formData.overallAverage} borderTop />
 		</React.Fragment>
 	);
 
@@ -76,12 +72,7 @@ const FormResultsTable = ({ formData }) => {
 						</tbody>
 					</table>
 				</FormSection>
-				<div className='form-results__average'>
-					<h2>
-						<span>Average: </span>
-						{Math.round(label.average * 100) / 100}
-					</h2>
-				</div>
+				<FormAverage average={label.average} borderTop />
 			</React.Fragment>
 		);
 	});

@@ -1,15 +1,21 @@
 @import '../../sass/abstracts/variables';
+@import '../../sass/abstracts/mixins';
 .form-reset {
-	margin-top: 4rem;
+	margin-top: 2.4rem;
 
 	& h3 {
-		color: $gray500;
 		margin-bottom: 4rem;
 		text-align: center;
 	}
 
-	&__warning {
+	& p {
 		text-align: center;
 		color: $gray400;
+		margin-bottom: 1.6rem;
+		white-space: nowrap;
+
+		@include respond(500) {
+			white-space: normal;
+		}
 	}
 }

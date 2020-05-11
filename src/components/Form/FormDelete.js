@@ -6,9 +6,8 @@ import DividerBlock from '../shared/DividerBlock';
 const FormDelete = () => {
 	return (
 		<div className='form-delete'>
-			<h1>Delete Form</h1>
-			<h3>Are you sure you wish to delete this form?</h3>
-			<p>(This action is can not be undone.)</p>
+			<h1>Are you sure you want to delete this form?</h1>
+			<p>(This action is can not be undone)</p>
 
 			<DividerBlock />
 		</div>

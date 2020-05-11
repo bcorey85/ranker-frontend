@@ -85,7 +85,9 @@ const Landing = ({ history, clearLocalStorage, existingForm }) => {
 					<Button handleClick={() => setResetModalOpen(false)} link>
 						Cancel
 					</Button>
-					<Button handleClick={resetForm}>New Form</Button>
+					<Button handleClick={resetForm} link>
+						<FontAwesomeIcon icon={faPlus} /> New Form
+					</Button>
 				</ModalControls>
 			</Modal>
 		</div>

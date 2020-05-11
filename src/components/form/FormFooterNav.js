@@ -50,7 +50,7 @@ const FormFooterNav = ({ handlePageChange, currentPage }) => {
 		nextButton = (
 			<div className='form-footer-nav__right-btn'>
 				<Button handleClick={setSaveModalOpen} disabled={!isValid}>
-					Save Form
+					Save
 				</Button>
 			</div>
 		);

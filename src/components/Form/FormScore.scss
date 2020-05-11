@@ -1,8 +1,7 @@
 @import '../../sass/abstracts/variables';
+@import '../../sass/abstracts/mixins';
 
 .form-score {
-	margin-bottom: 6.4rem;
-
 	& input {
 		width: 100%;
 		text-align: right;
@@ -15,10 +14,15 @@
 		align-items: flex-end;
 		padding-right: .8rem;
 		margin-top: .8rem;
-		padding-top: .8rem;
-		margin-bottom: 2.4rem;
-		height: 4.8rem;
+		padding-top: 8rem;
+		margin-bottom: .8rem;
+		height: 4rem;
 		color: $gray500;
+
+		@include respond(500) {
+			height: 4rem;
+			margin-top: 0;
+		}
 
 		& h2 {
 			margin-bottom: 0;

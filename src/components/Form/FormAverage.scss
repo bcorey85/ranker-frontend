@@ -1,0 +1,40 @@
+@import '../../sass/abstracts/variables';
+@import '../../sass/abstracts/mixins';
+
+.form-average {
+	display: flex;
+	justify-content: flex-end;
+	align-items: flex-end;
+	margin-top: 1.6rem;
+	padding-top: .8rem;
+	height: 4rem;
+	margin-bottom: .8rem;
+	color: $gray500;
+
+	@include respond(500) {
+		height: 3.2rem;
+		border-top: none;
+		margin-top: 0;
+		margin-bottom: .8rem;
+	}
+
+	& h2 {
+		margin-bottom: 0;
+	}
+
+	& label {
+		display: block;
+		font-size: 1.6rem;
+		font-weight: 400;
+		color: $gray300;
+		margin-right: .8rem;
+	}
+
+	&--border-top {
+		border-top: 1px solid $gray100;
+
+		@include respond(500) {
+			border-top: none;
+		}
+	}
+}

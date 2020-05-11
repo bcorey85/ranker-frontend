@@ -10,7 +10,7 @@
 	border-radius: 2px;
 
 	@include respond(500) {
-		padding: 4.8rem 3.6rem;
+		padding: 2.4rem;
 		border-top: none;
 		box-shadow: none;
 	}

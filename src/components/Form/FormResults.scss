@@ -25,4 +25,12 @@
 			text-align: right;
 		}
 	}
+
+	& p {
+		padding: .8rem;
+		color: $gray500;
+		background: $gray50;
+		text-align: center;
+		margin-top: 2.4rem;
+	}
 }

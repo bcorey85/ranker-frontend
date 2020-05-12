@@ -29,7 +29,7 @@ const UserDashboard = props => {
 	const [ categories, setCategories ] = useState({});
 	const [ editDetailsMode, setEditDetailsMode ] = useToggle(false);
 	const [ deleteModalOpen, setDeleteModalOpen ] = useToggle(false);
-	const [ deleteFormId, setDeleteFormId ] = useState('');
+	const [ deleteFormData, setDeleteFormData ] = useState('');
 
 	const getUserProfile = useCallback(
 		async () => {
@@ -59,9 +59,9 @@ const UserDashboard = props => {
 		props.history.push('/');
 	};
 
-	const handleDelete = async id => {
+	const handleDelete = async form => {
 		setDeleteModalOpen(true);
-		setDeleteFormId(id);
+		setDeleteFormData(form);
 	};
 
 	const deleteForm = async id => {
@@ -136,7 +136,11 @@ const UserDashboard = props => {
 											<div className='past-ranking-controls'>
 												<DeleteButton
 													handleClick={e =>
-														handleDelete(form._id)}
+														handleDelete({
+															id: form._id,
+															title: form.title,
+															date: form.date
+														})}
 												/>
 												<EditButton
 													handleClick={() =>
@@ -162,13 +166,17 @@ const UserDashboard = props => {
 					toggleModal={setDeleteModalOpen}
 					isOpen={deleteModalOpen}>
 					<ModalContent>
-						<FormDelete />
+						<FormDelete
+							formTitle={deleteFormData.title}
+							formDate={deleteFormData.date}
+						/>
 						<ModalControls>
 							<Button handleClick={setDeleteModalOpen} link>
 								Cancel
 							</Button>
 							<Button
-								handleClick={() => deleteForm(deleteFormId)}
+								handleClick={() =>
+									deleteForm(deleteFormData.id)}
 								type='delete'>
 								Delete
 							</Button>

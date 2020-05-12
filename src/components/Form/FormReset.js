@@ -9,9 +9,11 @@ const FormReset = () => {
 
 	let warningMessage;
 	if (isLoggedIn) {
-		warningMessage = 'Save current form to avoid losing progress';
+		warningMessage =
+			'Save your current form if you want to avoid losing progress.';
 	} else {
-		warningMessage = 'Create an account or login to save current form';
+		warningMessage =
+			'Create an account or login to save your current form.';
 	}
 
 	return (

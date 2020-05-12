@@ -8,6 +8,7 @@ import FormErrorBoundary from './FormErrorBoundary';
 
 import useScrollToTop from '../../hooks/useScrollToTop';
 import { FormContext } from '../../contexts/FormContext';
+import { AuthContext } from '../../contexts/AuthContext';
 
 import './FormResults.scss';
 const FormResults = ({ clearLocalStorage }) => {
@@ -16,6 +17,7 @@ const FormResults = ({ clearLocalStorage }) => {
 	const { dispatch, formState, saveModalOpen, setSaveModalOpen } = useContext(
 		FormContext
 	);
+	const { isLoggedIn } = useContext(AuthContext);
 
 	useEffect(
 		() => {
@@ -34,6 +36,9 @@ const FormResults = ({ clearLocalStorage }) => {
 					'Loading...'
 				) : (
 					<FormResultsTable formData={formState.form} />
+				)}
+				{!isLoggedIn && (
+					<p>Sign up or log in save this form for later.</p>
 				)}
 				<Modal toggleModal={setSaveModalOpen} isOpen={saveModalOpen}>
 					<ModalContent>

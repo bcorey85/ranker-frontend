@@ -23,6 +23,10 @@
 		width: 100%;
 		max-width: 40rem;
 		position: relative;
+
+		@include respond(500) {
+			max-width: 32rem;
+		}
 	}
 
 	&__close {

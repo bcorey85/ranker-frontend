@@ -8,7 +8,7 @@
 	margin: auto;
 
 	@include respond(500) {
-		max-width: 100%;
+		max-width: 32rem;
 		height: 100vh;
 	}
 

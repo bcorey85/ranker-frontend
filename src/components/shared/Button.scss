@@ -43,6 +43,7 @@
 
 	&:disabled {
 		color: $gray100;
+		text-decoration: none;
 		cursor: not-allowed;
 	}
 }

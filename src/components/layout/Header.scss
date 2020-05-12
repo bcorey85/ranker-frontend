@@ -10,6 +10,10 @@
 	background-color: $white;
 	box-shadow: $box-shadow;
 
+	@include respond(500) {
+		box-shadow: none;
+	}
+
 	& img {
 		width: 12rem;
 		margin-left: 1.6rem;

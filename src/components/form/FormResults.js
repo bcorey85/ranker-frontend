@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
+import { NavLink } from 'react-router-dom';
 
 import FormResultsTable from './FormResultsTable';
 import Modal from '../Modal/Modal';
@@ -38,7 +39,11 @@ const FormResults = ({ clearLocalStorage }) => {
 					<FormResultsTable formData={formState.form} />
 				)}
 				{!isLoggedIn && (
-					<p>Sign up or log in save this form for later.</p>
+					<p>
+						<NavLink to='/register'>Sign up</NavLink> or{' '}
+						<NavLink to='login'>log in</NavLink> save this form for
+						later.
+					</p>
 				)}
 				<Modal toggleModal={setSaveModalOpen} isOpen={saveModalOpen}>
 					<ModalContent>

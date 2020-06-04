@@ -47,11 +47,8 @@ const Landing = ({ history, clearLocalStorage, existingForm }) => {
 		<div className='landing'>
 			<Panel>
 				<img src={logo} alt='Ranker App' />
-				<h1>An Easier Way to Make Choices</h1>
-				<p>
-					Decision fatigue is real. Use the power of math to help
-					simplify your options.
-				</p>
+				<h1>A Simple App for Ranking Stuff</h1>
+				<p>Use the power of math to make complex decisions easier.</p>
 				<DividerBlock />
 				<div className='landing__controls'>
 					<div>

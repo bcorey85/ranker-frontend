@@ -8,7 +8,7 @@ body {
 	font-family: $font-family;
 	background-color: $gray25;
 
-	@include respond(500) {
+	@include respond(675) {
 		background: $white;
 		font-size: $mobile-font-size;
 		line-height: $mobile-baseline;

@@ -10,6 +10,8 @@ body {
 
 	@include respond(500) {
 		background: $white;
+		font-size: $mobile-font-size;
+		line-height: $mobile-baseline;
 	}
 }
 

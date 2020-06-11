@@ -26,7 +26,8 @@ const FormSave = ({ history, clearLocalStorage }) => {
 				try {
 					const response = await HttpRequest({
 						method: 'get',
-						url: `${process.env.REACT_APP_API_URL}/users/${userId}`
+						url: `${process.env.REACT_APP_API_URL}/users/${userId}`,
+						token: token
 					});
 
 					setUserData(response.data.payload);

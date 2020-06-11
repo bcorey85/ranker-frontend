@@ -91,7 +91,7 @@ const Register = props => {
 				/>
 
 				<Button handleClick={handleRegister}>
-					{!awaitingResponse ? 'Register' : 'Loading...'}
+					{!awaitingResponse ? 'Register' : 'Waking up the Server...'}
 				</Button>
 			</form>
 			<NavLink to='/login'>Already have an account?</NavLink>

@@ -34,9 +34,11 @@ const UserDashboard = props => {
 	const getUserProfile = useCallback(
 		async () => {
 			try {
-				const response = await axios.get(
-					`${process.env.REACT_APP_API_URL}/users/${userId}`
-				);
+				const response = await HttpRequest({
+					method: 'get',
+					url: `${process.env.REACT_APP_API_URL}/users/${userId}`,
+					token
+				});
 				setUserData(response.data.payload.user);
 				setCategories(response.data.payload.categories);
 				setIsLoading(false);
@@ -44,7 +46,7 @@ const UserDashboard = props => {
 				console.log(error);
 			}
 		},
-		[ userId ]
+		[ userId, token ]
 	);
 
 	useEffect(
@@ -88,7 +90,11 @@ const UserDashboard = props => {
 	};
 
 	if (isLoading) {
-		return <div>Loading...</div>;
+		return (
+			<div className='user-dashboard'>
+				<Panel>Loading Dashboard...</Panel>
+			</div>
+		);
 	}
 
 	if (editDetailsMode) {
@@ -123,6 +129,8 @@ const UserDashboard = props => {
 				</section>
 				<section className='user-dashboard__past-rankings'>
 					<h2>Past Rankings</h2>
+					{userData.rankForms.length < 1 &&
+						'No forms to display yet.'}
 					{[ ...categories ].sort().map(category => {
 						const forms = userData.rankForms.map(form => {
 							if (form.category === category) {

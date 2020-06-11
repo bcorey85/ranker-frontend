@@ -73,7 +73,7 @@ const Login = props => {
 					type={message.type}
 				/>
 				<Button handleClick={handleLogin}>
-					{!awaitingResponse ? 'Login' : 'Loading...'}
+					{!awaitingResponse ? 'Login' : 'Waking up the Server...'}
 				</Button>
 			</form>
 			<NavLink to='/forgotpassword'>Reset password</NavLink>

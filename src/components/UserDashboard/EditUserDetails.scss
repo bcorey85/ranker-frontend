@@ -1,16 +1,10 @@
 @import '../../sass/abstracts/mixins';
+@import '../../sass//abstracts/variables';
 
 .edit-user-details {
 	width: 100%;
 	max-width: 40rem;
 	margin: 0 auto;
-
-	& .panel {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-	}
 
 	@include respond(500) {
 		max-width: 100%;
@@ -29,13 +23,23 @@
 		margin-bottom: 1.6rem;
 	}
 
-	& button.link {
+	&__submit {
+		margin-top: 3.6rem;
+
+		& button {
+			width: 100%;
+		}
+	}
+
+	& .link {
 		align-self: flex-start;
 		margin-bottom: 2.4rem;
 	}
 
-	& button.btn {
+	&__delete {
+		border-top: .2rem solid $gray100;
+		padding-top: 2.4rem;
 		width: 100%;
-		margin-top: 3.6rem;
+		text-align: center;
 	}
 }

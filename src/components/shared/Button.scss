@@ -47,3 +47,22 @@
 		cursor: not-allowed;
 	}
 }
+
+.link--delete {
+	color: $red;
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	font-weight: 600;
+
+	&:hover {
+		color: $black;
+		text-decoration: underline;
+	}
+
+	&:disabled {
+		color: $gray100;
+		text-decoration: none;
+		cursor: not-allowed;
+	}
+}

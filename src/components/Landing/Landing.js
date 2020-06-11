@@ -46,11 +46,29 @@ const Landing = ({ history, clearLocalStorage, existingForm }) => {
 	return (
 		<div className='landing'>
 			<Panel>
-				<img src={logo} alt='Ranker App' />
-				<h1>A Simple App for Ranking Stuff</h1>
-				<p>Use the power of math to make complex decisions easier.</p>
-				<DividerBlock />
+				<div className='landing__text'>
+					<img src={logo} alt='Ranker App' />
+					<h1 className='landing__header'>
+						A Simple App for Ranking Stuff
+					</h1>
+					<p className='landing__p'>
+						Use the power of math to make complex decisions easier.
+					</p>
+					<DividerBlock />
+				</div>
+
 				<div className='landing__controls'>
+					<div>
+						<Button
+							handleClick={handleResumeForm}
+							link
+							disabled={
+								!existingForm ||
+								(existingForm && existingFormEmpty)
+							}>
+							Continue Form
+						</Button>
+					</div>
 					<div>
 						<Button
 							handleClick={
@@ -64,17 +82,6 @@ const Landing = ({ history, clearLocalStorage, existingForm }) => {
 							<FontAwesomeIcon icon={faPlus} /> New Form
 						</Button>
 					</div>
-					<div>
-						<Button
-							handleClick={handleResumeForm}
-							link
-							disabled={
-								!existingForm ||
-								(existingForm && existingFormEmpty)
-							}>
-							Continue Form
-						</Button>
-					</div>
 				</div>
 			</Panel>
 			<Modal toggleModal={setResetModalOpen} isOpen={resetModalOpen}>
@@ -85,8 +92,8 @@ const Landing = ({ history, clearLocalStorage, existingForm }) => {
 					<Button handleClick={() => setResetModalOpen(false)} link>
 						Cancel
 					</Button>
-					<Button handleClick={resetForm} link>
-						<FontAwesomeIcon icon={faPlus} /> New Form
+					<Button handleClick={resetForm}>
+						<FontAwesomeIcon /> New Form
 					</Button>
 				</ModalControls>
 			</Modal>

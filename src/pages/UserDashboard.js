@@ -171,7 +171,7 @@ const UserDashboard = props => {
 							formDate={deleteFormData.date}
 						/>
 						<ModalControls>
-							<Button handleClick={setDeleteModalOpen} link>
+							<Button handleClick={setDeleteModalOpen}>
 								Cancel
 							</Button>
 							<Button

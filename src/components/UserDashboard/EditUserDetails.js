@@ -16,7 +16,12 @@ import passwordUpdateValidate from '../../validators/passwordUpdateValidate';
 import AuthContext from '../../contexts/AuthContext';
 import './EditUserDetails.scss';
 
-const UpdateUserDetails = ({ userData, setEditDetailsMode, history }) => {
+const UpdateUserDetails = ({
+	userData,
+	setEditDetailsMode,
+	history,
+	getUserProfile
+}) => {
 	const [ email, setEmail ] = useInputState(userData.email);
 	const [ password, setPassword ] = useInputState('');
 	const [ confirmPassword, setConfirmPassword ] = useInputState('');
@@ -74,6 +79,7 @@ const UpdateUserDetails = ({ userData, setEditDetailsMode, history }) => {
 
 			setTimeout(() => {
 				setEditDetailsMode(false);
+				getUserProfile();
 			}, 1000);
 		} catch (error) {
 			console.log(error);

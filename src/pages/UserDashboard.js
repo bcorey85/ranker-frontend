@@ -102,6 +102,7 @@ const UserDashboard = props => {
 				userData={userData}
 				history={props.history}
 				setEditDetailsMode={setEditDetailsMode}
+				getUserProfile={getUserProfile}
 			/>
 		);
 	}

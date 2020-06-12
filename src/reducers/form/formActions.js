@@ -216,7 +216,7 @@ export const mapScores = state => {
 	// If all items empty, return default state
 	if (filterEmptyItems.length === 0) {
 		// Fix lingering average bug
-		const updatedItems = state.form.items(item => {
+		const updatedItems = state.form.items.map(item => {
 			return {
 				...item,
 				average: average(item.scores, 'score'),

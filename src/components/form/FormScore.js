@@ -16,7 +16,6 @@ const FormInput = () => {
 
 	const [ isLoading, setIsLoading ] = useState(true);
 	const { dispatch, formState } = useContext(FormContext);
-	const showWeighted = formState.form.options.weightedAverage;
 
 	useEffect(
 		() => {

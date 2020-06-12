@@ -4,11 +4,12 @@ import {
 	editForm,
 	addField,
 	updateFieldLabel,
+	updateweightedAverage,
 	deleteField,
 	updateItemScore,
 	mapScores,
 	calcResults,
-	setSort,
+	setOption,
 	updateMetaInfo
 } from './formActions';
 
@@ -24,6 +25,8 @@ const formReducer = (state, action) => {
 			return addField(state, action);
 		case 'UPDATE_FIELD_LABEL':
 			return updateFieldLabel(state, action);
+		case 'UPDATE_WEIGHTED_AVG':
+			return updateweightedAverage(state, action);
 		case 'DELETE_FIELD':
 			return deleteField(state, action);
 		case 'UPDATE_ITEM_SCORE':
@@ -32,8 +35,8 @@ const formReducer = (state, action) => {
 			return mapScores(state, action);
 		case 'CALC_RESULTS':
 			return calcResults(state, action);
-		case 'SET_SORT':
-			return setSort(state, action);
+		case 'SET_OPTION':
+			return setOption(state, action);
 		case 'UPDATE_META_INFO':
 			return updateMetaInfo(state, action);
 		default: {

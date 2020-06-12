@@ -6,16 +6,35 @@ import FormAverage from './FormAverage';
 import { sort } from '../../utils/sort';
 
 const FormResultsTable = ({ formData }) => {
+	const showWeighted = formData.options.weightedAverage;
+
+	let averageType;
+	if (showWeighted === true) {
+		averageType = {
+			average: 'weightedAverage',
+			score: 'score',
+			overallAverage: 'overallWeightedAverage'
+		};
+	} else {
+		averageType = {
+			average: 'average',
+			score: 'score',
+			overallAverage: 'overallAverage'
+		};
+	}
+
+	const { average, score, overallAverage } = averageType;
+
 	const items = sort(
 		formData.items,
-		formData.sort,
+		formData.options.sort,
 		'average'
 	).map((item, index) => {
 		return (
 			<tr key={item.id}>
 				<td>{index + 1}</td>
 				<td>{item.label}</td>
-				<td>{Math.round(item.average * 100) / 100}</td>
+				<td>{Math.round(item[average] * 100) / 100}</td>
 			</tr>
 		);
 	});
@@ -35,7 +54,12 @@ const FormResultsTable = ({ formData }) => {
 					<tbody>{items}</tbody>
 				</table>
 			</FormSection>
-			<FormAverage average={formData.overallAverage} borderTop />
+			<FormAverage
+				average={formData[overallAverage]}
+				weightedAverage={formData[overallAverage]}
+				showWeighted={false}
+				borderTop
+			/>
 		</React.Fragment>
 	);
 
@@ -55,16 +79,17 @@ const FormResultsTable = ({ formData }) => {
 						<tbody>
 							{sort(
 								label.scores,
-								formData.sort,
+								formData.options.sort,
 								'score'
-							).map((score, index) => {
+							).map((labelScore, index) => {
 								return (
-									<tr key={score.id}>
+									<tr key={labelScore.id}>
 										<td>{index + 1}</td>
-										<td>{score.label}</td>
+										<td>{labelScore.label}</td>
 										<td>
-											{Math.round(score.score * 100) /
-												100}
+											{Math.round(
+												labelScore[score] * 100
+											) / 100}
 										</td>
 									</tr>
 								);

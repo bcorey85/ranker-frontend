@@ -16,6 +16,7 @@ const FormInput = () => {
 
 	const [ isLoading, setIsLoading ] = useState(true);
 	const { dispatch, formState } = useContext(FormContext);
+	const showWeighted = formState.form.options.weightedAverage;
 
 	useEffect(
 		() => {
@@ -46,7 +47,7 @@ const FormInput = () => {
 								<Input
 									type='number'
 									id={`item${itemIndex + 1}-${score.id}`}
-									value={score.score}
+									value={score.score || ''}
 									handleChange={handleUpdateScore}
 									data-itemindex={item.id}
 									data-scoreindex={score.id}
@@ -58,7 +59,11 @@ const FormInput = () => {
 						);
 					})}
 				</FormSection>
-				<FormAverage average={item.average} />
+				<FormAverage
+					average={item.average}
+					weightedAverage={item.weightedAverage}
+					showWeighted={formState.form.options.weightedAverage}
+				/>
 			</div>
 		);
 	});

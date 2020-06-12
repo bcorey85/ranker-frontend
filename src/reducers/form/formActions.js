@@ -2,7 +2,7 @@ import produce from 'immer';
 
 import { Form, Score, fields } from './formSchemas';
 import { updateRanks } from '../../utils/formUtils';
-import { average } from '../../utils/math';
+import { average, weightedScore, weightedAverage } from '../../utils/math';
 
 const setLocalStorage = form => {
 	localStorage.setItem('RankerAppForm', JSON.stringify(form));
@@ -74,12 +74,97 @@ export const updateFieldLabel = (state, action) => {
 	}
 };
 
+export const updateweightedAverage = (state, action) => {
+	let weight;
+
+	if (action.value === '') {
+		weight = null;
+	} else {
+		weight = parseFloat(action.value);
+
+		// Break if weight is not an empty string or number
+		if (isNaN(weight)) {
+			return state;
+		}
+	}
+
+	// Update weight
+	const scoreLabelId = action.id.split('-weight')[0];
+	const scoreLabelString = state.form.scoreLabels.find(
+		label => label.id === scoreLabelId
+	).label;
+
+	const updatedLabels = state.form.scoreLabels.map(label => {
+		if (label.id === scoreLabelId) {
+			return {
+				...label,
+				weight
+			};
+		}
+		return label;
+	});
+
+	// Update child scores
+	const updatedItems = state.form.items.map(item => {
+		if (item.scores.length > 0) {
+			const updatedScores = item.scores.map(score => {
+				if (score.label === scoreLabelString) {
+					return {
+						...score,
+						weight,
+						weightedScore: weightedScore(weight, score.score)
+					};
+				}
+
+				return score;
+			});
+
+			return {
+				...item,
+				scores: updatedScores,
+				weightedAverage: weightedAverage(updatedScores, 'weightedScore')
+			};
+		}
+		return item;
+	});
+
+	return produce(state, draftState => {
+		draftState.form.scoreLabels = updatedLabels;
+		draftState.form.items = updatedItems;
+		setLocalStorage(draftState);
+	});
+};
+
 export const deleteField = (state, action) => {
 	if (fields[action.field]) {
 		const stateLocation = fields[action.field].stateLocation;
 		const filteredFields = state.form[stateLocation].filter(
 			field => field.id !== action.id
 		);
+
+		// Remove child scores from items after score label delete
+		if (action.field === 'scoreLabel') {
+			const label = state.form.scoreLabels.find(
+				label => label.id === action.id
+			).label;
+
+			const updatedItems = state.form.items.map(item => {
+				const updatedScores = item.scores.filter(
+					score => score.label !== label
+				);
+
+				return {
+					...item,
+					scores: updatedScores
+				};
+			});
+
+			return produce(state, draftState => {
+				draftState.form[stateLocation] = filteredFields;
+				draftState.form.items = updatedItems;
+				setLocalStorage(draftState);
+			});
+		}
 
 		return produce(state, draftState => {
 			draftState.form[stateLocation] = filteredFields;
@@ -98,16 +183,17 @@ export const updateItemScore = (state, action) => {
 				if (score.id === action.scoreId) {
 					return {
 						...score,
-						score: action.value
+						score: action.value,
+						weightedScore: weightedScore(score.weight, action.value)
 					};
 				}
 				return score;
 			});
-
 			return {
 				...item,
 				scores: newScores,
-				average: average(newScores, 'score')
+				average: average(newScores, 'score'),
+				weightedAverage: weightedAverage(newScores, 'weightedScore')
 			};
 		}
 		return item;
@@ -129,7 +215,16 @@ export const mapScores = state => {
 
 	// If all items empty, return default state
 	if (filterEmptyItems.length === 0) {
-		items = state.form.items;
+		// Fix lingering average bug
+		const updatedItems = state.form.items(item => {
+			return {
+				...item,
+				average: average(item.scores, 'score'),
+				weightedAverage: weightedAverage(item.scores, 'weightedScore')
+			};
+		});
+
+		items = updatedItems;
 	} else {
 		const mappedItems = filterEmptyItems.map(item => {
 			// If score exists on item already, return item, if not create a new score
@@ -140,11 +235,16 @@ export const mapScores = state => {
 				if (existingScore >= 0) {
 					return item.scores[existingScore];
 				} else {
-					return Score(label.label);
+					return Score(label.label, null, label.weight);
 				}
 			});
 
-			return { ...item, scores };
+			return {
+				...item,
+				scores,
+				average: average(item.scores, 'score'),
+				weightedAverage: weightedAverage(item.scores, 'weightedScore')
+			};
 		});
 
 		items = mappedItems;
@@ -171,7 +271,11 @@ export const calcResults = state => {
 				const itemScores = item.scores
 					.filter(score => score.label === scoreLabel.label)
 					.map(score => {
-						return Score(item.label, score.score);
+						return Score(
+							item.label,
+							score.score,
+							scoreLabel.weight
+						);
 					});
 
 				return itemScores;
@@ -186,14 +290,18 @@ export const calcResults = state => {
 
 	return produce(state, draftState => {
 		draftState.form.scoreLabels = updatedScoreLabels;
-		draftState.form.overallAverage = average(updatedScoreLabels, 'average');
+		draftState.form.overallAverage = average(state.form.items, 'average');
+		draftState.form.overallWeightedAverage = average(
+			state.form.items,
+			'weightedAverage'
+		);
 		setLocalStorage(draftState);
 	});
 };
 
-export const setSort = (state, action) => {
+export const setOption = (state, action) => {
 	return produce(state, draftState => {
-		draftState.form.sort = action.sort;
+		draftState.form.options[action.option] = action.value;
 		setLocalStorage(draftState);
 	});
 };

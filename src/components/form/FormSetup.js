@@ -17,9 +17,12 @@ import './FormSetup.scss';
 
 const FormSetup = () => {
 	useScrollToTop();
-	const { dispatch, formState } = useContext(FormContext);
-	const [ sort, setSort ] = useState(formState.form.sort);
 
+	const { dispatch, formState } = useContext(FormContext);
+	const [ sort, setSort ] = useState(formState.form.options.sort || 'asc');
+	const [ showWeightedAverage, setShowWeightedAverage ] = useState(
+		formState.form.options.weightedAverage || false
+	);
 	const handleNewField = (e, field) => {
 		dispatch({ type: 'ADD_FIELD', field });
 	};
@@ -33,6 +36,14 @@ const FormSetup = () => {
 		});
 	};
 
+	const handleUpdateweightedAverage = e => {
+		dispatch({
+			type: 'UPDATE_WEIGHTED_AVG',
+			value: e.target.value,
+			id: e.target.id
+		});
+	};
+
 	const handleDeleteField = (id, field) => {
 		dispatch({
 			type: 'DELETE_FIELD',
@@ -42,8 +53,19 @@ const FormSetup = () => {
 	};
 
 	const handleSort = e => {
-		dispatch({ type: 'SET_SORT', sort: e.target.value });
+		dispatch({ type: 'SET_OPTION', option: 'sort', value: e.target.value });
 		setSort(e.target.value);
+	};
+
+	const handleWeightedAverages = e => {
+		// Convert string to boolean
+		const value = e.target.value === 'true';
+		dispatch({
+			type: 'SET_OPTION',
+			option: 'weightedAverage',
+			value
+		});
+		setShowWeightedAverage(value);
 	};
 
 	return (
@@ -87,6 +109,8 @@ const FormSetup = () => {
 									handleUpdateLabel(e, 'scoreLabel')}
 								handleDelete={() =>
 									handleDeleteField(score.id, 'scoreLabel')}
+								handleweightedAverageChange={e =>
+									handleUpdateweightedAverage(e)}
 								item={score}
 								label='Label'
 								index={index}
@@ -97,6 +121,7 @@ const FormSetup = () => {
 										'label'
 									)
 								]}
+								showWeightedAverage={showWeightedAverage}
 							/>
 						);
 					})}
@@ -115,7 +140,7 @@ const FormSetup = () => {
 					<FormSectionHeader>Sort Results</FormSectionHeader>
 
 					<FormSection>
-						<div className='form-setup__sort'>
+						<div className='form-setup__options'>
 							<div onClick={handleSort}>
 								<label htmlFor='desc'>High to Low</label>
 								<input
@@ -134,6 +159,37 @@ const FormSetup = () => {
 									name='sort'
 									value='asc'
 									defaultChecked={sort === 'asc'}
+								/>
+							</div>
+						</div>
+					</FormSection>
+					<FormSectionHeader>
+						Toggle Weighted Averages
+					</FormSectionHeader>
+					<FormSection>
+						<div className='form-setup__options'>
+							<div onClick={handleWeightedAverages}>
+								<label htmlFor='weighted-avg-off'>Off</label>
+								<input
+									type='radio'
+									id='weighted-avg-off'
+									name='weighted-avg'
+									value={false}
+									defaultChecked={
+										showWeightedAverage === false
+									}
+								/>
+							</div>
+							<div onClick={handleWeightedAverages}>
+								<label htmlFor='weighted-avg-on'>On</label>
+								<input
+									type='radio'
+									id='weighted-avg-on'
+									name='weighted-avg'
+									value={true}
+									defaultChecked={
+										showWeightedAverage === true
+									}
 								/>
 							</div>
 						</div>

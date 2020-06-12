@@ -38,7 +38,7 @@ const FormSave = ({ history, clearLocalStorage }) => {
 			};
 			getData();
 		},
-		[ userId ]
+		[ userId, token ]
 	);
 
 	const handleMetaInfoChange = (e, field) => {

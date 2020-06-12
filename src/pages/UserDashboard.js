@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext, useCallback } from 'react';
-import axios from 'axios';
 
 import Button from '../components/shared/Button';
 import Accordion from '../components/Accordion/Accordion';

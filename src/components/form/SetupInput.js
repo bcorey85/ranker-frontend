@@ -9,11 +9,13 @@ import './SetupInput.scss';
 const SetupInput = ({
 	handleChange,
 	handleDelete,
+	handleweightedAverageChange,
 	index,
 	item,
 	label,
 	validators,
-	errorText
+	errorText,
+	showWeightedAverage
 }) => {
 	const [ isTouched, setIsTouched ] = useState(false);
 	const [ isValid, setIsValid ] = useState(true);
@@ -49,6 +51,36 @@ const SetupInput = ({
 		setIsTouched(true);
 	};
 
+	if (showWeightedAverage) {
+		return (
+			<div className={`setup-input ${error ? 'setup-input--error' : ''}`}>
+				<div className='setup-input__group--weighted'>
+					<label htmlFor={item.id}>
+						{error ? errorLabelText : labelText}
+					</label>
+					<input
+						type='text'
+						id={item.id}
+						value={item.label}
+						onChange={e =>
+							checkValidation(e, handleChange, validators)}
+						onBlur={handleBlur}
+					/>
+					<label htmlFor={`${item.id}-weight`}>Weight</label>
+					<input
+						type='number'
+						id={`${item.id}-weight`}
+						value={item.weight || ''}
+						onChange={e =>
+							checkValidation(e, handleweightedAverageChange)}
+						onBlur={handleBlur}
+					/>
+					<DeleteBtn handleClick={handleDelete} />
+				</div>
+			</div>
+		);
+	}
+
 	return (
 		<div className={`setup-input ${error ? 'setup-input--error' : ''}`}>
 			<label htmlFor={item.id}>
@@ -62,7 +94,16 @@ const SetupInput = ({
 					onChange={e => checkValidation(e, handleChange, validators)}
 					onBlur={handleBlur}
 				/>
-
+				{showWeightedAverage && (
+					<input
+						type='number'
+						id={`${item.id}-weighted-average`}
+						value={item.weightedAverage}
+						onChange={e =>
+							checkValidation(e, handleChange, validators)}
+						onBlur={handleBlur}
+					/>
+				)}
 				<DeleteBtn handleClick={handleDelete} />
 			</div>
 		</div>

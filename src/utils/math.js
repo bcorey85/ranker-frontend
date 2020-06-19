@@ -56,3 +56,18 @@ export const weightedAverage = (
 
 	return weightedAverage;
 };
+
+export const checkValidNumber = num => {
+	let value;
+	if (num === '') {
+		return (value = null);
+	}
+
+	value = parseFloat(num);
+
+	if (isNaN(value)) {
+		return;
+	}
+
+	return value;
+};

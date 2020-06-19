@@ -1,0 +1,12 @@
+export const CREATE_FORM = 'CREATE_FORM';
+export const RESUME_FORM = 'RESUME_FORM';
+export const EDIT_FORM = 'EDIT_FORM';
+export const ADD_FIELD = 'ADD_FIELD';
+export const UPDATE_FIELD_LABEL = 'UPDATE_FIELD_LABEL';
+export const UPDATE_WEIGHTED_AVG = 'UPDATE_WEIGHTED_AVG';
+export const DELETE_FIELD = 'DELETE_FIELD';
+export const UPDATE_ITEM_SCORE = 'UPDATE_ITEM_SCORE';
+export const MAP_SCORES = 'MAP_SCORES';
+export const CALC_RESULTS = 'CALC_RESULTS';
+export const SET_OPTION = 'SET_OPTION';
+export const UPDATE_META_INFO = 'UPDATE_META_INFO';

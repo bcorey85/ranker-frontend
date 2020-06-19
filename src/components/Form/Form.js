@@ -8,6 +8,11 @@ import FormScore from './FormScore';
 import FormResults from './FormResults';
 
 import checkEmptyForm from '../../utils/checkEmptyForm';
+import {
+	editForm,
+	resumeForm,
+	createForm
+} from '../../reducers/form/formActions';
 import { FormProvider } from '../../contexts/FormContext';
 import formReducer from '../../reducers/form/formReducer';
 import useLocalStorage from '../../hooks/useLocalStorage';
@@ -32,24 +37,17 @@ const Form = ({ formData }) => {
 			}
 
 			if (formData) {
-				dispatch({
-					type: 'EDIT_FORM',
-					form: formData
-				});
+				dispatch(editForm(formData));
 			} else if (currentForm !== null && !emptyForm) {
-				dispatch({
-					type: 'RESUME_FORM',
-					form: currentForm.form
-				});
+				dispatch(resumeForm(currentForm.form));
 			} else {
-				dispatch({
-					type: 'CREATE_FORM',
-					newForm: {
+				dispatch(
+					createForm({
 						numItems: 3,
 						numScoreLabels: 3,
 						sort: 'desc'
-					}
-				});
+					})
+				);
 			}
 			setIsLoading(false);
 		},

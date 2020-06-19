@@ -70,6 +70,7 @@ const SetupInput = ({
 					<input
 						type='number'
 						id={`${item.id}-weight`}
+						data-id={item.id}
 						value={item.weight || ''}
 						onChange={e =>
 							checkValidation(e, handleweightedAverageChange)}

@@ -9,6 +9,13 @@ import Accordion from '../Accordion/Accordion';
 import AccordionBody from '../Accordion/AccordionBody';
 import AccordionHeader from '../Accordion/AccordionHeader';
 
+import {
+	addField,
+	updateFieldLabel,
+	updateWeightedAverage,
+	deleteField,
+	setOption
+} from '../../reducers/form/formActions';
 import { isUnique } from '../../utils/validate';
 import { FormContext } from '../../contexts/FormContext';
 import useScrollToTop from '../../hooks/useScrollToTop';
@@ -24,47 +31,39 @@ const FormSetup = () => {
 		formState.form.options.weightedAverage || false
 	);
 	const handleNewField = (e, field) => {
-		dispatch({ type: 'ADD_FIELD', field });
+		dispatch(addField(field));
 	};
 
 	const handleUpdateLabel = (e, field) => {
-		dispatch({
-			type: 'UPDATE_FIELD_LABEL',
-			value: e.target.value,
-			id: e.target.id,
-			field
-		});
+		const value = e.target.value;
+		const id = e.target.id;
+
+		dispatch(updateFieldLabel(value, id, field));
 	};
 
-	const handleUpdateweightedAverage = e => {
-		dispatch({
-			type: 'UPDATE_WEIGHTED_AVG',
-			value: e.target.value,
-			id: e.target.id
-		});
+	const handleUpdateWeightedAverage = e => {
+		const value = e.target.value;
+		const id = e.target.dataset.id;
+		dispatch(updateWeightedAverage(value, id));
 	};
 
 	const handleDeleteField = (id, field) => {
-		dispatch({
-			type: 'DELETE_FIELD',
-			id,
-			field
-		});
+		dispatch(deleteField(id, field));
 	};
 
 	const handleSort = e => {
-		dispatch({ type: 'SET_OPTION', option: 'sort', value: e.target.value });
+		const option = 'sort';
+		const value = e.target.value;
+		dispatch(setOption(option, value));
 		setSort(e.target.value);
 	};
 
 	const handleWeightedAverages = e => {
 		// Convert string to boolean
 		const value = e.target.value === 'true';
-		dispatch({
-			type: 'SET_OPTION',
-			option: 'weightedAverage',
-			value
-		});
+		const option = 'weightedAverage';
+		dispatch(setOption(option, value));
+
 		setShowWeightedAverage(value);
 	};
 
@@ -110,7 +109,7 @@ const FormSetup = () => {
 								handleDelete={() =>
 									handleDeleteField(score.id, 'scoreLabel')}
 								handleweightedAverageChange={e =>
-									handleUpdateweightedAverage(e)}
+									handleUpdateWeightedAverage(e)}
 								item={score}
 								label='Label'
 								index={index}

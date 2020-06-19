@@ -6,6 +6,7 @@ import FormSectionHeader from './FormSectionHeader';
 import FormErrorBoundary from './FormErrorBoundary';
 import FormAverage from './FormAverage';
 
+import { mapScores, updateItemScore } from '../../reducers/form/formActions';
 import { FormContext } from '../../contexts/FormContext';
 import useScrollToTop from '../../hooks/useScrollToTop';
 
@@ -19,19 +20,18 @@ const FormInput = () => {
 
 	useEffect(
 		() => {
-			dispatch({ type: 'MAP_SCORES' });
+			dispatch(mapScores());
 			setIsLoading(false);
 		},
 		[ dispatch ]
 	);
 
 	const handleUpdateScore = e => {
-		dispatch({
-			type: 'UPDATE_ITEM_SCORE',
-			value: e.target.value,
-			scoreId: e.target.dataset.scoreindex,
-			itemId: e.target.dataset.itemindex
-		});
+		const value = e.target.value;
+		const scoreId = e.target.dataset.scoreindex;
+		const itemId = e.target.dataset.itemindex;
+
+		dispatch(updateItemScore(value, scoreId, itemId));
 	};
 
 	const scores = formState.form.items.map((item, itemIndex) => {

@@ -7,6 +7,7 @@ import ModalContent from '../Modal/ModalContent';
 import FormSave from './FormSave';
 import FormErrorBoundary from './FormErrorBoundary';
 
+import { calcResults } from '../../reducers/form/formActions';
 import useScrollToTop from '../../hooks/useScrollToTop';
 import { FormContext } from '../../contexts/FormContext';
 import { AuthContext } from '../../contexts/AuthContext';
@@ -22,7 +23,7 @@ const FormResults = ({ clearLocalStorage }) => {
 
 	useEffect(
 		() => {
-			dispatch({ type: 'CALC_RESULTS' });
+			dispatch(calcResults());
 
 			setIsLoading(false);
 		},

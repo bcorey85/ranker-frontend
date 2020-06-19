@@ -4,14 +4,14 @@ import {
 	editForm,
 	addField,
 	updateFieldLabel,
-	updateweightedAverage,
+	updateWeightedAverage,
 	deleteField,
 	updateItemScore,
 	mapScores,
 	calcResults,
 	setOption,
 	updateMetaInfo
-} from './formActions';
+} from './formCaseReducers';
 
 const formReducer = (state, action) => {
 	switch (action.type) {
@@ -26,7 +26,7 @@ const formReducer = (state, action) => {
 		case 'UPDATE_FIELD_LABEL':
 			return updateFieldLabel(state, action);
 		case 'UPDATE_WEIGHTED_AVG':
-			return updateweightedAverage(state, action);
+			return updateWeightedAverage(state, action);
 		case 'DELETE_FIELD':
 			return deleteField(state, action);
 		case 'UPDATE_ITEM_SCORE':

@@ -5,6 +5,7 @@ import Input from '../shared/Input';
 import Button from '../shared/Button';
 import MessageContainer from '../MessageContainer/MessageContainer';
 
+import { updateMetaInfo } from '../../reducers/form/formActions';
 import HttpRequest from '../../utils/httpRequest';
 import { FormContext } from '../../contexts/FormContext';
 import AuthContext from '../../contexts/AuthContext';
@@ -42,11 +43,7 @@ const FormSave = ({ history, clearLocalStorage }) => {
 	);
 
 	const handleMetaInfoChange = (e, field) => {
-		dispatch({
-			type: 'UPDATE_META_INFO',
-			field,
-			value: e.target.value
-		});
+		dispatch(updateMetaInfo(field, e.target.value));
 	};
 
 	const handleCategory = (e, field) => {

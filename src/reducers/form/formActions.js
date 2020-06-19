@@ -1,314 +1,73 @@
-import produce from 'immer';
+import {
+	CREATE_FORM,
+	RESUME_FORM,
+	EDIT_FORM,
+	ADD_FIELD,
+	UPDATE_FIELD_LABEL,
+	UPDATE_WEIGHTED_AVG,
+	DELETE_FIELD,
+	UPDATE_ITEM_SCORE,
+	MAP_SCORES,
+	CALC_RESULTS,
+	SET_OPTION,
+	UPDATE_META_INFO
+} from './formConstants';
 
-import { Form, Score, fields } from './formSchemas';
-import { updateRanks } from '../../utils/formUtils';
-import { average, weightedScore, weightedAverage } from '../../utils/math';
+export const createForm = newForm => ({
+	type: CREATE_FORM,
+	newForm
+});
 
-const setLocalStorage = form => {
-	localStorage.setItem('RankerAppForm', JSON.stringify(form));
-};
+export const resumeForm = form => ({
+	type: RESUME_FORM,
+	form
+});
 
-export const createForm = (state, action) => {
-	const { numItems, numScoreLabels, sort } = action.newForm;
-	const newForm = Form(numItems, numScoreLabels, sort);
+export const editForm = form => ({
+	type: EDIT_FORM,
+	form
+});
 
-	return produce(state, draftState => {
-		draftState.form = newForm;
-		setLocalStorage(draftState);
-	});
-};
+export const addField = field => ({ type: ADD_FIELD, field });
 
-export const resumeForm = (state, action) => {
-	return produce(state, draftState => {
-		draftState.form = action.form;
-		setLocalStorage(draftState);
-	});
-};
+export const updateFieldLabel = (value, id, field) => ({
+	type: UPDATE_FIELD_LABEL,
+	value,
+	id,
+	field
+});
 
-export const editForm = (state, action) => {
-	return produce(state, draftState => {
-		draftState.form = action.form;
-		draftState.form.editMode = true;
-		setLocalStorage(draftState);
-	});
-};
+export const updateWeightedAverage = (value, id) => ({
+	type: UPDATE_WEIGHTED_AVG,
+	value,
+	id
+});
 
-export const addField = (state, action) => {
-	if (fields[action.field]) {
-		const newField = fields[action.field].schema();
-		const stateLocation = fields[action.field].stateLocation;
+export const deleteField = (id, field) => ({
+	type: DELETE_FIELD,
+	id,
+	field
+});
 
-		return produce(state, draftState => {
-			draftState.form[stateLocation] = [
-				...state.form[stateLocation],
-				newField
-			];
-			setLocalStorage(draftState);
-		});
-	} else {
-		setLocalStorage(state);
-		return state;
-	}
-};
+export const updateItemScore = (value, scoreId, itemId) => ({
+	type: UPDATE_ITEM_SCORE,
+	value,
+	scoreId,
+	itemId
+});
 
-export const updateFieldLabel = (state, action) => {
-	if (fields[action.field]) {
-		const stateLocation = fields[action.field].stateLocation;
-		const updatedFields = state.form[stateLocation].map(field => {
-			if (field.id === action.id) {
-				return {
-					...field,
-					label: action.value
-				};
-			}
-			return field;
-		});
+export const mapScores = () => ({ type: MAP_SCORES });
 
-		return produce(state, draftState => {
-			draftState.form[stateLocation] = updatedFields;
-			setLocalStorage(draftState);
-		});
-	} else {
-		setLocalStorage(state);
-		return state;
-	}
-};
+export const calcResults = () => ({ type: CALC_RESULTS });
 
-export const updateweightedAverage = (state, action) => {
-	let weight;
+export const setOption = (option, value) => ({
+	type: SET_OPTION,
+	option,
+	value
+});
 
-	if (action.value === '') {
-		weight = null;
-	} else {
-		weight = parseFloat(action.value);
-
-		// Break if weight is not an empty string or number
-		if (isNaN(weight)) {
-			return state;
-		}
-	}
-
-	// Update weight
-	const scoreLabelId = action.id.split('-weight')[0];
-	const scoreLabelString = state.form.scoreLabels.find(
-		label => label.id === scoreLabelId
-	).label;
-
-	const updatedLabels = state.form.scoreLabels.map(label => {
-		if (label.id === scoreLabelId) {
-			return {
-				...label,
-				weight
-			};
-		}
-		return label;
-	});
-
-	// Update child scores
-	const updatedItems = state.form.items.map(item => {
-		if (item.scores.length > 0) {
-			const updatedScores = item.scores.map(score => {
-				if (score.label === scoreLabelString) {
-					return {
-						...score,
-						weight,
-						weightedScore: weightedScore(weight, score.score)
-					};
-				}
-
-				return score;
-			});
-
-			return {
-				...item,
-				scores: updatedScores,
-				weightedAverage: weightedAverage(updatedScores, 'weightedScore')
-			};
-		}
-		return item;
-	});
-
-	return produce(state, draftState => {
-		draftState.form.scoreLabels = updatedLabels;
-		draftState.form.items = updatedItems;
-		setLocalStorage(draftState);
-	});
-};
-
-export const deleteField = (state, action) => {
-	if (fields[action.field]) {
-		const stateLocation = fields[action.field].stateLocation;
-		const filteredFields = state.form[stateLocation].filter(
-			field => field.id !== action.id
-		);
-
-		// Remove child scores from items after score label delete
-		if (action.field === 'scoreLabel') {
-			const label = state.form.scoreLabels.find(
-				label => label.id === action.id
-			).label;
-
-			const updatedItems = state.form.items.map(item => {
-				const updatedScores = item.scores.filter(
-					score => score.label !== label
-				);
-
-				return {
-					...item,
-					scores: updatedScores
-				};
-			});
-
-			return produce(state, draftState => {
-				draftState.form[stateLocation] = filteredFields;
-				draftState.form.items = updatedItems;
-				setLocalStorage(draftState);
-			});
-		}
-
-		return produce(state, draftState => {
-			draftState.form[stateLocation] = filteredFields;
-			setLocalStorage(draftState);
-		});
-	} else {
-		setLocalStorage(state);
-		return state;
-	}
-};
-
-export const updateItemScore = (state, action) => {
-	const updatedItems = state.form.items.map(item => {
-		if (item.id === action.itemId) {
-			const newScores = item.scores.map(score => {
-				if (score.id === action.scoreId) {
-					return {
-						...score,
-						score: action.value,
-						weightedScore: weightedScore(score.weight, action.value)
-					};
-				}
-				return score;
-			});
-			return {
-				...item,
-				scores: newScores,
-				average: average(newScores, 'score'),
-				weightedAverage: weightedAverage(newScores, 'weightedScore')
-			};
-		}
-		return item;
-	});
-
-	return produce(state, draftState => {
-		draftState.form.items = updateRanks(updatedItems, state.form.sort);
-		setLocalStorage(draftState);
-	});
-};
-
-export const mapScores = state => {
-	let items, scoreLabels;
-	// Remove empty labels
-	const filterEmptyItems = state.form.items.filter(item => item.label !== '');
-	const filterEmptyScoreLabels = state.form.scoreLabels.filter(
-		label => label.label !== ''
-	);
-
-	// If all items empty, return default state
-	if (filterEmptyItems.length === 0) {
-		// Fix lingering average bug
-		const updatedItems = state.form.items.map(item => {
-			return {
-				...item,
-				average: average(item.scores, 'score'),
-				weightedAverage: weightedAverage(item.scores, 'weightedScore')
-			};
-		});
-
-		items = updatedItems;
-	} else {
-		const mappedItems = filterEmptyItems.map(item => {
-			// If score exists on item already, return item, if not create a new score
-			const scores = filterEmptyScoreLabels.map(label => {
-				const existingScore = item.scores.findIndex(
-					score => score.label === label.label
-				);
-				if (existingScore >= 0) {
-					return item.scores[existingScore];
-				} else {
-					return Score(label.label, null, label.weight);
-				}
-			});
-
-			return {
-				...item,
-				scores,
-				average: average(item.scores, 'score'),
-				weightedAverage: weightedAverage(item.scores, 'weightedScore')
-			};
-		});
-
-		items = mappedItems;
-	}
-
-	// If all scorelabels empty, return default state
-	if (filterEmptyScoreLabels.length === 0) {
-		scoreLabels = state.form.scoreLabels;
-	} else {
-		scoreLabels = filterEmptyScoreLabels;
-	}
-
-	return produce(state, draftState => {
-		draftState.form.items = items;
-		draftState.form.scoreLabels = scoreLabels;
-		setLocalStorage(draftState);
-	});
-};
-
-export const calcResults = state => {
-	const updatedScoreLabels = state.form.scoreLabels.map(scoreLabel => {
-		const newScores = state.form.items
-			.map(item => {
-				const itemScores = item.scores
-					.filter(score => score.label === scoreLabel.label)
-					.map(score => {
-						return Score(
-							item.label,
-							score.score,
-							scoreLabel.weight
-						);
-					});
-
-				return itemScores;
-			})
-			.reduce((acc, val) => acc.concat(val), []);
-		return {
-			...scoreLabel,
-			scores: newScores,
-			average: average(newScores, 'score')
-		};
-	});
-
-	return produce(state, draftState => {
-		draftState.form.scoreLabels = updatedScoreLabels;
-		draftState.form.overallAverage = average(state.form.items, 'average');
-		draftState.form.overallWeightedAverage = average(
-			state.form.items,
-			'weightedAverage'
-		);
-		setLocalStorage(draftState);
-	});
-};
-
-export const setOption = (state, action) => {
-	return produce(state, draftState => {
-		draftState.form.options[action.option] = action.value;
-		setLocalStorage(draftState);
-	});
-};
-
-export const updateMetaInfo = (state, action) => {
-	return produce(state, draftState => {
-		draftState.form[action.field] = action.value;
-		setLocalStorage(draftState);
-	});
-};
+export const updateMetaInfo = (field, value) => ({
+	type: UPDATE_META_INFO,
+	field,
+	value
+});

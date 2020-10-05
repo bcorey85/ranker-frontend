@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 
 import './FormNav.scss';
-import { FormContext } from '../../contexts/FormContext';
+import { FormContext } from '../../../contexts/FormContext';
 const FormNav = ({ handlePageChange, currentPage }) => {
 	const { isValid } = useContext(FormContext);
 

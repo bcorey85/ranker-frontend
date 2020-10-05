@@ -1,15 +1,15 @@
 import React, { useState, useContext } from 'react';
-import DeleteBtn from '../shared/DeleteBtn';
+import DeleteBtn from '../../shared/DeleteBtn';
 
-import { validate } from '../../utils/validate';
-import { FormContext } from '../../contexts/FormContext';
+import { validate } from '../../../utils/validate';
+import { FormContext } from '../../../contexts/FormContext';
 
 import './SetupInput.scss';
 
 const SetupInput = ({
 	handleChange,
 	handleDelete,
-	handleweightedAverageChange,
+	handleWeightedAverageChange,
 	index,
 	item,
 	label,
@@ -73,7 +73,7 @@ const SetupInput = ({
 						data-id={item.id}
 						value={item.weight || ''}
 						onChange={e =>
-							checkValidation(e, handleweightedAverageChange)}
+							checkValidation(e, handleWeightedAverageChange)}
 						onBlur={handleBlur}
 					/>
 					<DeleteBtn handleClick={handleDelete} />

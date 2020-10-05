@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
 
-import FormSection from './FormSection';
+import FormSection from './shared/FormSection';
 import Input from '../shared/Input';
-import FormSectionHeader from './FormSectionHeader';
-import FormErrorBoundary from './FormErrorBoundary';
-import FormAverage from './FormAverage';
+import FormSectionHeader from './shared/FormSectionHeader';
+import FormErrorBoundary from './shared/FormErrorBoundary';
+import FormAverage from './shared/FormAverage';
 
 import { mapScores, updateItemScore } from '../../reducers/form/formActions';
 import { FormContext } from '../../contexts/FormContext';

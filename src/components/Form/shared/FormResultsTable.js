@@ -3,7 +3,7 @@ import React from 'react';
 import FormSection from './FormSection';
 import FormSectionHeader from './FormSectionHeader';
 import FormAverage from './FormAverage';
-import { sort } from '../../utils/sort';
+import { sort } from '../../../utils/sort';
 
 const FormResultsTable = ({ formData }) => {
 	const showWeighted = formData.options.weightedAverage;

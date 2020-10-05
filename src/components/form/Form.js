@@ -1,8 +1,8 @@
 import React, { useState, useReducer, useEffect } from 'react';
 
-import FormNav from './FormNav';
-import FormBody from './FormBody';
-import FormFooterNav from './FormFooterNav';
+import FormNav from './shared/FormNav';
+import FormBody from './shared/FormBody';
+import FormFooterNav from './shared/FormFooterNav';
 import FormSetup from './FormSetup';
 import FormScore from './FormScore';
 import FormResults from './FormResults';

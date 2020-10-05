@@ -1,6 +1,6 @@
 import React from 'react';
 
-import checkEmptyForm from '../../utils/checkEmptyForm';
+import checkEmptyForm from '../../../utils/checkEmptyForm';
 import './FormErrorBoundary.scss';
 
 const FormErrorBoundary = ({ formState, children }) => {

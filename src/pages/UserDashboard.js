@@ -6,7 +6,7 @@ import AccordionHeader from '../components/Accordion/AccordionHeader';
 import AccordionBody from '../components/Accordion/AccordionBody';
 import EditUserDetails from '../components/UserDashboard/EditUserDetails';
 import FormDelete from '../components/Form/FormDelete';
-import FormResultsTable from '../components/Form/FormResultsTable';
+import FormResultsTable from '../components/Form/shared/FormResultsTable';
 import Category from '../components/UserDashboard/Category';
 import DeleteButton from '../components/shared/DeleteBtn';
 import EditButton from '../components/shared/EditBtn';

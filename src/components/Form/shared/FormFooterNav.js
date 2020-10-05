@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 
-import Button from '../shared/Button';
+import Button from '../../shared/Button';
 
-import AuthContext from '../../contexts/AuthContext';
-import { FormContext } from '../../contexts/FormContext';
+import AuthContext from '../../../contexts/AuthContext';
+import { FormContext } from '../../../contexts/FormContext';
 import './FormFooterNav.scss';
 
 const FormFooterNav = ({ handlePageChange, currentPage }) => {

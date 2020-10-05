@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import FormResultsTable from './FormResultsTable';
+import FormResultsTable from './shared/FormResultsTable';
 import Modal from '../Modal/Modal';
 import ModalContent from '../Modal/ModalContent';
 import FormSave from './FormSave';
-import FormErrorBoundary from './FormErrorBoundary';
+import FormErrorBoundary from './shared/FormErrorBoundary';
 
 import { calcResults } from '../../reducers/form/formActions';
 import useScrollToTop from '../../hooks/useScrollToTop';

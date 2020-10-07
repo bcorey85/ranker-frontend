@@ -6,7 +6,7 @@ import bclogo from '../../imgs/bc-logo.svg';
 const Footer = () => {
 	return (
 		<footer className='footer'>
-			<a href='mailto: bcorey85@gmail.com'>
+			<a href='https://www.bcdev.co/'>
 				<img
 					src={bclogo}
 					className='bc-logo'

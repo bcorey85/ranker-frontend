@@ -6,7 +6,9 @@ import './Accordion.scss';
 const Accordion = props => {
 	return (
 		<AccordionProvider>
-			<section className='accordion'>{props.children}</section>
+			<section className='accordion' tabIndex='0'>
+				{props.children}
+			</section>
 		</AccordionProvider>
 	);
 };

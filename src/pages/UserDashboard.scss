@@ -2,6 +2,10 @@
 @import '../sass/abstracts/mixins';
 
 .user-dashboard {
+	&__logout {
+		text-align: right;
+	}
+
 	&__user-info {
 		width: 100%;
 		margin-bottom: 4rem;
@@ -15,7 +19,8 @@
 	}
 
 	&__controls {
-		margin-top: 2.4rem;
+		margin-top: 1.6rem;
+
 		& button {
 			margin-right: 2.4rem;
 		}

@@ -9,13 +9,13 @@ const FormAverage = ({ average, weightedAverage, borderTop, showWeighted }) => {
 				: ''}`}>
 			{showWeighted && (
 				<React.Fragment>
-					<label>Weighted Average</label>
+					<label>Weighted Average:</label>
 					<h2>{Math.round(weightedAverage * 100) / 100}</h2>
 				</React.Fragment>
 			)}
 			{!showWeighted && (
 				<React.Fragment>
-					<label>Average</label>
+					<label>Average:</label>
 					<h2>{Math.round(average * 100) / 100}</h2>
 				</React.Fragment>
 			)}

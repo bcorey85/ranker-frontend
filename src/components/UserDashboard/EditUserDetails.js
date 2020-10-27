@@ -15,6 +15,8 @@ import useToggle from '../../hooks/useToggle';
 import passwordUpdateValidate from '../../validators/passwordUpdateValidate';
 import AuthContext from '../../contexts/AuthContext';
 import './EditUserDetails.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
 const UpdateUserDetails = ({
 	userData,
@@ -82,7 +84,6 @@ const UpdateUserDetails = ({
 				getUserProfile();
 			}, 1000);
 		} catch (error) {
-			console.log(error);
 			history.push('/500');
 		}
 	};
@@ -119,36 +120,39 @@ const UpdateUserDetails = ({
 					<button
 						onClick={() => setEditDetailsMode(false)}
 						className='link'>
-						Go Back
+						<FontAwesomeIcon icon={faChevronLeft} />Back
 					</button>
+					<section className='edit-user-details__section'>
+						<h3>Update Details</h3>
+						<Input
+							type='email'
+							id='email'
+							value={email}
+							label='Email'
+							handleChange={setEmail}
+							autoComplete='email'
+						/>
+					</section>
+					<section className='edit-user-details__section'>
+						<h3>Update Password</h3>
+						<Input
+							type='password'
+							id='password'
+							value={password}
+							label='Password'
+							onChange={setPassword}
+							autoComplete='new-password'
+						/>
+						<Input
+							type='password'
+							id='confirm-password'
+							value={confirmPassword}
+							label='Confirm Password'
+							onChange={setConfirmPassword}
+							autoComplete='confirm-new-password'
+						/>
+					</section>
 
-					<h3>Update Details</h3>
-					<Input
-						type='email'
-						id='email'
-						value={email}
-						label='Email'
-						handleChange={setEmail}
-						autoComplete='email'
-					/>
-
-					<h3>Update Password</h3>
-					<Input
-						type='password'
-						id='password'
-						value={password}
-						label='Password'
-						onChange={setPassword}
-						autoComplete='new-password'
-					/>
-					<Input
-						type='password'
-						id='confirm-password'
-						value={confirmPassword}
-						label='Confirm Password'
-						onChange={setConfirmPassword}
-						autoComplete='confirm-new-password'
-					/>
 					<div className='edit-user-details__submit'>
 						<Button handleClick={submitUserDetails}>Submit</Button>
 					</div>

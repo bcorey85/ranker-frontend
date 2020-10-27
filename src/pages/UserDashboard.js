@@ -110,6 +110,12 @@ const UserDashboard = props => {
 	return (
 		<div className='user-dashboard'>
 			<Panel>
+				<nav className='user-dashboard__logout'>
+					<Button handleClick={handleLogout} type='outline'>
+						Logout
+					</Button>
+				</nav>
+
 				<section className='user-dashboard__user-info'>
 					<h2>User Info</h2>
 					<div>
@@ -122,9 +128,6 @@ const UserDashboard = props => {
 						<Button handleClick={setEditDetailsMode} link>
 							Edit Details
 						</Button>{' '}
-						<Button handleClick={handleLogout} link>
-							Logout
-						</Button>
 					</div>
 				</section>
 				<section className='user-dashboard__past-rankings'>

@@ -13,7 +13,11 @@
 	}
 
 	& h3 {
-		margin-bottom: 0;
+		margin-bottom: .8rem;
+
+		& span {
+			font-weight: 400;
+		}
 	}
 
 	& h3:last-of-type {

@@ -1,5 +1,6 @@
 @import '../../sass/abstracts/variables';
 @import '../../sass/abstracts/mixins';
+@import '../../sass/abstracts/functions';
 
 .landing {
 	width: 100%;
@@ -26,10 +27,18 @@
 
 	& h1 {
 		text-align: center;
+		font-size: 4rem;
+		line-height: calc-lh(4rem, 1.1);
+
+		@include respond(675) {
+			font-size: 3.2rem;
+			line-height: calc-lh(3.2rem, 1.1);
+			margin-bottom: 2.4rem;
+		}
 	}
 
 	& p {
-		color: $gray300;
+		color: $gray500;
 		text-align: center;
 	}
 

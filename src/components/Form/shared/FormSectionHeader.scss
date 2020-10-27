@@ -2,8 +2,6 @@
 @import '../../../sass/abstracts/mixins';
 
 .form-section-header {
-	@include respond(500) {
-		border-bottom: 2px solid $primary;
-		padding-bottom: .4rem;
-	}
+	border-bottom: 2px solid $primary;
+	padding-bottom: .4rem;
 }

@@ -18,6 +18,17 @@
 	}
 }
 
+.btn--outline {
+	background-color: $white;
+	color: $gray300;
+	border: 1px solid $gray300;
+
+	&:hover {
+		border: 1px solid $primary;
+		color: $primary;
+	}
+}
+
 .btn--delete {
 	background-color: transparent;
 	color: $red;

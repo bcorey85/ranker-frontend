@@ -4,9 +4,9 @@
 .form {
 	max-width: 68rem;
 	margin: 0 auto;
-	border-bottom: 8px solid $primary;
 	border-radius: 2px;
 	box-shadow: $box-shadow;
+	overflow: hidden;
 
 	& label {
 		display: block;

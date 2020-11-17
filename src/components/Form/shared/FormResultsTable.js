@@ -28,7 +28,7 @@ const FormResultsTable = ({ formData }) => {
 	const items = sort(
 		formData.items,
 		formData.options.sort,
-		'average'
+		average
 	).map((item, index) => {
 		return (
 			<tr key={item.id}>
